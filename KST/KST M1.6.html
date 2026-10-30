@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Street 1.6: End-of-Shift Reporting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #2C3C49;
+            --brand-secondary: #B2232E;
+            --bg-page: #FAF6EF;
+            --surface: #FFFFFF;
+            --text-main: #22303B;
+            --text-muted: #6B6259;
+            --warning: #C1440E;
+            --success: #2E7D32;
+            --font-heading: 'Roboto Slab', serif;
+            --font-body: 'Nunito Sans', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER ZONE --- */
+        .nav-header {
+            height: 90px;
+            background: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-header img { height: 60px; margin-right: 20px; }
+        .header-titles { display: flex; flex-direction: column; }
+        .module-name { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .lesson-name { color: white; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+
+        /* --- MENTOR HOOK --- */
+        .mentor-hook {
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--surface);
+            border-bottom: 4px solid var(--brand-secondary);
+        }
+        .mentor-hook p { font-size: 1.2rem; color: var(--brand-primary); max-width: 800px; margin: 0 auto; font-weight: 600; font-style: italic; }
+
+        /* --- KNOWLEDGE ZONE --- */
+        .zone-lesson { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+        
+        .visual-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            border-left: 6px solid var(--brand-primary);
+        }
+        .visual-card .illustration {
+            flex: 1;
+            min-width: 300px;
+            background: #f1f4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .visual-card .content { flex: 1.5; padding: 32px; min-width: 300px; }
+
+        .step-tag {
+            display: inline-block;
+            background: var(--brand-primary);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .tool-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f8f9fa;
+            border: 1px dashed var(--text-muted);
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .alert-box {
+            background: #FFF5F5;
+            border: 1px solid var(--warning);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+        }
+
+        /* --- APPLICATION ZONE --- */
+        .zone-application { background-color: #E6EBF0; padding: 64px 24px; }
+        .app-container { max-width: 850px; margin: 0 auto; background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        
+        .button-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+        .btn { flex: 1; min-width: 280px; padding: 18px 24px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-family: var(--font-body); text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-align: center;}
+        .btn-navy { background: var(--brand-primary); color: white; }
+        .btn-red { background: var(--brand-secondary); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* --- VALIDATION ZONE --- */
+        .zone-validation { background: var(--brand-primary); padding: 64px 24px; color: white; text-align: center; }
+        .quiz-card { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 32px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) {
+            .nav-header { height: auto; padding: 16px; }
+            .visual-card { flex-direction: column; }
+            .btn { width: 100%; flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <img src="https://nextfranchise.github.io/nextfranchise/Clients/K%20Street/assets/kstulogo%20clean.png" alt="K-Street">
+        <div class="header-titles">
+            <span class="module-name">Module 1: FOH Standards</span>
+            <span class="lesson-name">1.6 End-of-Shift Reporting</span>
+        </div>
+    </header>
+
+    <section class="mentor-hook">
+        <p>"A great shift doesn't end when the door locks. It ends when the next team knows exactly what they're walking into."</p>
+    </section>
+
+    <main class="zone-lesson">
+        
+        <!-- Action Card 1: DOCUMENTING ISSUES -->
+        <article class="visual-card">
+            <div class="illustration">
+                <!-- REFINED SVG: The Reporting Log -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Spreadsheet Outline -->
+                    <rect x="40" y="40" width="120" height="150" rx="4" stroke="#2C3C49" stroke-width="6"/>
+                    <line x1="40" y1="80" x2="160" y2="80" stroke="#2C3C49" stroke-width="4"/>
+                    <line x1="80" y1="40" x2="80" y2="190" stroke="#2C3C49" stroke-width="2"/>
+                    <!-- Writing Badge -->
+                    <circle cx="160" cy="190" r="30" fill="#B2232E"/>
+                    <path d="M150 200L170 180M155 185L165 195" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                    <!-- Text Badge Label -->
+                    <rect x="30" y="200" width="140" height="35" rx="4" fill="#2C3C49"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">THE LOG</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="step-tag">Step 1: Recount & Record</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Log the Legacy</h2>
+                <p>Before you leave, perform a mental replay. Record low stock, equipment glitches, or notable guest feedback. Be factual and specific.</p>
+                <div class="tool-badge">
+                    <span>📎</span> [TOOL_001] Shift Report Log — Available in LMS
+                </div>
+                <div class="alert-box">
+                    <strong style="color: var(--warning);">AVOID VAGUENESS:</strong> Entries like "All good" are unhelpful. If we're down to 2 bags of rice, write: <em>"Inventory: Rice low (2 bags remaining)."</em>
+                </div>
+            </div>
+        </article>
+
+        <!-- Action Card 2: VERBAL ESCALATION -->
+        <article class="visual-card" style="border-left-color: var(--brand-secondary); flex-direction: row-reverse;">
+            <div class="illustration">
+                <!-- REFINED SVG: Verbal Briefing -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Speech Bubbles -->
+                    <path d="M40 100C40 70 65 50 100 50C135 50 160 70 160 100C160 115 155 130 140 140L150 160L120 150C115 152 105 155 100 155C65 155 40 135 40 100Z" stroke="#2C3C49" stroke-width="6"/>
+                    <!-- Urgent Spark Badge -->
+                    <path d="M160 60L175 40L190 60L210 65L190 75L195 95L175 80L155 95L160 75L140 65L160 60Z" fill="#B2232E"/>
+                    <!-- Text Badge Label -->
+                    <rect x="25" y="200" width="150" height="35" rx="4" fill="#B2232E"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">SPEAK UP</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="step-tag">Step 2: The Briefing</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Don't Just Log It</h2>
+                <p>If an issue is urgent (safety risk, broken lock, POS failure), you <strong>must</strong> speak to the Manager on Duty (MOD) before you walk out.</p>
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
+                    <li>Verbally flag anything that can't wait for the next shift.</li>
+                    <li>Hand off or leave the log in the designated area.</li>
+                </ul>
+                <div class="alert-box" style="border-color: var(--brand-primary); background: #f0f4f8;">
+                    <strong style="color: var(--brand-primary);">KPI TARGET:</strong> 100% Urgent Issue Escalation. Never leave a safety or security concern for the next team to "find."
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- APPLICATION ZONE -->
+    <section class="zone-application">
+        <div class="app-container">
+            <h2 style="font-family: var(--font-heading); margin-bottom: 16px;">The Last 5 Minutes</h2>
+            <p style="font-size: 1.15rem; margin-bottom: 24px;">Your shift is over. During the rush, you noticed the front door lock was sticking and difficult to turn. What do you do?</p>
+            <div class="button-group">
+                <button class="btn btn-navy" onclick="feedback(false)">Note it in the Shift Log so the morning team sees it.</button>
+                <button class="btn btn-red" onclick="feedback(true)">Log it AND verbally tell the MOD immediately.</button>
+            </div>
+            <div id="fb" style="display:none; margin-top:32px; padding:24px; border-radius:var(--radius);"></div>
+        </div>
+    </section>
+
+    <!-- VALIDATION ZONE -->
+    <footer class="zone-validation">
+        <div class="quiz-card">
+            <h3 style="font-family: var(--font-heading); margin-bottom: 20px;">Reporting Certification</h3>
+            <p style="margin-bottom: 24px;">What is the target for shift report completion at K-Street?</p>
+            <div style="text-align: left; margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="a"> Only when there is an incident to report.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" id="correct" value="b"> 100% of shifts must be logged.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="c"> Whenever the MOD asks for a report.
+                </label>
+            </div>
+            <button class="btn btn-red" style="width: 100%;" onclick="check()">Confirm Standards</button>
+            <p id="quiz-fb" style="margin-top: 20px; font-weight: 700;"></p>
+        </div>
+        <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.5;">K-Street University &copy; 2023 | FOH 1.6</p>
+    </footer>
+
+    <script>
+        function feedback(isCorrect) {
+            const f = document.getElementById('fb');
+            f.style.display = 'block';
+            f.style.background = isCorrect ? '#D1FAE5' : '#FEE2E2';
+            f.style.color = isCorrect ? '#065F46' : '#991B1B';
+            f.innerHTML = isCorrect ? "<strong>CORRECT.</strong> Security issues (like a sticking lock) are urgent. The log creates the record, but your voice ensures the problem is addressed before the store is left unattended." : "<strong>INCORRECT.</strong> While logging is important, urgent safety or security issues must be verbally flagged to the MOD before you leave.";
+        }
+        function check() {
+            const res = document.getElementById('correct').checked;
+            const msg = document.getElementById('quiz-fb');
+            if(res) {
+                msg.style.color = "#4ADE80";
+                msg.innerText = "✓ CORRECT: Every single shift requires a log entry to ensure continuity.";
+            } else {
+                msg.style.color = "#F87171";
+                msg.innerText = "✘ INCORRECT: K-Street standards require a 100% Shift Report Completion Rate.";
+            }
+        }
+    </script>
+</body>
+</html>

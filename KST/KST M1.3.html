@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Street 1.3: Opening Procedure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #2C3C49;
+            --brand-secondary: #B2232E;
+            --bg-page: #FAF6EF;
+            --surface: #FFFFFF;
+            --text-main: #22303B;
+            --text-muted: #6B6259;
+            --warning: #C1440E;
+            --success: #2E7D32;
+            --font-heading: 'Roboto Slab', serif;
+            --font-body: 'Nunito Sans', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER ZONE --- */
+        .nav-header {
+            height: 90px;
+            background: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-header img { height: 60px; margin-right: 20px; }
+        .header-titles { display: flex; flex-direction: column; }
+        .module-name { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .lesson-name { color: white; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+
+        /* --- MENTOR HOOK --- */
+        .mentor-hook {
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--surface);
+            border-bottom: 4px solid var(--brand-secondary);
+        }
+        .mentor-hook p { font-size: 1.2rem; color: var(--brand-primary); max-width: 800px; margin: 0 auto; font-weight: 600; font-style: italic; }
+
+        /* --- KNOWLEDGE ZONE --- */
+        .zone-lesson { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+        
+        .visual-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            border-left: 6px solid var(--brand-primary);
+        }
+        .visual-card .illustration {
+            flex: 1;
+            min-width: 300px;
+            background: #f1f4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .visual-card .content { flex: 1.5; padding: 32px; min-width: 300px; }
+
+        .step-label {
+            display: inline-block;
+            background: var(--brand-secondary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .alert-box {
+            background: #FFF5F5;
+            border: 1px solid var(--warning);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        /* --- APPLICATION ZONE --- */
+        .zone-application { background-color: #E6EBF0; padding: 64px 24px; }
+        .app-container { max-width: 850px; margin: 0 auto; background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        
+        .button-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+        .btn { flex: 1; min-width: 280px; padding: 18px 24px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-family: var(--font-body); text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-align: center;}
+        .btn-navy { background: var(--brand-primary); color: white; }
+        .btn-red { background: var(--brand-secondary); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* --- VALIDATION ZONE --- */
+        .zone-validation { background: var(--brand-primary); padding: 64px 24px; color: white; text-align: center; }
+        .quiz-card { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 32px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) {
+            .nav-header { height: auto; padding: 16px; }
+            .visual-card { flex-direction: column; }
+            .btn { width: 100%; flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <img src="https://nextfranchise.github.io/nextfranchise/Clients/K%20Street/assets/kstulogo%20clean.png" alt="K-Street">
+        <div class="header-titles">
+            <span class="module-name">Module 1: FOH Standards</span>
+            <span class="lesson-name">1.3 Opening Procedure</span>
+        </div>
+    </header>
+
+    <section class="mentor-hook">
+        <p>"Success is built in the first 30 minutes. If we win the morning prep, we win the whole day."</p>
+    </section>
+
+    <main class="zone-lesson">
+        
+        <!-- Action Card 1: THE INITIAL SCAN -->
+        <article class="visual-card">
+            <div class="illustration">
+                <!-- REFINED SVG: The Storefront Scan -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Building Frame -->
+                    <path d="M40 180V80L100 50L160 80V180H40Z" stroke="#2C3C49" stroke-width="6" stroke-linejoin="round"/>
+                    <rect x="70" y="110" width="60" height="70" stroke="#2C3C49" stroke-width="4"/>
+                    <!-- Clipboard/Checklist Badge Overlay -->
+                    <rect x="130" y="140" width="50" height="70" rx="4" fill="white" stroke="#B2232E" stroke-width="4"/>
+                    <line x1="140" y1="160" x2="170" y2="160" stroke="#B2232E" stroke-width="3"/>
+                    <line x1="140" y1="175" x2="170" y2="175" stroke="#B2232E" stroke-width="3"/>
+                    <line x1="140" y1="190" x2="160" y2="190" stroke="#B2232E" stroke-width="3"/>
+                    <!-- Text Badge Label -->
+                    <rect x="30" y="200" width="140" height="35" rx="4" fill="#2C3C49"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">INITIAL SCAN</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="step-label">PHASE 1</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 1: The Daily Walkthrough</h2>
+                <p>Arrive early. Before you touch a guest order, you must ensure the "Stage" is ready. Walk the dining area and scan for hazards or debris.</p>
+                <p style="margin-top:10px;"><strong>Key Tasks:</strong></p>
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
+                    <li>Unlock premises and check safety lighting.</li>
+                    <li>Complete your handwashing and grooming check.</li>
+                    <li>Join the MOD for the daily briefing.</li>
+                </ul>
+                <div class="alert-box">
+                    <strong style="color: var(--warning);">WHY IT MATTERS:</strong> A late start ripples through the whole shift. On-time opening is verified by your POS transaction logs.
+                </div>
+            </div>
+        </article>
+
+        <!-- Action Card 2: STATION ACTIVATION -->
+        <article class="visual-card" style="border-left-color: var(--brand-secondary); flex-direction: row-reverse;">
+            <div class="illustration">
+                <!-- REFINED SVG: Power & Station Readiness -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Power Button Circle -->
+                    <circle cx="100" cy="110" r="70" stroke="#2C3C49" stroke-width="6" stroke-dasharray="10 5"/>
+                    <circle cx="100" cy="110" r="50" fill="#f1f4f7"/>
+                    <!-- Power Icon -->
+                    <path d="M100 70V110" stroke="#B2232E" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M75 85C65 95 65 125 75 135C85 145 115 145 125 135C135 125 135 95 125 85" stroke="#B2232E" stroke-width="12" stroke-linecap="round"/>
+                    <!-- Text Badge Label -->
+                    <rect x="25" y="200" width="150" height="35" rx="4" fill="#B2232E"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">STATION READY</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="step-label">PHASE 2</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 2: Power Up</h2>
+                <p>Once the environment is safe, bring the technology to life. Every piece of FOH equipment must be powered and checked.</p>
+                <p style="margin-top:10px;"><strong>The Technical Checklist:</strong></p>
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
+                    <li>Power on POS terminals and food warmers.</li>
+                    <li>Verify all service equipment is functioning.</li>
+                    <li>Sign off every line item on the <strong>Opening Checklist</strong>.</li>
+                </ul>
+                <div class="alert-box" style="border-color: var(--brand-primary); background: #f0f4f8;">
+                    <strong style="color: var(--brand-primary);">KPI TARGET:</strong> 100% Checklist Completion Rate. Do not sign a line item until the task is physically finished.
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- APPLICATION ZONE -->
+    <section class="zone-application">
+        <div class="app-container">
+            <h2 style="font-family: var(--font-heading); margin-bottom: 16px;">The Opening Sprint</h2>
+            <p style="font-size: 1.15rem; margin-bottom: 24px;">It's 10 minutes before the doors open. You are still working on the dining room walkthrough, but the POS isn't on yet. The MOD is waiting for the briefing. What's your move?</p>
+            <div class="button-group">
+                <button class="btn btn-navy" onclick="feedback(false)">Quickly sign the checklist and turn on the POS to save time.</button>
+                <button class="btn btn-red" onclick="feedback(true)">Finish the scan, power up the POS, and inform the MOD of the delay.</button>
+            </div>
+            <div id="fb" style="display:none; margin-top:32px; padding:24px; border-radius:var(--radius);"></div>
+        </div>
+    </section>
+
+    <!-- VALIDATION ZONE -->
+    <footer class="zone-validation">
+        <div class="quiz-card">
+            <h3 style="font-family: var(--font-heading); margin-bottom: 20px;">Sign-Off Certification</h3>
+            <p style="margin-bottom: 24px;">When should you notify the MOD that the store is ready to open?</p>
+            <div style="text-align: left; margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="a"> As soon as you arrive at the store.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" id="correct" value="b"> Only after the checklist is 100% complete and signed.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="c"> Once the first guest is at the door.
+                </label>
+            </div>
+            <button class="btn btn-red" style="width: 100%;" onclick="check()">Confirm Daily Procedure</button>
+            <p id="quiz-fb" style="margin-top: 20px; font-weight: 700;"></p>
+        </div>
+        <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.5;">K-Street University &copy; 2023</p>
+    </footer>
+
+    <script>
+        function feedback(isCorrect) {
+            const f = document.getElementById('fb');
+            f.style.display = 'block';
+            f.style.background = isCorrect ? '#D1FAE5' : '#FEE2E2';
+            f.style.color = isCorrect ? '#065F46' : '#991B1B';
+            f.innerHTML = isCorrect ? "<strong>CORRECT.</strong> Accuracy and safety always come before 'paperwork speed'. Informed communication with the MOD is the right standard." : "<strong>INCORRECT.</strong> Signing a checklist before the work is done is a violation of brand integrity and safety standards.";
+        }
+        function check() {
+            const res = document.getElementById('correct').checked;
+            const msg = document.getElementById('quiz-fb');
+            if(res) {
+                msg.style.color = "#4ADE80";
+                msg.innerText = "✓ CORRECT: Integrity in the opening checklist is non-negotiable.";
+            } else {
+                msg.style.color = "#F87171";
+                msg.innerText = "✘ INCORRECT: The store is only 'Ready' when all physical checks are complete.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Street 1.5: FOH-BOH Communication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #2C3C49;
+            --brand-secondary: #B2232E;
+            --bg-page: #FAF6EF;
+            --surface: #FFFFFF;
+            --text-main: #22303B;
+            --text-muted: #6B6259;
+            --warning: #C1440E;
+            --success: #2E7D32;
+            --font-heading: 'Roboto Slab', serif;
+            --font-body: 'Nunito Sans', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER ZONE --- */
+        .nav-header {
+            height: 90px;
+            background: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-header img { height: 60px; margin-right: 20px; }
+        .header-titles { display: flex; flex-direction: column; }
+        .module-name { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .lesson-name { color: white; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+
+        /* --- MENTOR HOOK --- */
+        .mentor-hook {
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--surface);
+            border-bottom: 4px solid var(--brand-secondary);
+        }
+        .mentor-hook p { font-size: 1.2rem; color: var(--brand-primary); max-width: 800px; margin: 0 auto; font-weight: 600; font-style: italic; }
+
+        /* --- KNOWLEDGE ZONE --- */
+        .zone-lesson { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+        
+        .visual-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            border-left: 6px solid var(--brand-primary);
+        }
+        .visual-card .illustration {
+            flex: 1;
+            min-width: 300px;
+            background: #f1f4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .visual-card .content { flex: 1.5; padding: 32px; min-width: 300px; }
+
+        .kpi-badge {
+            display: inline-block;
+            background: var(--brand-primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .check-icon { color: var(--brand-secondary); font-weight: 900; }
+
+        .alert-box {
+            background: #FFF5F5;
+            border: 1px solid var(--warning);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+        }
+
+        /* --- APPLICATION ZONE --- */
+        .zone-application { background-color: #E6EBF0; padding: 64px 24px; }
+        .app-container { max-width: 850px; margin: 0 auto; background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        
+        .button-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+        .btn { flex: 1; min-width: 280px; padding: 18px 24px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-family: var(--font-body); text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-align: center;}
+        .btn-navy { background: var(--brand-primary); color: white; }
+        .btn-red { background: var(--brand-secondary); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* --- VALIDATION ZONE --- */
+        .zone-validation { background: var(--brand-primary); padding: 64px 24px; color: white; text-align: center; }
+        .quiz-card { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 32px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) {
+            .nav-header { height: auto; padding: 16px; }
+            .visual-card { flex-direction: column; }
+            .btn { width: 100%; flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <img src="https://nextfranchise.github.io/nextfranchise/Clients/K%20Street/assets/kstulogo%20clean.png" alt="K-Street">
+        <div class="header-titles">
+            <span class="module-name">Module 1: FOH Standards</span>
+            <span class="lesson-name">1.5 FOH-BOH Communication</span>
+        </div>
+    </header>
+
+    <section class="mentor-hook">
+        <p>"The POS sends the data, but your communication sends the quality. Let's make sure the front and back speak the same language."</p>
+    </section>
+
+    <main class="zone-lesson">
+        
+        <!-- Action Card 1: THE TICKET PATH -->
+        <article class="visual-card">
+            <div class="illustration">
+                <!-- REFINED SVG: POS to Kitchen Ticket -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- POS Screen -->
+                    <rect x="40" y="60" width="120" height="80" rx="4" stroke="#2C3C49" stroke-width="6"/>
+                    <!-- Ticket Popping Out -->
+                    <path d="M70 140V190H130V140" fill="white" stroke="#2C3C49" stroke-width="4"/>
+                    <line x1="80" y1="155" x2="120" y2="155" stroke="#2C3C49" stroke-width="2"/>
+                    <line x1="80" y1="170" x2="110" y2="170" stroke="#2C3C49" stroke-width="2"/>
+                    <!-- Sync Arrow -->
+                    <path d="M170 80L190 100L170 120" stroke="#B2232E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Text Badge Label -->
+                    <rect x="30" y="200" width="140" height="35" rx="4" fill="#2C3C49"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">POS SYNC</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="kpi-badge">ACCURACY TARGET: 100%</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 1: Precise Entry</h2>
+                <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <p><strong>Double-Check the Guest:</strong> Read the order summary back to the guest before hitting "Send." One correction at the counter saves 10 minutes in the kitchen.</p>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <p><strong>The Verbal Bridge:</strong> If there's a modification (no onions, extra sauce) that isn't a standard button, you <strong>must</strong> verbally flag it to the BOH Cook.</p>
+                </div>
+                <div class="alert-box">
+                    <strong style="color: var(--warning);">RUSH RULE:</strong> During peak hours, rely primarily on the POS ticket. Use verbal talk only for exceptions to keep the kitchen noise down.
+                </div>
+            </div>
+        </article>
+
+        <!-- Action Card 2: THE QUALITY CHECK -->
+        <article class="visual-card" style="border-left-color: var(--brand-secondary); flex-direction: row-reverse;">
+            <div class="illustration">
+                <!-- REFINED SVG: Final Order Match -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Serving Tray -->
+                    <path d="M40 160H160L170 140H30L40 160Z" fill="#2C3C49"/>
+                    <!-- Kitchen Bell -->
+                    <path d="M100 100C120 100 130 115 130 135H70C70 115 80 100 100 100Z" stroke="#B2232E" stroke-width="6"/>
+                    <path d="M100 90V80" stroke="#B2232E" stroke-width="6" stroke-linecap="round"/>
+                    <!-- Success Checkmark -->
+                    <circle cx="160" cy="80" r="25" fill="#2E7D32"/>
+                    <path d="M150 80L157 87L170 73" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Text Badge Label -->
+                    <rect x="25" y="200" width="150" height="35" rx="4" fill="#B2232E"/>
+                    <text x="100" y="224" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">MATCH CHECK</text>
+                </svg>
+            </div>
+            <div class="content">
+                <span class="kpi-badge">SPEED TARGET: BRANCH-TARGET</span>
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 2: Verification</h2>
+                <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <p><strong>Monitor the Clock:</strong> Keep an eye on ticket times. If an order is running behind the branch target, sync with the BOH Cook immediately to re-prioritize.</p>
+                </div>
+                <div class="check-item">
+                    <span class="check-icon">✓</span>
+                    <p><strong>The Final Match:</strong> Before the food touches the guest's hand, compare the plate to the ticket. If it doesn't match 100%, send it back for correction before the guest sees it.</p>
+                </div>
+                <div class="alert-box" style="border-color: var(--brand-primary); background: #f0f4f8;">
+                    <strong style="color: var(--brand-primary);">TEAM SYNC:</strong> Discrepancies should be flagged calmly and immediately. We fix it as a team, not as rivals.
+                </div>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- APPLICATION ZONE -->
+    <section class="zone-application">
+        <div class="app-container">
+            <h2 style="font-family: var(--font-heading); margin-bottom: 16px;">The Coordination Challenge</h2>
+            <p style="font-size: 1.15rem; margin-bottom: 24px;">A guest orders a bibimbap with <strong>no mushrooms</strong> due to an allergy. You enter it in the POS, but the kitchen is currently slammed with 10 active tickets. What's your move?</p>
+            <div class="button-group">
+                <button class="btn btn-navy" onclick="feedback(false)">Trust the POS ticket; they'll see the 'No Mushroom' note.</button>
+                <button class="btn btn-red" onclick="feedback(true)">Verbally flag the allergy order to the Cook immediately.</button>
+            </div>
+            <div id="fb" style="display:none; margin-top:32px; padding:24px; border-radius:var(--radius);"></div>
+        </div>
+    </section>
+
+    <!-- VALIDATION ZONE -->
+    <footer class="zone-validation">
+        <div class="quiz-card">
+            <h3 style="font-family: var(--font-heading); margin-bottom: 20px;">Relay Certification</h3>
+            <p style="margin-bottom: 24px;">When should an order discrepancy be corrected?</p>
+            <div style="text-align: left; margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="a"> After the guest complains about it.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" id="correct" value="b"> Immediately at the pass, before delivery to the guest.
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="c"> Only if it's a high-priced item.
+                </label>
+            </div>
+            <button class="btn btn-red" style="width: 100%;" onclick="check()">Confirm Standards</button>
+            <p id="quiz-fb" style="margin-top: 20px; font-weight: 700;"></p>
+        </div>
+        <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.5;">K-Street University &copy; 2023 | FOH 1.5</p>
+    </footer>
+
+    <script>
+        function feedback(isCorrect) {
+            const f = document.getElementById('fb');
+            f.style.display = 'block';
+            f.style.background = isCorrect ? '#D1FAE5' : '#FEE2E2';
+            f.style.color = isCorrect ? '#065F46' : '#991B1B';
+            f.innerHTML = isCorrect ? "<strong>CORRECT.</strong> Allergy modifications are high-risk. Digital tickets can be missed during a rush—verbal confirmation ensures guest safety." : "<strong>INCORRECT.</strong> During a rush, small text on a ticket is easily missed. High-stakes modifications (like allergies) must be verbally confirmed with the BOH.";
+        }
+        function check() {
+            const res = document.getElementById('correct').checked;
+            const msg = document.getElementById('quiz-fb');
+            if(res) {
+                msg.style.color = "#4ADE80";
+                msg.innerText = "✓ CORRECT: The FOH Match-Check is our final line of defense.";
+            } else {
+                msg.style.color = "#F87171";
+                msg.innerText = "✘ INCORRECT: Every order must be verified against the ticket before it leaves the pass.";
+            }
+        }
+    </script>
+</body>
+</html>

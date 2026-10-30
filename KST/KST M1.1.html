@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Street 1.1: Guest Greeting & Farewell</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #2C3C49;
+            --brand-secondary: #B2232E;
+            --bg-page: #FAF6EF;
+            --surface: #FFFFFF;
+            --text-main: #22303B;
+            --text-muted: #6B6259;
+            --warning: #C1440E;
+            --success: #2E7D32;
+            --font-heading: 'Roboto Slab', serif;
+            --font-body: 'Nunito Sans', sans-serif;
+            --radius: 8px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER ZONE --- */
+        .nav-header {
+            height: 90px;
+            background: var(--brand-primary);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-header img { height: 60px; margin-right: 20px; }
+        .header-titles { display: flex; flex-direction: column; }
+        .module-name { color: rgba(255,255,255,0.7); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .lesson-name { color: white; font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+
+        /* --- MENTOR HOOK --- */
+        .mentor-hook {
+            padding: 32px 24px;
+            text-align: center;
+            background: var(--surface);
+            border-bottom: 4px solid var(--brand-secondary);
+        }
+        .mentor-hook p { font-size: 1.2rem; color: var(--brand-primary); max-width: 800px; margin: 0 auto; font-weight: 600; font-style: italic; }
+
+        /* --- KNOWLEDGE ZONE --- */
+        .zone-lesson { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+        
+        .visual-card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            border-left: 6px solid var(--brand-primary);
+        }
+        .visual-card .illustration {
+            flex: 1;
+            min-width: 300px;
+            background: #f1f4f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .visual-card .content { flex: 1.5; padding: 32px; min-width: 300px; }
+
+        .script-bubble {
+            background: #F0F4F8;
+            border-left: 4px solid var(--brand-secondary);
+            padding: 20px;
+            margin: 20px 0;
+            font-weight: 700;
+            color: var(--brand-primary);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+        }
+
+        .alert-box {
+            background: #FFF5F5;
+            border: 1px solid var(--warning);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        /* --- APPLICATION ZONE --- */
+        .zone-application { background-color: #E6EBF0; padding: 64px 24px; }
+        .app-container { max-width: 850px; margin: 0 auto; background: var(--surface); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); }
+        
+        .button-group { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 32px; }
+        .btn { flex: 1; min-width: 280px; padding: 18px 24px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; transition: 0.2s; font-family: var(--font-body); text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-align: center;}
+        .btn-navy { background: var(--brand-primary); color: white; }
+        .btn-red { background: var(--brand-secondary); color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* --- VALIDATION ZONE --- */
+        .zone-validation { background: var(--brand-primary); padding: 64px 24px; color: white; text-align: center; }
+        .quiz-card { max-width: 600px; margin: 0 auto; background: rgba(255,255,255,0.05); padding: 32px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); }
+
+        @media (max-width: 768px) {
+            .nav-header { height: auto; padding: 16px; }
+            .visual-card { flex-direction: column; }
+            .btn { width: 100%; flex: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-header">
+        <img src="https://nextfranchise.github.io/nextfranchise/Clients/K%20Street/assets/kstulogo%20clean.png" alt="K-Street">
+        <div class="header-titles">
+            <span class="module-name">Module 1: FOH Standards</span>
+            <span class="lesson-name">1.1 Guest Greeting & Farewell</span>
+        </div>
+    </header>
+
+    <section class="mentor-hook">
+        <p>"Greeting a guest is the first 'bite' of their K-Street experience. Let's make it hit the mark."</p>
+    </section>
+
+    <main class="zone-lesson">
+        
+        <!-- REFINED ACTION CARD 1: THE 5s RULE -->
+        <article class="visual-card">
+            <div class="illustration">
+                <!-- REFINED SVG: 5-Second Rule -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Clock Outer Ring -->
+                    <circle cx="100" cy="100" r="85" stroke="#2C3C49" stroke-width="4" stroke-dasharray="8 8"/>
+                    <!-- Red Zone Segment (Visualizing 5 seconds) -->
+                    <path d="M100 15 A 85 85 0 0 1 115 17" stroke="#B2232E" stroke-width="12" stroke-linecap="round"/>
+                    <!-- Clock Hands -->
+                    <path d="M100 40V100L135 135" stroke="#2C3C49" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="100" cy="100" r="12" fill="#B2232E"/>
+                    <!-- Text Badge Label -->
+                    <rect x="30" y="195" width="140" height="35" rx="4" fill="#2C3C49"/>
+                    <text x="100" y="220" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">THE 5s RULE</text>
+                </svg>
+            </div>
+            <div class="content">
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 1: Immediate Connection</h2>
+                <p>The moment a guest enters, the clock starts. You have <strong>five seconds</strong> to acknowledge them. Even if your hands are full, eye contact and a warm smile meet the K-Street standard.</p>
+                <div class="script-bubble">
+                    [SCRIPT] "Annyeong, Welcome to K-Street!"
+                </div>
+                <div class="alert-box">
+                    <strong style="color: var(--warning);">KPI ALERT:</strong> Mystery shoppers verify these specific phrases. Consistent delivery is the target for 100% of guests.
+                </div>
+            </div>
+        </article>
+
+        <!-- REFINED ACTION CARD 2: FAREWELL -->
+        <article class="visual-card" style="border-left-color: var(--brand-secondary); flex-direction: row-reverse;">
+            <div class="illustration">
+                <!-- REFINED SVG: Last Impression -->
+                <svg width="220" height="220" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Door Frame -->
+                    <path d="M50 170V40H140V170" stroke="#2C3C49" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Door Handle -->
+                    <circle cx="125" cy="105" r="8" fill="#B2232E"/>
+                    <!-- Exit Arrow -->
+                    <path d="M150 105H190M190 105L175 90M190 105L175 120" stroke="#B2232E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Text Badge Label -->
+                    <rect x="20" y="195" width="160" height="35" rx="4" fill="#B2232E"/>
+                    <text x="100" y="220" font-family="Roboto Slab" font-size="16" fill="white" font-weight="900" text-anchor="middle">LAST IMPRESSION</text>
+                </svg>
+            </div>
+            <div class="content">
+                <h2 style="font-family: var(--font-heading); color: var(--brand-primary); margin-bottom: 12px;">Step 2: The Lasting Impression</h2>
+                <p>The service isn't over when the guest pays. As they head toward the door, pause, make eye contact again, and send them off with energy.</p>
+                <div class="script-bubble" style="background: #FFF9F0;">
+                    [SCRIPT] "Kamsahamnida, See us Again!"
+                </div>
+                <p><strong>Pro-Tip:</strong> Never let a guest leave "to the back of your head." Turn around and finish the interaction properly.</p>
+            </div>
+        </article>
+
+    </main>
+
+    <section class="zone-application">
+        <div class="app-container">
+            <h2 style="font-family: var(--font-heading); margin-bottom: 16px;">Scenario Practice</h2>
+            <p style="font-size: 1.15rem; margin-bottom: 24px;">It's the lunch rush. You're busy entering a complex phone order. A guest walks in. What's your move?</p>
+            <div class="button-group">
+                <button class="btn btn-navy" onclick="feedback(false)">Finish the entry first to ensure accuracy.</button>
+                <button class="btn btn-red" onclick="feedback(true)">Look up, smile, and say "Annyeong!" immediately.</button>
+            </div>
+            <div id="fb" style="display:none; margin-top:32px; padding:24px; border-radius:var(--radius);"></div>
+        </div>
+    </section>
+
+    <footer class="zone-validation">
+        <div class="quiz-card">
+            <h3 style="font-family: var(--font-heading); margin-bottom: 20px;">Certification Quiz</h3>
+            <p style="margin-bottom: 24px;">Which phrase is required as a guest leaves K-Street?</p>
+            <div style="text-align: left; margin-bottom: 24px;">
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="a"> "Goodbye, thanks for coming!"
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" id="correct" value="b"> "Kamsahamnida, See us Again!"
+                </label>
+                <label style="display: block; margin-bottom: 12px; cursor: pointer;">
+                    <input type="radio" name="q" value="c"> "See you next time!"
+                </label>
+            </div>
+            <button class="btn btn-red" style="width: 100%;" onclick="check()">Confirm Knowledge</button>
+            <p id="quiz-fb" style="margin-top: 20px; font-weight: 700;"></p>
+        </div>
+        <p style="margin-top: 60px; font-size: 0.8rem; opacity: 0.5;">K-Street University &copy; 2023</p>
+    </footer>
+
+    <script>
+        function feedback(isCorrect) {
+            const f = document.getElementById('fb');
+            f.style.display = 'block';
+            f.style.background = isCorrect ? '#D1FAE5' : '#FEE2E2';
+            f.style.color = isCorrect ? '#065F46' : '#991B1B';
+            f.innerHTML = isCorrect ? "<strong>CORRECT.</strong> In-person guests always take priority over screens. That 5-second greeting is our promise." : "<strong>INCORRECT.</strong> Standards require a 5-second acknowledgement, even during a rush.";
+        }
+        function check() {
+            const res = document.getElementById('correct').checked;
+            const msg = document.getElementById('quiz-fb');
+            if(res) {
+                msg.style.color = "#4ADE80";
+                msg.innerText = "✓ Correct! You are certified on Guest Interaction.";
+            } else {
+                msg.style.color = "#F87171";
+                msg.innerText = "✘ Incorrect. Please review the farewell script.";
+            }
+        }
+    </script>
+</body>
+</html>
