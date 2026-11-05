@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 3 Session 7 · The Hard Conversation</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .role-tab.active {
+      background-color: #1F2733;
+      color: #FFFFFF;
+      border-color: #1F2733;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 07 (150m)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">The Hard Conversation · Client Facilitation Under Pushback</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Card v1 to v2</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Facilitation Rules</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>RP 1: Territory</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>RP 2: Guarantee</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>RP 3: The Buyer</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>Debrief & Lexicon</span>
+        </button>
+      </nav>
+
+      <!-- Back Link -->
+      <div class="flex items-center gap-2">
+        <a href="session6.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 6</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: GROUND TRUTH DEBRIEF (CARD V1 TO V2)            -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 01 OF 06</span>
+            <span class="text-[#5C6066]">CHECK-IN · 00:00 – 00:15 (15 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Ground Truth Debrief // Upgrading Card v1 to v2
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Skill Anchor: Learning Acuity in Motion
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Ground Commando Impact -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="footprints" class="w-4 h-4 text-[#BD9F4F]"></i>
+              What Happened When You Touched the Ground?
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Between Session 6 and today, each trainee visited a store, interviewed crew members, or spoke to a prospective franchise buyer.
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold font-mono text-[#1F2733] uppercase text-[10px]">The Reflection Crucible:</span>
+              <p class="italic leading-relaxed">
+                "What assumption in your Problem Card v1 collapsed the moment you heard actual verbatim words from the crew or diner? What would you have mistakenly recommended without that visit?"
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#1F2733] text-white text-xs space-y-1">
+              <span class="text-[#BD9F4F] font-bold font-mono text-[10px] uppercase">The Learning Acuity Dividend:</span>
+              <p class="text-slate-200">
+                Pivoting without ego when field reality contradicts your earlier deck is the defining mark of a Senior Consultant.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066]">
+            Every v2 card must show its version changelog and date.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Two Real Trainee Transformations -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Case Shift: Desk v1 vs Field v2
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">REAL TRANSFORMATION</span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1">
+                <span class="font-bold text-[#B42318] font-mono text-[10px] uppercase">Problem Card v1 (The Desk Assumption):</span>
+                <p class="text-[#5C6066]">"Store sales are down because local store marketing is weak and crew need customer service training."</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 space-y-1">
+                <span class="font-bold text-[#1E7B4F] font-mono text-[10px] uppercase">Problem Card v2 (The Field Truth):</span>
+                <p class="text-[#1A1A1A] leading-relaxed">
+                  "Crew interview revealed the commissary freezer delivery arrives at 2:00 PM during lunch rush, forcing them to turn away diners for 45 minutes to unload boxes. The fix is a revised delivery window, not marketing."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-medium flex justify-between items-center">
+            <span>Stage Outcome:</span>
+            <strong class="font-heading text-[#1F2733]">Problem Card v2 is now fortified with verified ground evidence.</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="shield" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">FACILITATION PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Owners pay Next Franchise to hear what their own management team is terrified to tell them."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Master the 6 Facilitation Mandates and the 3 Moves of Radical Candor.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Master Facilitation Rules</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: HOW TO FACILITATE AN OWNER                      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 02 OF 06</span>
+            <span class="text-[#5C6066]">STAGE PACE: 20 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            How to Facilitate an Owner Under Pressure
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Candor · Whole Person · Follow the Good
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The 3 Moves of Candor -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="scale" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 3 Non-Negotiable Moves of Candor
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              When delivering an uncomfortable truth that threatens the owner's immediate cashflow, execute these three moves sequentially:
+            </p>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-[11px] uppercase">1. Name the Weak Point Plainly</span>
+                <p class="text-[#1A1A1A]">State the flaw directly without sugarcoating or defensive hedging. <em>"At 15,000 population, the territory falls below the Conservative break-even threshold."</em></p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-[11px] uppercase">2. State Why It Hurts the Brand with Evidence</span>
+                <p class="text-[#1A1A1A]">Ground the warning in capital consequences. <em>"If this branch averages 35 transactions instead of 100, the franchisee runs out of revolving cash in month four, and your brand's reputation pays for it."</em></p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-[11px] uppercase">3. Offer a Viable Next Step the Owner Can Say Yes To</span>
+                <p class="text-[#1A1A1A]">Never leave the client in an argumentative dead-end. <em>"Redirect this buyer to the Phase 1 territory in Calbayog, or evaluate a low-CapEx kiosk format."</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            Candor without an actionable next step is just arrogance.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: The 6 Facilitation Mandates -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The 6 Facilitation Mandates
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">PSYCHOLOGY</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">01</span>
+                <div><strong>Ask Before Telling:</strong> Use <em>"Tell me about the last time..."</em> and <em>"And then what happened?"</em> until the real root story emerges.</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">02</span>
+                <div><strong>Keep the Owner's Exact Words:</strong> A Blueprint written in corporate consulting vocabulary is one the owner cannot defend to their franchisees.</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">03</span>
+                <div><strong>The Owner is a Whole Person:</strong> This brand is their life's work, their family pride, and their debt. Radical Candor is not cruelty.</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">04</span>
+                <div><strong>Never Trade Reality for Client Targets:</strong> Never let the owner's growth target replace register reality.</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">05</span>
+                <div><strong>Name Meta Skills Only After Use:</strong> Don't lecture the client on jargon; demonstrate the habit first.</div>
+              </div>
+
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-2.5">
+                <span class="font-bold font-mono text-[#BD9F4F]">06</span>
+                <div><strong>Hold Position Without Hostility:</strong> Do not fold under pushback, and do not raise your voice. Stand on the evidence.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066] text-right">
+            Governs live capstone defense in Session 8.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ROLE-PLAY SIMULATION 01</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Role-Play 1: The owner has a bank loan due and desperately wants to sell a 15,000-population territory."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Hold your position under pressure without losing the client relationship.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Role-Play 1</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: ROLE-PLAY 1 — THE UNREADY TERRITORY             -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">ROLE-PLAY 01</span>
+            <span class="text-[#5C6066]">SIMULATION · 18 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Role-Play 1 // The Territory That Isn't Ready
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Demand Score: 5 / 10 · High Risk
+        </div>
+      </div>
+
+      <!-- Triad Role Switcher -->
+      <div class="flex gap-2 border-b border-[#E8E4D8] pb-3 text-xs font-mono">
+        <button onclick="switchRole(1, 'sr')" id="rp1-tab-sr" class="role-tab active px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold transition">Sr Consultant Brief</button>
+        <button onclick="switchRole(1, 'owner')" id="rp1-tab-owner" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Owner's Secret Brief</button>
+        <button onclick="switchRole(1, 'observer')" id="rp1-tab-observer" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Observer Audit Sheet</button>
+      </div>
+
+      <!-- Role-Play 1 Card Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Main Content 8 Cols -->
+        <div class="lg:col-span-8 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          
+          <!-- SR VIEW -->
+          <div id="rp1-view-sr" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase">Your Position as Sr Consultant</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">DO NOT AUTHORIZE</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>The Context:</strong> A rice-meal brand with four company-owned stores wants to franchise. A prospect has cash ready to reserve a franchise territory in a town of 15,000 residents.</p>
+              <p><strong>The Mathematical Reality:</strong> Your territory rule, proven at existing units, requires a minimum catchment of <strong>25,000 residents</strong> at conservative penetration. The demand score for this town is <strong>5 out of 10</strong>.</p>
+              <p><strong>Your Mission:</strong> Tell the owner plainly not to sell this territory yet. Do not cave under pressure. Deliver a viable next step.</p>
+            </div>
+          </div>
+
+          <!-- OWNER VIEW -->
+          <div id="rp1-view-owner" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#B42318] uppercase">Owner's Secret Brief (Private)</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">PRESSURE STANCE</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>Your Hidden Pressure:</strong> You have an overdue bank amortization due next Monday. You desperately need the ₱500,000 franchise fee deposit from this sale.</p>
+              <p><strong>Your Pushback Moves:</strong> Push hard twice: <em>"Your population rules are just theoretical estimates!"</em> and <em>"If we don't grab this town now, our competitor will open there next month!"</em></p>
+              <p><strong>Soften Only If:</strong> The consultant demonstrates empathy for your cash needs, stands firm on the evidence, and gives you a viable alternative (e.g. Phase 1 territory or smaller kiosk format).</p>
+            </div>
+          </div>
+
+          <!-- OBSERVER VIEW -->
+          <div id="rp1-view-observer" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1E7B4F] uppercase">Observer Audit Checklist</span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">EVALUATION</span>
+            </div>
+            <div class="space-y-2 text-xs text-[#5C6066]">
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr ask about the owner's financial situation before arguing?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr stand firm on the 5/10 demand score without becoming defensive or apologetic?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr offer an actionable next step the owner could realistically accept?</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Cols: Timing & Ground Rules -->
+        <div class="lg:col-span-4 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ROLE-PLAY CLOCK</span>
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs font-mono text-center">
+              <div class="text-2xl font-bold text-[#BD9F4F]">8:00 Mins</div>
+              <p class="text-slate-300 text-[11px]">3m Briefing · 8m Simulation · 7m Debrief</p>
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Debrief order: <strong>1. Observer</strong> (objective checks) → <strong>2. Owner</strong> (how it felt) → <strong>3. Sr Consultant</strong> (self-critique).
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A]">
+            Watch for folding: Trainees often say <em>"Okay, maybe we can try it as a test branch."</em> That is a failure of candor.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="badge-percent" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ROLE-PLAY SIMULATION 02</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Role-Play 2: The owner insists on offering a 'Guaranteed 18-month payback or your money back'."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Redirect the owner from an uncontrollable guarantee to an operational guarantee.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Role-Play 2</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: ROLE-PLAY 2 — THE UNCONTROLLABLE GUARANTEE       -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">ROLE-PLAY 02</span>
+            <span class="text-[#5C6066]">SIMULATION · 18 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Role-Play 2 // The Uncontrollable Guarantee
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Laundry Brand Case · Offer Integrity
+        </div>
+      </div>
+
+      <!-- Triad Role Switcher -->
+      <div class="flex gap-2 border-b border-[#E8E4D8] pb-3 text-xs font-mono">
+        <button onclick="switchRole(2, 'sr')" id="rp2-tab-sr" class="role-tab active px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold transition">Sr Consultant Brief</button>
+        <button onclick="switchRole(2, 'owner')" id="rp2-tab-owner" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Owner's Secret Brief</button>
+        <button onclick="switchRole(2, 'observer')" id="rp2-tab-observer" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Observer Audit Sheet</button>
+      </div>
+
+      <!-- Role-Play 2 Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <div class="lg:col-span-8 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          
+          <!-- SR VIEW -->
+          <div id="rp2-view-sr" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase">Your Position as Sr Consultant</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">REJECT PROMISSORY GUARANTEE</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>The Issue:</strong> A laundry franchise client wants their launch offer to claim: <em>"Guaranteed payback in 18 months or we refund the franchise fee."</em></p>
+              <p><strong>The Legal & Systemic Law:</strong> The franchisor does not control local store utility rates, crew theft, machine maintenance, or customer footfall. Guarantees may <strong>strictly cover what the franchisor controls directly</strong>.</p>
+              <p><strong>Your Mission:</strong> Tell the owner plainly why sales/payback guarantees invite fatal legal disputes, and propose an operational guarantee (e.g. machine maintenance SLA, chemical supply terms, or on-site opening support).</p>
+            </div>
+          </div>
+
+          <!-- OWNER VIEW -->
+          <div id="rp2-view-owner" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#B42318] uppercase">Owner's Secret Brief (Private)</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">AGGRESSIVE SALES STANCE</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>Your Argument:</strong> A competitor used a payback guarantee and sold 15 units in two months. You believe in your machines and feel the consultant is making you look timid.</p>
+              <p><strong>Your Pushback Moves:</strong> <em>"You're making us look weak! If our machines work, where is the risk? You consultants over-complicate everything!"</em></p>
+              <p><strong>Soften Only If:</strong> The consultant shows that an income guarantee gives rogue franchisees an incentive to under-report sales to get a refund, and offers a strong controllable guarantee that still sounds compelling to buyers.</p>
+            </div>
+          </div>
+
+          <!-- OBSERVER VIEW -->
+          <div id="rp2-view-observer" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1E7B4F] uppercase">Observer Audit Checklist</span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">EVALUATION</span>
+            </div>
+            <div class="space-y-2 text-xs text-[#5C6066]">
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr keep the franchisee in the room (who gets hurt when guarantees fail)?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr offer an airtight controllable guarantee rather than just saying "no"?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr remain calm and composed when the owner attacked their courage?</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Cols -->
+        <div class="lg:col-span-4 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OFFER GUARANTEE STANDARD</span>
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs leading-relaxed">
+              <span class="text-[#BD9F4F] font-bold font-mono text-[10px] uppercase">The Controllable Rule:</span>
+              <p class="text-slate-200">
+                You can guarantee crew certification. You can guarantee on-time commissary shipments. You can guarantee 7-day on-site opening trainers. You CANNOT guarantee revenue.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A]">
+            Skill Anchor: <strong>Follow the Good & Radical Candor</strong>.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="user-x" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ROLE-PLAY SIMULATION 03</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Role-Play 3: A prospective buyer has full capital ready, but scored 5/10 on the Readiness Check."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Turn down capital respectfully using the 'Not Yet' conditional bridge.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Role-Play 3</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: ROLE-PLAY 3 — THE BUYER WHO SHOULDN'T SIGN      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">ROLE-PLAY 03</span>
+            <span class="text-[#5C6066]">SIMULATION · 18 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Role-Play 3 // The Buyer Who Shouldn't Sign
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Tutorial Center Case · Readiness Score: 5 / 10
+        </div>
+      </div>
+
+      <!-- Triad Role Switcher -->
+      <div class="flex gap-2 border-b border-[#E8E4D8] pb-3 text-xs font-mono">
+        <button onclick="switchRole(3, 'sr')" id="rp3-tab-sr" class="role-tab active px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold transition">Sr Consultant Brief</button>
+        <button onclick="switchRole(3, 'owner')" id="rp3-tab-owner" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Owner's Secret Brief</button>
+        <button onclick="switchRole(3, 'observer')" id="rp3-tab-observer" class="role-tab px-4 py-2 rounded-xl border border-[#E8E4D8] font-bold text-[#5C6066] transition">Observer Audit Sheet</button>
+      </div>
+
+      <!-- Role-Play 3 Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <div class="lg:col-span-8 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          
+          <!-- SR VIEW -->
+          <div id="rp3-view-sr" class="space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase">Your Position as Sr Consultant</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">SCORE BELOW 7 = REJECT</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>The Prospect:</strong> A tutorial center franchise prospect has the full ₱1.8M capital ready in cash. However, their 3.7 Readiness Check score is <strong>5 out of 10</strong>.</p>
+              <p><strong>The Profile:</strong> The buyer works full-time in Singapore and plans to manage the center remotely via Zoom. They have zero experience managing teaching staff, and the investment represents their family's entire life savings.</p>
+              <p><strong>Your Mission:</strong> Tell the owner that selling to this buyer will destroy the unit. Provide a respectful 'Not Yet' conditional bridge.</p>
+            </div>
+          </div>
+
+          <!-- OWNER VIEW -->
+          <div id="rp3-view-owner" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#B42318] uppercase">Owner's Secret Brief (Private)</span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">CAPITAL SEDUCTION</span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>Your Stance:</strong> This would be your milestone 5th center. The prospect is genuinely polite and enthusiastic. You need this win to validate your brand expansion.</p>
+              <p><strong>Your Pushback Moves:</strong> <em>"They have the capital in the bank! It's their decision as adults to invest, not ours! We will just give them extra Zoom training!"</em></p>
+              <p><strong>Soften Only If:</strong> The consultant treats the buyer as a whole human being (protecting their family from catastrophe) and gives you a conditional path (e.g. buyer assigns a local full-time managing partner before signing).</p>
+            </div>
+          </div>
+
+          <!-- OBSERVER VIEW -->
+          <div id="rp3-view-observer" class="hidden space-y-4">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="text-xs font-heading font-bold text-[#1E7B4F] uppercase">Observer Audit Checklist</span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">EVALUATION</span>
+            </div>
+            <div class="space-y-2 text-xs text-[#5C6066]">
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr treat the prospect as a whole person rather than just 'disqualified pipeline'?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr use Follow the Good without sounding moralistic or preachy?</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-square" class="w-4 h-4 text-[#BD9F4F]"></i>
+                <span>Did the Sr frame 'Not Yet' as protecting the brand's 5th center reputation?</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right 4 Cols -->
+        <div class="lg:col-span-4 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE NOT YET BRIDGE</span>
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs leading-relaxed">
+              <span class="text-[#BD9F4F] font-bold font-mono text-[10px] uppercase">The Script Formulation:</span>
+              <p class="text-slate-200">
+                "We don't say no forever. We say: <em>'To protect your family's savings and our academic standards, we require a full-time, on-site managing partner certified at HQ before contract signing.'</em>"
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A]">
+            Skill Anchor: <strong>Whole Person & Follow the Good</strong>.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="message-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">LEXICON DEBRIEF PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "What phrases made the owner defensive, and what phrases made them listen?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Build the room's verbal de-escalation toolkit and prepare for Capstone Session 8.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Review De-Escalation Lexicon</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: DEBRIEF & CAPSTONE LAUNCHPAD                    -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 06 OF 06</span>
+            <span class="text-[#5C6066]">SYNTHESIS · 01:45 – 02:30 (45 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Facilitator Lexicon & Capstone Launchpad
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Phrases That Disarm Pushback
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Verbal Lexicon (Taglish Welcome) -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Phrases That Work vs Words That Inflame
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">TOOLKIT</span>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 space-y-1">
+                <span class="font-bold text-[#1E7B4F] font-mono uppercase text-[10px]">Phrases That De-Escalate:</span>
+                <p class="text-[#1A1A1A] italic">"Sir, we want you to reach 20 branches, but we want all 20 alive in year three."</p>
+                <p class="text-[#1A1A1A] italic">"Kung sarili mong ipon ang nakataya dito sa Conservative volume, pipirma ka ba?"</p>
+                <p class="text-[#1A1A1A] italic">"Hindi namin sinasabing NO. Sinasabi namin: NOT YET until these 2 conditions are met."</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1">
+                <span class="font-bold text-[#B42318] font-mono uppercase text-[10px]">Phrases That Trigger Defensiveness (Banned):</span>
+                <p class="text-[#5C6066] line-through italic">"Mali po yung financial projections niyo."</p>
+                <p class="text-[#5C6066] line-through italic">"Policy po kasi namin na bawal yan."</p>
+                <p class="text-[#5C6066] line-through italic">"Wala kayong magagawa, data ang nagsasabi."</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A]">
+            Candor delivered with respect makes the client trust you for life.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Session 8 Capstone Mandate -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Session 8 Capstone Mandate
+              </span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">EXECUTIVE DEFENSE</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-3 text-xs leading-relaxed">
+              <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CAPSTONE PREPARATION BRIEF:</span>
+              <div class="space-y-2 text-slate-200">
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span>Draft <strong>Part 5 Blueprint Advisory (Cards 5.1 & 5.2)</strong> for your live client brand based on your Problem Cards.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span>Prepare a <strong>10-minute presentation</strong> to the Lead Senior Consultant playing the client owner in role.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span>Your presentation <strong>must include at least one uncomfortable truth</strong> regarding fees, payback, or readiness.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span>Run Template B4 on your own draft and include an honest <em>"What's Weak Here"</em> line.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Hard Conversation Canvas</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Canvas:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Card v1 to v2</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Card v1 to v2",
+      "2. Facilitation Rules",
+      "3. RP 1: Unready Territory",
+      "4. RP 2: Payback Guarantee",
+      "5. RP 3: Unfit Buyer",
+      "6. Lexicon & Capstone"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    // Role-Play View Switcher Function
+    function switchRole(rpNum, role) {
+      const views = ['sr', 'owner', 'observer'];
+      views.forEach(v => {
+        const el = document.getElementById(`rp${rpNum}-view-${v}`);
+        const tab = document.getElementById(`rp${rpNum}-tab-${v}`);
+        if (v === role) {
+          el.classList.remove('hidden');
+          tab.classList.add('active');
+          tab.classList.remove('text-[#5C6066]');
+        } else {
+          el.classList.add('hidden');
+          tab.classList.remove('active');
+          tab.classList.add('text-[#5C6066]');
+        }
+      });
+    }
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

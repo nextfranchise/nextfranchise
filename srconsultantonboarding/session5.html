@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 2B Session 5 · Blueprint Parts 4 to 6 & Appendices</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 05 (4 Hrs)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">Parts 4 to 6 & Appendices · Advisory & Offer Integrity</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Shared Value</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Advisory 5.1</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>Appendices & Sign</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>Offer & Hormozi</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Offer Audit B8</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>Card Clinics</span>
+        </button>
+      </nav>
+
+      <!-- Back to Session 4 -->
+      <div class="flex items-center gap-2">
+        <a href="session4.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 4</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: PART 4 — SHARED VALUE & FAIR SHARE CRUCIBLE     -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 45 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 4: Shared Value // The Fair Share Crucible
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Follow the Good · Systems Thinking
+        </div>
+      </div>
+
+      <!-- Stage Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The 3 Fee Designs at Break-Even -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="scale" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Card 4.2 Fair Share // Testing Fee Burdens at Break-Even
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Anyone can design fees that work when a store is booming at Target. A Senior Consultant proves how the fee structure lands when a store is struggling at break-even.
+            </p>
+
+            <div class="space-y-3">
+              <!-- Design 1 -->
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 text-xs">
+                <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                  <span>Snaxxville: Fixed ₱30,000 / mo (No Royalty)</span>
+                  <span class="text-[#BD9F4F] font-mono">FIXED FEE</span>
+                </div>
+                <p class="text-[#5C6066] leading-relaxed">
+                  Represents <strong>3.7% of sales at Target</strong>, but jumps to <strong>9.6% of sales at break-even</strong>. <em>Design Choice:</em> System fee negotiated or subsidized during soft opening.
+                </p>
+              </div>
+
+              <!-- Design 2 -->
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 text-xs">
+                <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                  <span>Teamworks: ₱100 Per Therapy Session</span>
+                  <span class="text-[#1E7B4F] font-mono">PER-UNIT FEE</span>
+                </div>
+                <p class="text-[#5C6066] leading-relaxed">
+                  Represents exactly <strong>7.4% of sales at every level</strong>. <em>Design Choice:</em> The first 100 client sessions per month are waived so fixed clinic overhead is covered first.
+                </p>
+              </div>
+
+              <!-- Design 3 -->
+              <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1 text-xs">
+                <div class="flex justify-between items-center font-bold text-[#B42318]">
+                  <span>The White Bucket: 5% Royalty + 2% Marketing</span>
+                  <span class="text-[#B42318] font-mono">HIGH-RISK ROYALTY</span>
+                </div>
+                <p class="text-[#5C6066] leading-relaxed">
+                  At break-even (66 covers a day), the 7% franchisor deduction consumes <strong>100% of the franchisee's profit</strong>! A slow opening is fatal.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            "5% royalty is industry standard" is a lazy answer. Standard for whom, and at what volume?
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Card 4.1 Value Map & Deliberate Zeroes -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Card 4.1 Power Value Map // Deliberate Zeroes
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">ETHICAL ARCHITECTURE</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              A franchise network thrives when value ripples to everyone it touches. The Value Map reveals where the franchisor captures value, and where it <strong>deliberately captures nothing</strong>.
+            </p>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse font-sans">
+                <thead>
+                  <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px]">
+                    <th class="p-2.5">Stakeholder</th>
+                    <th class="p-2.5">Value Created</th>
+                    <th class="p-2.5 text-right font-mono">Franchisor Capture</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                  <tr>
+                    <td class="p-2.5 font-bold text-[#1F2733]">Store Crew</td>
+                    <td class="p-2.5 text-[#5C6066]">Certification path to lead trainer</td>
+                    <td class="p-2.5 text-right font-mono text-[#1E7B4F] font-bold bg-[#EFF8F2]/60">₱0 (Deliberate)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-[#1F2733]">Local Town LGU</td>
+                    <td class="p-2.5 text-[#5C6066]">Reliable office & event catering</td>
+                    <td class="p-2.5 text-right font-mono text-[#1E7B4F] font-bold bg-[#EFF8F2]/60">₱0 (Deliberate)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-2.5 font-bold text-[#1F2733]">Local Suppliers</td>
+                    <td class="p-2.5 text-[#5C6066]">Predictable, high-volume orders</td>
+                    <td class="p-2.5 text-right font-mono text-[#1E7B4F] font-bold bg-[#EFF8F2]/60">₱0 (No Kickbacks)</td>
+                  </tr>
+                  <tr class="bg-[#F7F5EF] font-bold">
+                    <td class="p-2.5 text-[#1F2733]">Franchisee</td>
+                    <td class="p-2.5 text-[#5C6066]">Turnkey proven operating cashflow</td>
+                    <td class="p-2.5 text-right font-mono text-[#BD9F4F]">Fixed System Fee</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] space-y-1">
+              <strong class="font-heading font-bold text-[#1F2733]">Card 4.4 Franchise Terms Integrity:</strong>
+              <p class="text-[#5C6066] leading-relaxed">
+                Every term in the contract must trace backward to an approved card (territory to 1.3, crew certification gates to 3.8, fee to 4.2). If a clause traces to nothing, it was copied from someone else.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#BD9F4F] font-bold text-right">
+            Governs Franchise Agreement side letters and master terms.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ADVISORY SHOWCASE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Part 5 Advisory is the Senior Consultant's showcase. What did we fix that the owner could not see?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Inspect Foundation Upgrades that change real decisions, numbers, and risks.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Part 5 Advisory</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: PART 5 — BLUEPRINT ADVISORY                     -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">STAGE PACE: 35 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 5: Blueprint Advisory // The Senior Consultant's Section
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Candor · Decisions Changed
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: Card 5.1 Foundation Upgrades -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Card 5.1 Foundation Upgrades // Real Upgrades vs Weak Rewordings
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">DECISIONS CHANGED</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse font-sans">
+              <thead>
+                <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px]">
+                  <th class="p-2.5">System Area</th>
+                  <th class="p-2.5 text-slate-300">Before NF Intervention</th>
+                  <th class="p-2.5 text-[#BD9F4F] bg-[#161D27]">What NF Changed</th>
+                  <th class="p-2.5">Why It Matters to Capital</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-2.5 font-bold text-[#1F2733]">Snaxxville Term</td>
+                  <td class="p-2.5 text-[#5C6066]">2-Year Agreement</td>
+                  <td class="p-2.5 font-bold bg-[#F7F5EF] text-[#1F2733]">5-Year Term</td>
+                  <td class="p-2.5 text-[#5C6066]">At 2 years, a slower store barely recoups its cash before facing renewal fees.</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-2.5 font-bold text-[#1F2733]">K-Street Sites</td>
+                  <td class="p-2.5 text-[#5C6066]">Mall foot-traffic count</td>
+                  <td class="p-2.5 font-bold bg-[#F7F5EF] text-[#1F2733]">12% Occupancy Cap</td>
+                  <td class="p-2.5 text-[#5C6066]">Prevents opening in high-footfall mall corridors where rent kills the margin.</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-2.5 font-bold text-[#1F2733]">K-Street Payback</td>
+                  <td class="p-2.5 text-[#5C6066]">"9 mos on package"</td>
+                  <td class="p-2.5 font-bold bg-[#F7F5EF] text-[#1F2733]">27 mos from signing</td>
+                  <td class="p-2.5 text-[#5C6066]">Payback measured against ₱3.03M total cash required, not the ₱799k fee.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1">
+            <strong>The Weak Version (Banned):</strong>
+            <p class="text-[#5C6066] leading-relaxed">
+              Writing upgrades that only reword marketing language (e.g. <em>"Improved brand positioning and modernized look"</em>). An upgrade is valid only if it changed a decision, a number, or an existential risk.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Cards 5.2 Risks & 5.3 Sales Path -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="git-merge" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Cards 5.2 & 5.3 // Risks & Sales Path
+            </span>
+
+            <!-- 5.2 Risks -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">5.2 Named Risks & Named Owners:</span>
+              <p class="text-[#5C6066] leading-relaxed">
+                <strong>Snaxxville Supply Logistics:</strong> Ferry between Matnog and Allen halts during storms. <em>Mitigation:</em> Mandatory 14-day freezer buffer in every unit before storm season.
+              </p>
+              <p class="text-[#5C6066] leading-relaxed">
+                <strong>Brand Protection:</strong> IPOPHL trademark application must be filed before the first franchise contract is executed.
+              </p>
+            </div>
+
+            <!-- 5.3 Sales Path -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 text-xs">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">5.3 Franchise Sales Path Gate:</span>
+              <p class="text-[#5C6066] leading-relaxed">
+                6 strict stages from Discovery to Opening Day. The <strong>3.7 Readiness Check occurs before money changes hands</strong>. Deposit is strictly refundable within 7 days.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            Every Problem Card from Week 3 lands directly in Part 5.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="file-text" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">DOCUMENT ARCHITECTURE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Why is a clean final Blueprint only possible because of Appendices A and B?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Examine the 5 research statuses and the dual-approval structure.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Appendices & Sign</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: APPENDICES & DUAL APPROVAL                      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">STAGE PACE: 20 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Appendices & Dual-Approval Architecture
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          AI Integration · Relentless Execution
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Appendix A Research Statuses -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="search" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Appendix A // The 5 External Verification Statuses
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Every external market claim is cataloged in Appendix A with a live source link and one of five statuses:
+            </p>
+
+            <div class="space-y-2 text-xs font-mono">
+              <div class="p-2.5 rounded-lg bg-[#EFF8F2] border border-[#1E7B4F]/30 flex justify-between items-center">
+                <span class="font-bold text-[#1E7B4F]">1. Confirmed</span>
+                <span class="text-[11px] font-sans text-slate-700">PSA Census data, official wage orders</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between items-center">
+                <span class="font-bold text-[#1F2733]">2. Confirmed as Projection</span>
+                <span class="text-[11px] font-sans text-slate-700">Documented industry forecasts</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#FEF08A]/40 border border-[#FEF08A] flex justify-between items-center">
+                <span class="font-bold text-[#713F12]">3. Inconclusive</span>
+                <span class="text-[11px] font-sans text-slate-700">Contradictory market surveys</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between items-center">
+                <span class="font-bold text-[#5C6066]">4. Not Verifiable Online</span>
+                <span class="text-[11px] font-sans text-slate-700">Requires Ground Commando visit</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#FDF2F0] border border-[#B42318]/30 flex justify-between items-center">
+                <span class="font-bold text-[#B42318]">5. Not Supported</span>
+                <span class="text-[11px] font-sans text-[#B42318] font-bold">MANDATORY DROP FROM BODY</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/20 text-xs text-[#B42318]">
+            K-Street dropped <em>"Filipinos eat Korean food 2–3 times a month"</em> because its cited study did not support it.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Appendix B & Dual Approval -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Appendix B & The Dual-Approval Gate
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">CLEAN BODY TEXT</span>
+            </div>
+
+            <!-- Appendix B -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">Appendix B Open Items Checklist:</span>
+              <p class="text-[#5C6066] leading-relaxed">
+                The body contains zero "(TBD)" tags. Everything unresolved moves to Appendix B with a single named owner: <strong>The Client</strong>, <strong>Legal Counsel</strong>, or <strong>Next Franchise</strong>.
+              </p>
+            </div>
+
+            <!-- Dual Approval -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="font-heading font-bold text-[#BD9F4F]">The Dual-Approval Standard:</span>
+              <div class="space-y-2 text-slate-200">
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span><strong>Foundation Approval:</strong> The owner signs Parts 1 to 5 and the Appendices as the permanent operating bedrock.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#BD9F4F] shrink-0 mt-0.5"></i>
+                  <span><strong>Offer Approval:</strong> Part 6 (The Offer) is approved <em>separately</em> on its own schedule. It expires and is replaced version by version without touching the foundation!</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066] text-right">
+            Governs Build Offer and Update Blueprint protocols.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="tag" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OFFER ARCHITECTURE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Why do price objections almost always turn out to be value objections in disguise?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct Part 6: Cards 6.1, 6.2, and the Hormozi Value Equation.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Part 6: Offer</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: PART 6 — OFFER & VALUE EQUATION                 -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">STAGE PACE: 45 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 6: The Offer // Cards 6.1 to 6.3 & The Value Equation
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Outcomes · Value Stack Engineering
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Cards 6.1 & 6.2 The Hormozi Equation -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Cards 6.1 & 6.2 // The Value Equation
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">HORMOZI 4-LEVER MODEL</span>
+            </div>
+
+            <!-- Card 6.1 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 text-xs">
+              <span class="font-mono font-bold text-[#1F2733] text-[10px] uppercase">Card 6.1 Honest Offer Naming:</span>
+              <p class="text-[#1A1A1A] font-bold">"The Snaxxville Founding Two: Own Your Town's Snaxxville, Open in 60 Days."</p>
+              <p class="text-[#5C6066]">Tells the buyer who it is for, what they achieve, and the real time frame.</p>
+            </div>
+
+            <!-- Card 6.2 The Equation -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">Card 6.2 The 4 Value Levers:</span>
+              <div class="space-y-1.5 text-slate-200">
+                <div class="flex justify-between border-b border-slate-700 pb-1">
+                  <span>↑ Dream Outcome:</span>
+                  <span class="text-[#BD9F4F]">Permanent home income, stop overseas work</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-1">
+                  <span>↑ Perceived Likelihood:</span>
+                  <span class="text-[#1E7B4F]">₱726k–₱862k proven track record in Samar</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-700 pb-1">
+                  <span>↓ Time Delay:</span>
+                  <span class="text-white font-bold">Turnkey store delivered in 60 days</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>↓ Effort & Sacrifice:</span>
+                  <span class="text-white font-bold">Commissary handles batch prep & recipes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066]">
+            Raise value by maximizing the numerator and collapsing the denominator.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Card 6.3 Value Stack Tied to Pain DNA -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Card 6.3 Value Stack // Tied Directly to Pain DNA
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">COSTED BONUSES</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Every bonus in the value stack must answer a named sequence in Blueprint 3.4 Pain DNA. Bonuses that don't solve named pains eat the franchisor's margin without building trust.
+            </p>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>Bonus 1: Opening Week On-Site Operations Master</span>
+                  <span class="font-mono text-[#BD9F4F]">Cost: ₱12,500</span>
+                </div>
+                <p class="text-[#5C6066]">Answers Pain 1: "I have capital but don't know how to run a kitchen."</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>Bonus 2: Free Opening Stock Inventory (₱40,000)</span>
+                  <span class="font-mono text-[#BD9F4F]">Cost: ₱40,000</span>
+                </div>
+                <p class="text-[#5C6066]">Answers Pain 2: Cash buffer depleted before first delivery arrives.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] flex justify-between items-center font-bold">
+              <span>Total Stack Cost to Franchisor:</span>
+              <span class="font-mono text-[#1E7B4F]">~7% of Package Price</span>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#BD9F4F] font-bold">
+            Cost every bonus in the workbook before publishing the slide.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check-square" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OFFER INTEGRITY PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The owner demands an offer that says 'Guaranteed ROI in 12 months'. Why is that illegal and catastrophic?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Audit guarantees, scarcity, and urgency using Template B8.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Run The B8 Offer Audit</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: OFFER AUDIT // TEMPLATE B8                      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">AUDIT LAB · 02:10 – 02:55 (45 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Offer Integrity // The Template B8 Audit Engine
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#B42318] bg-[#FDF2F0] border border-[#B42318]/30 px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Follow the Good · Radical Candor
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: The 5-Point B8 Audit Checklist -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Template B8: The 5 Tests of Offer Legitimacy
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">ALL 5 MUST PASS</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            
+            <!-- Guarantee Check -->
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>1. Guarantees: Only What the Franchisor Controls</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF8F2] text-[#1E7B4F] border border-[#1E7B4F]/30">PASS</span>
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                <strong>Snaxxville Certification Guarantee:</strong> If crew does not pass certification by launch, trainer stays at Snaxxville's cost until they do. Never guarantee sales, profit, or payback.
+              </p>
+            </div>
+
+            <!-- Scarcity Check -->
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>2. Scarcity: Operationally True Limits Today</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF8F2] text-[#1E7B4F] border border-[#1E7B4F]/30">PASS</span>
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Only 11 towns qualify under the 23,000 population territory rule. Only 2 openings allowed per month because that is what HQ can certify while running its own flagships.
+              </p>
+            </div>
+
+            <!-- Urgency Check -->
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>3. Urgency: The Price Increase Must Actually Take Effect</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF8F2] text-[#1E7B4F] border border-[#1E7B4F]/30">PASS</span>
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Offer closes when 2 territories are reserved. The next batch fee increases to ₱600,000—and the owner has signed that this increase will actually execute. No resetting timers.
+              </p>
+            </div>
+
+            <!-- Perk & Value Stack -->
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>4 & 5. Perks Costed & Mapped to Pain DNA</span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#EFF8F2] text-[#1E7B4F] border border-[#1E7B4F]/30">PASS</span>
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Every perk has an explicit line in the Offer Scenarios tab. Both value to franchisee and effect on payback are stated plainly.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: The K-Street Proving Two Contrast -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE TRANSPARENCY STANDARD</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">K-Street "The Proving Two"</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              K-Street's Blueprint eliminated false urgency completely: <em>"There is no discount countdown and no price that rises next month."</em>
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold uppercase">The Transparency Guarantee:</span>
+              <p class="text-slate-200 leading-relaxed font-medium">
+                The franchisee receives the network's full closure history, the sustain rate of every mall branch with data, and the verified sales of performing branches before signing.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1">
+            <strong>Room Probe:</strong>
+            <p class="text-[#1A1A1A] leading-relaxed">
+              "Which offer would you have the courage to show your own family members if they were investing their savings?"
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="stethoscope" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">PEER CLINIC PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Put your cards on the table. Where does your draft fail its quality check?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Run the 45-minute live Card Clinic across trainee deliverables.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Card Clinic</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: THE CARD CLINIC & PROTOCOL                      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">CLINIC LAB · 03:05 – 04:00 (55 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Card Clinic // Triads & Quality Check Protocol
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Peer Auditing · Radical Candor in Action
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The Clinic Protocol -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The 7-Minute Triad Audit Protocol
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">TRIADS OF 3</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Each trainee brings 2 cards from their live client: the one they are proudest of, and the one they are least sure about.
+            </p>
+
+            <div class="space-y-2.5 text-xs text-[#1A1A1A]">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong>Minute 1 to 2:</strong> Author reads card aloud verbatim.
+              </div>
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong>Minute 3 to 5:</strong> Reviewers run the card's specific quality check from the manual and deliver one unflinching <em>"What's Weak Here"</em> line.
+              </div>
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong>Minute 6:</strong> Author responds only with: <em>"What I will change is..."</em>
+              </div>
+              <div class="p-3 rounded-xl bg-[#1F2733] text-white font-mono">
+                <strong>Minute 7 (The Output):</strong> Every card ends in 1 of 3 outcomes: Rewrite immediately, Visit the ground source, or Move claim to Appendix B.
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#BD9F4F] font-bold">
+            When a card fails its check, send it back to its source, not to rewording.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Update Blueprint & Session 6 Transition -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Updating the Blueprint Post-Approval
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">GOVERNANCE</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold font-mono text-[10px] uppercase text-[#1F2733]">Two Distinct Modification Protocols:</span>
+              <p><strong>1. Update Blueprint:</strong> Used only when Foundation cards (Parts 1 to 5) require revision based on newly confirmed register data or store closures. Requires formal version bump.</p>
+              <p><strong>2. Build Offer:</strong> Used to launch new seasonal or founding batches (Part 6) without altering the signed operating foundation.</p>
+            </div>
+
+            <!-- Homework Box for Session 6 -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CRUCIAL HOMEWORK FOR SESSION 6:</span>
+              <p class="text-slate-200 leading-relaxed font-medium">
+                Rewrite your live client's cards from today's clinic. Draft Parts 4 and 5, Appendix A, and Appendix B. <strong>Bring one real, current, unsolved problem from your live client</strong> to run through the 8-Step Loop in Session 6.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Blueprint Session 5 Canvas</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Canvas:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Shared Value</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Shared Value & Fair Share",
+      "2. Blueprint Advisory 5.1",
+      "3. Appendices & Dual Sign",
+      "4. Offer Architecture",
+      "5. Offer Integrity Audit",
+      "6. Card Clinic & Protocol"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

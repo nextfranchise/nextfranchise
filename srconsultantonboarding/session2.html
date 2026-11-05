@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 1 Session 2 · All 13 Meta Skills at Work</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tag-badge {
+      transition: all 0.15s ease;
+    }
+    .tag-badge.selected {
+      box-shadow: 0 0 0 2px #1F2733;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Wordmark Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 02</span>
+          </div>
+          <p class="text-[11px] text-slate-300">All 13 Meta Skills at Work · Live Case Lab</p>
+        </div>
+      </div>
+
+      <!-- Stage Stepper Pills -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Gap Check</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Dino Crew Case</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>AI Audit Engine</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>Radical Candor</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Whole Person</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>My Why & Proof</span>
+        </button>
+      </nav>
+
+      <!-- Module Switcher -->
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1.5 transition">
+          <i data-lucide="home" class="w-3.5 h-3.5 text-[#BD9F4F]"></i>
+          <span class="hidden sm:inline">Home</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: COGNITIVE GAP CHECK-IN                          -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 01 OF 06</span>
+            <span class="text-[#5C6066]">CHECK-IN · 00:00 – 00:10 (10 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Cognitive Gap // What Was Missing?
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Skill Anchor: Learning Acuity
+        </div>
+      </div>
+
+      <!-- Stage Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#BD9F4F]/10 text-[#BD9F4F] font-mono text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+              Session 1 Homework Audit
+            </div>
+            
+            <h3 class="text-xl font-extrabold text-[#1A1A1A] font-heading leading-snug">
+              Auditing Your Blind Spot
+            </h3>
+
+            <p class="text-sm text-[#1A1A1A] leading-relaxed">
+              In Session 1, you mapped your live client problem against Template B4. When you stripped away assumptions, which Meta Skill was blatantly absent?
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border-l-4 border-[#BD9F4F] text-xs text-[#1A1A1A] leading-relaxed font-medium">
+              "A week of only reporting good news teaches nothing. The fastest way to accelerate as a Senior Consultant is naming exactly where your framing collapsed."
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-1">
+            <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">Praise Honest Admissions</span>
+            <p class="text-xs text-slate-300">
+              When a consultant admits: <em>"I assumed mall traffic without verifying terminal registers,"</em> that is Level 3+ Learning Acuity in motion.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: The 4 Common Trainee Epiphanies -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <h3 class="text-xs font-heading font-bold tracking-wider text-[#1F2733] uppercase">
+              The 4 Diagnostic Epiphanies
+            </h3>
+            <span class="text-[11px] text-[#5C6066] font-mono">Common Blindspots</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <i data-lucide="user-x" class="w-4 h-4 text-[#B42318]"></i>
+                False Customer Voice
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Problem began with <em>"The client wants 20 units."</em> Trainee realized they never asked what the prospective franchisee feared losing.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <i data-lucide="file-question" class="w-4 h-4 text-[#BD9F4F]"></i>
+                Client-Said as Fact
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Trainee accepted the owner's ₱250 average ticket as Confirmed. A register audit proved actual ticket was ₱180.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <i data-lucide="repeat" class="w-4 h-4 text-[#1F2733]"></i>
+                Fixing the Symptom
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Trainee recommended store marketing for declining sales, unaware that commissary late deliveries had cut regular footfall.
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <i data-lucide="list-ordered" class="w-4 h-4 text-[#1E7B4F]"></i>
+                Paralysis by Laundry List
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Trainee had 15 equal action items. No "not yet" list meant the client achieved zero items over 30 days.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] flex items-center justify-between">
+            <span class="font-mono text-[#5C6066]">Room Probe:</span>
+            <strong class="font-heading text-[#1F2733]">"Who discovered their problem was framed from the owner's ego?"</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">LIVE CASE CRUCIBLE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Dino Crew PH: The platform is paid for, the contract requires it, but training has not started."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Put all 13 Meta Skills to work on a real client breakdown.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Open Dino Crew Lab</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: DINO CREW PH LIVE CASE STUDY                    -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 02 OF 06</span>
+            <span class="text-[#5C6066]">CASE LAB · 00:10 – 00:50 (40 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Case Lab: Dino Crew PH (Appendix E1)
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          November 2026 Orientation Case
+        </div>
+      </div>
+
+      <!-- Case Workspace Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Part 1 The Dilemma -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE FACTUAL BRIEF (PART 1)</span>
+              <span class="text-[10px] font-mono text-[#B42318] bg-[#FDF2F0] px-2 py-0.5 rounded font-bold">STALLED TRAINING</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A] leading-relaxed">
+              <p><strong>Brand:</strong> Dino Crew PH (dinosaur mascot shows, party entertainment, claw & gachapon machine rentals).</p>
+              <p><strong>The Contract Rule:</strong> The Franchise Agreement requires every new hire to complete required online modules and achieve certification before working an event.</p>
+              <p><strong>The Reality:</strong> The monthly royalty covers access to the training LMS platform. The platform is live. Yet franchisee training has <em>not started</em>.</p>
+            </div>
+
+            <!-- PROBE: The 10-Minute Challenge -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2">
+              <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">10-MINUTE TRAINEE CHALLENGE</span>
+              <p class="text-xs text-slate-200 font-medium leading-relaxed">
+                "Pairs have 10 minutes: In the franchisee's voice ('I am a Dino Crew franchisee...'), list 6 assumptions behind why training hasn't started, and pick the one link you will attack."
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Solution Reveal Toggle -->
+          <div class="pt-2">
+            <button id="dino-reveal-btn" onclick="toggleDinoReveal()" class="w-full py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="unlock" class="w-4 h-4"></i>
+              <span id="dino-btn-text">Reveal Part 2: The Two Consultant Answers</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Part 2 Reveal Container (Initially Toggled/Inspected) -->
+        <div id="dino-reveal-panel" class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                PART 2 DECONSTRUCTION // THE TWO CONSULTANTS
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] bg-[#EFF8F2] px-2 py-0.5 rounded font-bold">VERIFIED EVIDENCE</span>
+            </div>
+
+            <!-- The Traditional Blunder -->
+            <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1.5 text-xs">
+              <div class="font-heading font-bold text-[#B42318] flex items-center gap-1.5">
+                <i data-lucide="x-circle" class="w-4 h-4 shrink-0"></i>
+                The Traditional Answer: A Compliance Memo
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">
+                Drafts a formal memo quoting Clause 8.2 and attaching the penalty schedule. The rule is 100% legally correct—and <strong>nothing changes</strong> because no one asked why the crew couldn't log in.
+              </p>
+            </div>
+
+            <!-- The Next Franchise Architecture -->
+            <div class="p-3.5 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 space-y-1.5 text-xs">
+              <div class="font-heading font-bold text-[#1E7B4F] flex items-center gap-1.5">
+                <i data-lucide="check-circle" class="w-4 h-4 shrink-0"></i>
+                The Next Franchise Answer: Ground Truth First
+              </div>
+              <p class="text-[#1A1A1A] leading-relaxed">
+                Meets franchisees first. Discovers event crew work evening shifts on mobile phones with limited data. Treats "uninterested" as an unconfirmed assumption. Shows how royalty already pays for the LMS. Resolves mobile credential access first.
+              </p>
+            </div>
+
+            <!-- Meta Skills Applied -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <span class="font-mono font-bold text-[#BD9F4F] uppercase text-[10px]">Meta Skills in Real Motion</span>
+              <div class="flex flex-wrap gap-1.5 text-[10px] font-mono">
+                <span class="px-2 py-0.5 bg-white border border-[#E8E4D8] rounded font-semibold text-[#1F2733]">Customer Obsession</span>
+                <span class="px-2 py-0.5 bg-white border border-[#E8E4D8] rounded font-semibold text-[#1F2733]">Ground Commando</span>
+                <span class="px-2 py-0.5 bg-white border border-[#E8E4D8] rounded font-semibold text-[#1F2733]">First Principles</span>
+                <span class="px-2 py-0.5 bg-white border border-[#E8E4D8] rounded font-semibold text-[#1F2733]">Power Law</span>
+                <span class="px-2 py-0.5 bg-white border border-[#E8E4D8] rounded font-semibold text-[#1F2733]">Relentless Exec</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-[11px] flex justify-between items-center">
+            <span class="font-mono text-[#BD9F4F]">Ending Deliverable:</span>
+            <span>One Training Champion, 100% Accounts Active by Friday 5 PM</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="cpu" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE AI AUDIT CRUCIBLE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "AI will draft a 5-page franchise persona in 10 seconds. How much of it is hallucinated fiction?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Run the live H / I / CS / C tagging engine on an unedited AI persona.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Run The AI Audit Engine</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: THE LIVE AI PERSONA AUDIT ENGINE                -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 03 OF 06</span>
+            <span class="text-[#5C6066]">LAB ENGINE · 01:00 – 01:20 (20 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Live AI Persona Audit Engine
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#B42318]"></span>
+          Skill Anchor: AI Integration & Ground Commando
+        </div>
+      </div>
+
+      <!-- Interactive Audit Workspace -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 8 Cols: The AI Persona Text with Interactive Tags -->
+        <div class="lg:col-span-8 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              AI-Generated Persona Draft (From Owner Deck Alone)
+            </span>
+            <div class="flex items-center gap-2 text-[10px] font-mono">
+              <span class="px-2 py-0.5 bg-[#EFF8F2] text-[#1E7B4F] border border-[#1E7B4F]/30 rounded font-bold">[C] Confirmed</span>
+              <span class="px-2 py-0.5 bg-[#FDF2F0] text-[#B42318] border border-[#B42318]/30 rounded font-bold">[I] Inferred</span>
+              <span class="px-2 py-0.5 bg-[#F7F5EF] text-[#BD9F4F] border border-[#BD9F4F]/40 rounded font-bold">[CS] Client-Said</span>
+            </div>
+          </div>
+
+          <div class="space-y-3 text-xs leading-relaxed text-[#1A1A1A]">
+            
+            <!-- Sentence 1 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start justify-between gap-3">
+              <p class="text-slate-800">
+                <strong>Sentence 1:</strong> "The prospective franchisee is a 35-to-45-year-old middle-class Filipino professional with ₱1.5M disposable savings eager to establish passive income in their home province."
+              </p>
+              <div class="flex gap-1 shrink-0 font-mono text-[10px]">
+                <button onclick="tagSentence(this, 'I')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#B42318] font-bold text-[#B42318]">[I] Inferred</button>
+                <button onclick="tagSentence(this, 'CS')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#BD9F4F] font-bold text-[#BD9F4F]">[CS] Client-Said</button>
+              </div>
+            </div>
+
+            <!-- Sentence 2 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start justify-between gap-3">
+              <p class="text-slate-800">
+                <strong>Sentence 2:</strong> "The regional capital has an expanding young population with strong unfulfilled demand for branded specialty merienda combos."
+              </p>
+              <div class="flex gap-1 shrink-0 font-mono text-[10px]">
+                <button onclick="tagSentence(this, 'I')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#B42318] font-bold text-[#B42318]">[I] Inferred</button>
+                <button onclick="tagSentence(this, 'C')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#1E7B4F] font-bold text-[#1E7B4F]">[C] PSA Census</button>
+              </div>
+            </div>
+
+            <!-- Sentence 3 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start justify-between gap-3">
+              <p class="text-slate-800">
+                <strong>Sentence 3:</strong> "Catubig branch generates ₱861,607 monthly gross revenue at a weighted average ticket of ₱225 across 109 daily transactions."
+              </p>
+              <div class="flex gap-1 shrink-0 font-mono text-[10px]">
+                <button onclick="tagSentence(this, 'C')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#1E7B4F] font-bold text-[#1E7B4F]">[C] Confirmed</button>
+                <button onclick="tagSentence(this, 'CS')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#BD9F4F] font-bold text-[#BD9F4F]">[CS] Client-Said</button>
+              </div>
+            </div>
+
+            <!-- Sentence 4 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start justify-between gap-3">
+              <p class="text-slate-800">
+                <strong>Sentence 4:</strong> "Franchisees will effortlessly recoup their full ₱823,000 capital package within 10 to 12 months of opening."
+              </p>
+              <div class="flex gap-1 shrink-0 font-mono text-[10px]">
+                <button onclick="tagSentence(this, 'I')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#B42318] font-bold text-[#B42318]">[I] Inferred</button>
+                <button onclick="tagSentence(this, 'CS')" class="tag-badge px-2 py-1 bg-white border border-[#E8E4D8] rounded hover:border-[#BD9F4F] font-bold text-[#BD9F4F]">[CS] Client-Said</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 4 Cols: Ground Commando Action Converter -->
+        <div class="lg:col-span-4 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE GROUND CONVERTER</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Turning [I] into Ground Truth</h3>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              If an AI-drafted sentence is tagged <strong>[I] Inferred</strong>, it cannot sit in the Blueprint body. Who must you talk to on the ground to confirm it?
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <div class="font-bold text-[#1F2733] font-mono text-[11px] uppercase">Field Action Protocol:</div>
+              <ul class="space-y-1.5 text-slate-700">
+                <li class="flex items-center gap-1.5"><i data-lucide="phone-call" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Call 2 prospective inquiries</li>
+                <li class="flex items-center gap-1.5"><i data-lucide="store" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Shadow store crew at 3:00 PM peak</li>
+                <li class="flex items-center gap-1.5"><i data-lucide="receipt" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Verify 30-day POS transaction register</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-1">
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold uppercase">Architect Rule:</span>
+            <p class="text-xs text-slate-200 leading-snug">
+              Every sentence with NF's name on it must survive cross-examination by the franchisee's accountant.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="message-square" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">RADICAL CANDOR PROTOCOL</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Critique of the deliverable is not critique of your character. Can you hear what's weak without defending?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Run the non-defensive peer review drill.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Candor Protocol</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: RADICAL CANDOR // WHAT'S WEAK HERE              -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 04 OF 06</span>
+            <span class="text-[#5C6066]">PAIR LAB · 01:20 – 01:40 (20 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Radical Candor Protocol // "What's Weak Here"
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Skill Anchor: Radical Candor (Level 4)
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The 3 Moves of Candor -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="shield" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 3 Structural Moves of Candor
+            </span>
+
+            <div class="space-y-3">
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-xs">MOVE 01 // State the Weak Point Plainly</span>
+                <p class="text-xs text-[#1A1A1A]">No softening, no diplomatic preamble. <em>"At Conservative volume, payback is 30 months, not 12."</em></p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-xs">MOVE 02 // Name Why It Hurts Capital</span>
+                <p class="text-xs text-[#1A1A1A]">Connect weakness to real consequence. <em>"If we sell 12 and a franchisee lives 30, they deplete their working capital in month 6."</em></p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-xs">MOVE 03 // Offer a Concrete Next Step</span>
+                <p class="text-xs text-[#1A1A1A]">Give a viable path forward. <em>"Show both Conservative and Target in 3.10, and require 6 months buffer capital."</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1">
+            <strong>The Defense Ban:</strong> The author may only respond with: <span class="font-mono font-bold text-[#1A1A1A]">"What I will change is [Action]."</span> Any rationalizing or defending is an automatic disqualification.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Live Pair Practice Card -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Peer Review Crucible
+              </span>
+              <span class="text-[10px] font-mono text-[#5C6066]">8 MINS EACH</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-3">
+              <span class="text-xs font-mono font-bold text-[#1F2733] uppercase">Live Review Protocol:</span>
+              <ol class="text-xs text-[#5C6066] space-y-2 list-decimal list-inside leading-relaxed">
+                <li>Swap Session 1 homework drafts with your review partner.</li>
+                <li>Reviewer writes exactly <strong>one paragraph</strong> titled <span class="text-[#1A1A1A] font-bold">"What's Weak Here"</span>.</li>
+                <li>Reviewer reads it aloud looking into their partner's eyes.</li>
+                <li>Partner responds <em>only</em> with: "What I will change is..."</li>
+              </ol>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-1.5">
+              <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">Lead Facilitator Cue:</span>
+              <p class="text-xs text-slate-200 italic leading-relaxed">
+                "Lead by example. Read an unflinching 'What's Weak Here' critique on your own recent work before the pairs begin."
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-2 text-right">
+            <span class="text-[11px] font-mono text-[#5C6066]">Candor is an act of care, not cruelty.</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">HUMAN FACTOR PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Would you recommend this franchise to this buyer if Next Franchise earned ₱0 from it?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Test the franchise against the Whole Person & Zero-Fee benchmark.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Apply The Zero-Fee Test</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: WHOLE PERSON & THE ZERO-FEE TEST                -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 05 OF 06</span>
+            <span class="text-[#5C6066]">HUMAN LAB · 01:40 – 02:00 (20 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Template B7 // The "In My Life" Canvas & Zero-Fee Test
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Skill Anchor: Whole Person & Follow the Good
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: Template B7 Canvas -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Template B7: The "In My Life" Profile
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">HUMAN CONTEXT</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+              <span class="font-mono font-bold text-[#1F2733] uppercase text-[10px]">Persona Archetype:</span>
+              <p class="text-[#1A1A1A] font-medium">Returning OFW (Dubai mechanical technician, 12 years abroad, returning home to Pangasinan).</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div class="p-3 rounded-xl bg-white border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-[10px] uppercase">What Keeps Me Busy:</span>
+                <p class="text-[#5C6066]">Wiring remittances, sorting college tuition for 2 kids, preparing balikbayan cargo.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#BD9F4F] text-[10px] uppercase">What Makes Me Happy:</span>
+                <p class="text-[#5C6066]">Dinner with my family every night without counting days until my flight out.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#B42318] text-[10px] uppercase">My Biggest Fear:</span>
+                <p class="text-[#5C6066]">Losing the ₱1.5M savings and having to go back abroad as a 48-year-old.</p>
+              </div>
+              <div class="p-3 rounded-xl bg-white border border-[#E8E4D8] space-y-1">
+                <span class="font-mono font-bold text-[#1E7B4F] text-[10px] uppercase">What I Need Most:</span>
+                <p class="text-[#5C6066]">A system that works even if I'm not a chef or marketing guru. Predictable supply.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: The Zero-Fee Test -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE ETHICAL GAUGE</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">The "If NF Earned ₱0" Test</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Before you recommend selling a franchise package to this person, ask yourself this question out loud:
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2">
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold uppercase">The Litmus Test</span>
+              <p class="text-xs text-slate-100 font-semibold leading-relaxed">
+                "Would I recommend this franchise package to this returning OFW if Next Franchise earned zero pesos in brokerage or consulting fees from the deal?"
+              </p>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#5C6066]">
+              If the answer hesitates, your Readiness Check (3.7) has a hole that must be closed immediately.
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#1E7B4F] flex items-center gap-1.5 font-bold">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            Follow the Good protects the network's 10-year value.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="flame" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">PERSONAL LEADERSHIP PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Why do you care about this work? Tell your story in 100 words—without using the word 'passionate'."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Craft your 100-word why and lock in your next proof.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Lock In Personal Conviction</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: PERSONAL CONVICTION & RELENTLESS PROOF          -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">STAGE 06 OF 06</span>
+            <span class="text-[#5C6066]">SYNTHESIS · 02:00 – 02:30 (30 MINS)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Personal Conviction & Relentless Close
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Skill Anchor: Deeply Personal Leadership & Relentless Exec
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The 100-Word Why Crucible -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE 100-WORD WHY</span>
+              <span class="text-[10px] font-mono text-[#B42318] bg-[#FDF2F0] px-2 py-0.5 rounded font-bold">"PASSIONATE" IS BANNED</span>
+            </div>
+
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">
+              Leading from Authentic Story, Not Borrowed Scripts
+            </h3>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Franchise owners and prospects smell corporate slogans instantly. What in your own upbringing, career struggles, or family history makes protecting small businesses personal to you?
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">Real Trainee Archetype:</span>
+              <p class="text-[#1A1A1A] italic leading-relaxed">
+                "My parents spent 15 years running a sari-sari store. When an aggressive convenience chain opened 20 meters away, they had no system, no supplier scale, and closed within 6 months. I do this work so independent Filipino entrepreneurs have systems that let them survive."
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 bg-[#1F2733] text-white rounded-xl text-xs space-y-1">
+            <span class="font-mono text-[#BD9F4F] font-bold text-[10px] uppercase">Room Partner Exercise:</span>
+            <p class="text-slate-200">
+              Read your 100 words to your partner. The partner responds by repeating back the single sentence that felt completely true.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Relentless Execution Close (Template B1 / B6 / B9) -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The Relentless Execution Close
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] bg-[#EFF8F2] px-2 py-0.5 rounded font-bold">SESSION 2 COMMITMENT</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-3">
+              <span class="text-xs font-mono font-bold text-[#1F2733] uppercase">Homework Assignment for Session 3:</span>
+              <ul class="text-xs text-[#5C6066] space-y-2 leading-relaxed">
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span><strong>Two Ground Conversations (Template B9):</strong> Talk first-hand to one branch crew member and one customer or prospective buyer. Capture verbatim quotes with date and location.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span><strong>Learning Dividend (Template B6):</strong> File one written lesson from a past consulting engagement: What was learned, what it cost, and what is done differently now.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <i data-lucide="check" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                  <span><strong>Weekly Reflection Log (B5):</strong> Pick 2 Meta Skills: note 1 moment each showed up, and 1 moment each was missing.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 text-xs text-[#1E7B4F] font-medium flex items-center justify-between">
+              <span>Next Working Milestone:</span>
+              <strong class="font-mono">Session 3 · Financial Goals Engine (4 Hrs)</strong>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Session 2 Canvas</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Canvas:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Cognitive Gap Check</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Cognitive Gap Check",
+      "2. Dino Crew Case Lab",
+      "3. Live AI Persona Audit",
+      "4. Radical Candor Protocol",
+      "5. Whole Person & Zero-Fee",
+      "6. My Why & Next Proof"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    // Dino Crew Reveal Toggle
+    let dinoRevealed = false;
+    function toggleDinoReveal() {
+      const panel = document.getElementById('dino-reveal-panel');
+      const btnText = document.getElementById('dino-btn-text');
+      dinoRevealed = !dinoRevealed;
+      
+      if (dinoRevealed) {
+        panel.classList.remove('opacity-40');
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        btnText.innerText = "Hide Part 2 Reveal";
+      } else {
+        btnText.innerText = "Reveal Part 2: The Two Consultant Answers";
+      }
+    }
+
+    // Interactive Tagging for AI Engine
+    function tagSentence(btn, tag) {
+      const parent = btn.parentElement;
+      const allButtons = parent.querySelectorAll('button');
+      allButtons.forEach(b => b.classList.remove('selected', 'bg-[#1F2733]', 'text-white'));
+      btn.classList.add('selected', 'bg-[#1F2733]', 'text-white');
+    }
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

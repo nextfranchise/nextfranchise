@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 4 Session 9 · Scoring & The Certification Gate</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gate-card.completed {
+      border-color: #1E7B4F;
+      background-color: #EFF8F2;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 09 (150m)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">Scoring, The 90-Day Plan & The Certification Gate</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Retrospective</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Appendix C Rubric</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>1-on-1 Scoring</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>90-Day Plan</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Months 2–4 Routines</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>The Gate Console</span>
+        </button>
+      </nav>
+
+      <!-- Back to Session 8 -->
+      <div class="flex items-center gap-2">
+        <a href="session8.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 8</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: COHORT RETROSPECTIVE & BASELINE DELTA           -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 15 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Cohort Retrospective // The 30-Day Cognitive Shift
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Skill Anchor: Learning Acuity
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The Reflection Crucible -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="compass" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Opening Room Inquiry // What Changed?
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              In Session 1, each trainee wrote their stuck problem on the board. Look at that board today. How has your cognitive lens permanently shifted?
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold font-mono text-[#1F2733] uppercase text-[10px]">The Retrospective Prompt:</span>
+              <p class="italic leading-relaxed">
+                "Name one concrete habit you used to execute out of convenience (copying client projections, accepting foot-traffic claims, softening bad news) that you now refuse to write down without ground evidence."
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#1F2733] text-white text-xs space-y-1">
+              <span class="text-[#BD9F4F] font-bold font-mono text-[10px] uppercase">The Cohort Learning Dividend:</span>
+              <p class="text-slate-200">
+                You are no longer document compilers. You are Franchise Architects whose judgment stands between a brand's ambition and a franchisee's life savings.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066]">
+            Every trainee gives one specific example from their live client brand.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Before vs After Competency -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The 30-Day Evolution of Mindset
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">VERIFIED SHIFT</span>
+            </div>
+
+            <div class="space-y-2.5 text-xs font-sans">
+              <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 flex items-start gap-2.5 text-[#5C6066]">
+                <i data-lucide="x-circle" class="w-4 h-4 text-[#B42318] shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="text-[#B42318]">Week 0 Baseline:</strong> Transcribed owner pitch decks into template slides; fixed branch symptoms with marketing; hid uncomfortable data.
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 flex items-start gap-2.5 text-[#1A1A1A]">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#1E7B4F] shrink-0 mt-0.5"></i>
+                <div>
+                  <strong class="text-[#1E7B4F]">Week 4 Embodied:</strong> Builds on Confirmed register numbers; solves break-even by hand; turns away unqualified capital; delivers hard truths in 3 moves.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-medium flex justify-between items-center">
+            <span>Next Stage:</span>
+            <strong class="font-heading text-[#1F2733]">Calibrating the Appendix C Rubric Engine.</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="scale" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">RUBRIC CALIBRATION PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Score observed behavior only. No evidence, no score."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct Appendix C and the 7 Senior Focus Skills.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Appendix C</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: APPENDIX C RUBRIC ENGINE                        -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">RUBRIC ENGINE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Appendix C // The 4 Competency Mastery Levels
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Level 4 Required on 5 of 7 Core Skills
+        </div>
+      </div>
+
+      <!-- 4 Levels Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono text-[#5C6066] font-bold">
+            <span>LEVEL 1</span>
+            <span class="px-2 py-0.5 rounded bg-[#F7F5EF]">UNAWARE</span>
+          </div>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Blind to the Habit</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Does not show the skill; cannot see it is missing in a deliverable. Transcribes client deck without questioning.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono text-[#BD9F4F] font-bold">
+            <span>LEVEL 2</span>
+            <span class="px-2 py-0.5 rounded bg-[#F7F5EF]">AWARE</span>
+          </div>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Spots It In Others</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Catches missing evidence in peer reviews, but remains inconsistent in their own deliverables under deadline pressure.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono text-[#1F2733] font-bold">
+            <span>LEVEL 3</span>
+            <span class="px-2 py-0.5 rounded bg-[#F7F5EF]">PRACTICING</span>
+          </div>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Applies When Prompted</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Applies the skill when facilitated; their cards consistently pass Template B4 checks upon submission.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border-2 border-[#BD9F4F] shadow-sm space-y-2 bg-[#F7F5EF]">
+          <div class="flex justify-between items-center text-xs font-mono text-[#BD9F4F] font-bold">
+            <span>LEVEL 4</span>
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F] text-white">EMBODIED</span>
+          </div>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Unprompted & Coaching</h4>
+          <p class="text-xs text-[#1A1A1A] leading-relaxed font-medium">
+            Applies unprompted, coaches others, and catches missing habits in the owner's or lead consultant's initial framing.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- The 7 Senior Focus Skills -->
+      <div class="bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+          <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+            The 7 Senior Focus Meta Skills (Gate Item 1 Mandate)
+          </span>
+          <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">LEVEL 4 TARGET ON 5 OF 7</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2.5 text-xs text-center font-mono">
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Systems Thinking</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Power Law</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Radical Candor</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Radical Outcomes</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Follow the Good</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Learning Acuity</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+            <strong class="text-[#1F2733] font-sans block text-xs">Deeply Personal</strong>
+            <span class="text-[10px] text-[#BD9F4F] font-bold">L4 Target</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="user-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">SCORING CALIBRATION PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Compare candidate self-scores against lead scores. Where they differ, discuss the evidence, not opinions."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Execute the 30-minute one-on-one scoring protocol.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter 1-on-1 Scoring</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: ONE-ON-ONE SCORING CRUCIBLE                     -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">STAGE PACE: 90 MINUTES (30M PER CANDIDATE)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The 1-on-1 Scoring Calibration Protocol
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Candor in Action
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: 30-Minute Calibration Architecture -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 3-Phase Calibration Breakdown
+            </span>
+
+            <div class="space-y-3 text-xs font-sans">
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>Phase 1: Candidate Self-Scores</span>
+                  <span class="font-mono text-[#BD9F4F]">10 Mins</span>
+                </div>
+                <p class="text-[#5C6066]">Candidate presents self-ratings 1 to 4 with their single line of verified artifact evidence per skill.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>Phase 2: Lead Reconciles on Evidence</span>
+                  <span class="font-mono text-[#1E7B4F]">15 Mins</span>
+                </div>
+                <p class="text-[#5C6066]">Lead presents observed scores. Where ratings diverge, open the actual Blueprint cards, register audits, and field notes. Opinions are barred.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>Phase 3: Agree on the 2 Focus Skills</span>
+                  <span class="font-mono text-[#1F2733]">5 Mins</span>
+                </div>
+                <p class="text-[#5C6066]">Isolate the two lowest Senior Focus skills to anchor the candidate's next 90 days.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            A trainee scored 4 without verified evidence learns nothing. Be direct.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Non-Testing Candidates Draft Plan -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Concurrent Task for Waiting Candidates
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">90-DAY DRAFT</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              While one candidate sits in calibration with the lead, remaining cohort members draft their <strong>1-Page 90-Day Implementation Plan</strong>:
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold font-mono text-[#1F2733] uppercase text-[10px]">The 6 Required Fields:</span>
+              <ul class="space-y-1.5 text-[#5C6066]">
+                <li><strong>1. Assigned Brands:</strong> Which live clients will you lead?</li>
+                <li><strong>2. Blueprint Ownership:</strong> Which Blueprints do you own Parts 5 & 6 for?</li>
+                <li><strong>3. Owner Co-Leads:</strong> Which client discussions will you co-lead, and when?</li>
+                <li><strong>4. 2 Focus Skills:</strong> Exactly how will you practice your lowest scores?</li>
+                <li><strong>5. Gate Target Months:</strong> By which month will you hit all 6 gate items?</li>
+                <li><strong>6. First Next Proof:</strong> 1 proof, 1 owner, 1 date within 7 days.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066] text-right">
+            Governs Stage 4 review.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="target" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE 90-DAY PLAN PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The cohort audits each 90-day plan with Power Law: Is it one or two priorities, or ten distractions?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Present and challenge each candidate's implementation commitments.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Review 90-Day Plans</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: THE 90-DAY PLAN BUILDER                         -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">STAGE PACE: 20 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The 90-Day Implementation Plan // Power Law Applied
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          1-Page Blueprint Ownership
+        </div>
+      </div>
+
+      <!-- 90-Day Canvas Layout -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+        
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <span class="font-mono font-bold text-[#BD9F4F] text-xs">FIELD 01 & 02</span>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Assigned Brands & Ownership</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Name the active client brand you will architect. Candidate must own <strong>Part 5 Advisory and Part 6 Offer</strong> through to client sign-off.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <span class="font-mono font-bold text-[#BD9F4F] text-xs">FIELD 03</span>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Client Discussions Co-Led</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Specific scheduled calendar dates to co-lead client intake, financial clarification calls, or Blueprint reviews alongside the Lead Senior.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <span class="font-mono font-bold text-[#BD9F4F] text-xs">FIELD 04</span>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">The 2 Agreed Focus Skills</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            The two lowest Senior Focus skills agreed during calibration. Outline exact weekly behavioral drills to lift them from Level 2/3 to Level 4.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-2">
+          <span class="font-mono font-bold text-[#BD9F4F] text-xs">FIELD 05</span>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">Gate Milestone Dates</h4>
+          <p class="text-xs text-[#5C6066] leading-relaxed">
+            Target dates for Month 2, Month 3, and Month 4 gate reviews. Gate review occurs only when all 6 items carry verified artifacts.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white border-2 border-[#1E7B4F] shadow-sm space-y-2 md:col-span-2 bg-[#EFF8F2]">
+          <span class="font-mono font-bold text-[#1E7B4F] text-xs">FIELD 06 // RELENTLESS EXECUTION MANDATE</span>
+          <h4 class="font-heading font-bold text-[#1F2733] text-sm">The 7-Day First Next Proof</h4>
+          <p class="text-xs text-[#1A1A1A] leading-relaxed font-medium">
+            <strong>One Proof · One Named Owner · One Hard Date:</strong> Exactly what artifact will be delivered within the next 7 calendar days to prove momentum has started?
+          </p>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="repeat" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OPERATING RHYTHM PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The month taught the cognitive habits; the next three months prove them on live clients."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Review the weekly operating routines and the fall-behind intervention.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Review Implementation Cadence</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: MONTHS 2 TO 4 OPERATING CADENCE                 -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">OPERATING RHYTHM</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Months 2 to 4 // Weekly & Monthly Routines
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Proven Habits on Real Clients
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Weekly Rhythms -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="calendar" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 4 Weekly Field Routines
+            </span>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>1. Live Blueprint Ownership</span>
+                  <span class="font-mono text-[#BD9F4F]">DAILY</span>
+                </div>
+                <p class="text-[#5C6066]">Every client crisis goes on Template B1 Problem Card before reaching the owner.</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>2. Client Co-Lead & 15m Debrief</span>
+                  <span class="font-mono text-[#BD9F4F]">SCHEDULED</span>
+                </div>
+                <p class="text-[#5C6066]">Co-lead interview or review; immediate 15m debrief: what worked, what was weak, one change.</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>3. Peer Meta Skills Audit</span>
+                  <span class="font-mono text-[#1E7B4F]">45 MINS / WK</span>
+                </div>
+                <p class="text-[#5C6066]">Bring one deliverable. Peers audit with 13-row check. Every Revise gets owner and date.</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between font-bold text-[#1F2733]">
+                  <span>4. Reflection Log (Template B5)</span>
+                  <span class="font-mono text-[#1F2733]">15 MINS / WK</span>
+                </div>
+                <p class="text-[#5C6066]">Pick 2 skills: 1 moment present, 1 moment missing. Shared strictly with lead consultant.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066]">
+            Weekly discipline prevents month-end panic.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Monthly Gate Check & Fall-Behind Protocol -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Monthly Cadence & The Fall-Behind Law
+              </span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">RE-SCORING</span>
+            </div>
+
+            <!-- Monthly Routines -->
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold font-mono text-[10px] uppercase text-[#1F2733]">Monthly Milestones (Months 2, 3, 4):</span>
+              <p><strong>Learning Dividend Session (30m):</strong> Group shares lessons learned on clients; best added to case bank.</p>
+              <p><strong>Rubric Re-Scoring (30m):</strong> Re-score all 13 skills against new artifacts; adjust the 2 focus skills.</p>
+              <p><strong>Gate Progress Tracking:</strong> Formally sign off gate items that now carry verified evidence.</p>
+            </div>
+
+            <!-- Fall-Behind Protocol -->
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-2 text-xs text-[#B42318]">
+              <span class="font-bold font-mono text-[10px] uppercase">The Fall-Behind Protocol:</span>
+              <p class="text-[#1A1A1A] leading-relaxed">
+                If a trainee shows no progress on focus skills at monthly scoring: <strong>Name it plainly. Find the cause (time, client load, skill gap, motivation).</strong> If client workload is the blocker, management immediately reduces client volume. Training only works if there is time to practice.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            Promotion comes when evidence is verified, never on a calendar date.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE FINAL GATE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "All six gate items must carry verified evidence before a consultant is certified as Senior."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Inspect the 6-Gate Master Verification Console.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Gate Console</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: THE 6-GATE MASTER CERTIFICATION CONSOLE         -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">FINAL MASTER GATE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Senior Consultant Certification Gate
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          All 6 Must Be True
+        </div>
+      </div>
+
+      <!-- The 6 Interactive Gate Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
+        
+        <!-- Gate 1 -->
+        <div id="gate-card-1" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 01</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">APPENDIX C</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Level 4 on 5 of 7 Focus Skills</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Achieve Level 4 on at least 5 of the 7 Sr focus skills; Level 3+ on all others. Validated on Appendix C score sheet with verified evidence links.
+            </p>
+          </div>
+          <button onclick="toggleGate(1)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-1">Mark Gate Verified</span>
+          </button>
+        </div>
+
+        <!-- Gate 2 -->
+        <div id="gate-card-2" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 02</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">TEMPLATE B1</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">3 Problem Cards Accepted</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              At least 3 complete Problem Cards accepted into Blueprint Part 5 Advisory across at least two live brand engagements.
+            </p>
+          </div>
+          <button onclick="toggleGate(2)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-2">Mark Gate Verified</span>
+          </button>
+        </div>
+
+        <!-- Gate 3 -->
+        <div id="gate-card-3" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 03</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">SIGNED BLUEPRINT</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Owned Part 5 & 6 to Signature</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Owned Part 5 Advisory and Part 6 Offer on one full client Blueprint through to the owner's executed physical signature.
+            </p>
+          </div>
+          <button onclick="toggleGate(3)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-3">Mark Gate Verified</span>
+          </button>
+        </div>
+
+        <!-- Gate 4 -->
+        <div id="gate-card-4" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 04</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">OBSERVED HARD TALK</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Led 1 Observed Hard Truth</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Led a live client discussion and successfully delivered at least one uncomfortable truth under pressure, observed and signed off by the Lead Senior.
+            </p>
+          </div>
+          <button onclick="toggleGate(4)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-4">Mark Gate Verified</span>
+          </button>
+        </div>
+
+        <!-- Gate 5 -->
+        <div id="gate-card-5" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 05</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">PEER COACHING</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Coached Another Consultant</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Mentored another consultant through one Blueprint section to a passing Template B4 check without doing the work for them.
+            </p>
+          </div>
+          <button onclick="toggleGate(5)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-5">Mark Gate Verified</span>
+          </button>
+        </div>
+
+        <!-- Gate 6 -->
+        <div id="gate-card-6" class="gate-card p-5 rounded-2xl bg-white border border-[#E8E4D8] shadow-sm space-y-3 flex flex-col justify-between transition">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">GATE 06</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">SESSION 8 ARTIFACT</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Capstone Passed (Zero Revise)</h4>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Session 8 executive defense completed with all 13 Meta Skills reading PASS on the final verification scorecard.
+            </p>
+          </div>
+          <button onclick="toggleGate(6)" class="w-full py-2 bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-mono font-bold text-xs rounded-xl transition flex items-center justify-center gap-1.5">
+            <i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i>
+            <span id="gate-btn-6">Mark Gate Verified</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Final Master Certification Status Bar -->
+      <div class="bg-[#1F2733] rounded-2xl p-6 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xl">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-[#BD9F4F]/20 text-[#BD9F4F] flex items-center justify-center shrink-0 border border-[#BD9F4F]/40">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-[10px] font-mono uppercase tracking-wider text-[#BD9F4F] font-bold">CERTIFICATION STATUS</div>
+            <div id="gate-status-headline" class="text-lg font-heading font-bold text-white">0 of 6 Gate Items Verified</div>
+            <div class="text-xs text-slate-300">Sr Consultant Certification takes effect upon signature of all 6 items.</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i data-lucide="home" class="w-4 h-4"></i>
+            <span>Return to Syllabus Home</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Stage</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Module:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Retrospective</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Stage</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Cohort Retrospective",
+      "2. Appendix C Rubric",
+      "3. 1-on-1 Scoring",
+      "4. The 90-Day Plan",
+      "5. Months 2-4 Cadence",
+      "6. Master Gate Console"
+    ];
+
+    // Gate Verification State Tracker
+    const gateStatus = {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: true // Capstone Passed in Session 8
+    };
+
+    try {
+      var savedGates = JSON.parse(localStorage.getItem('nf_gates_v1') || 'null');
+      if (savedGates) Object.keys(savedGates).forEach(function (k) { gateStatus[k] = !!savedGates[k]; });
+    } catch (e) {}
+
+    function toggleGate(num, forced) {
+      gateStatus[num] = (typeof forced === 'boolean') ? forced : !gateStatus[num];
+      const card = document.getElementById(`gate-card-${num}`);
+      const btn = document.getElementById(`gate-btn-${num}`);
+      
+      if (gateStatus[num]) {
+        card.classList.add('completed');
+        btn.innerText = "Gate Verified ✓";
+        btn.parentElement.classList.add('bg-[#EFF8F2]', 'border-[#1E7B4F]');
+      } else {
+        card.classList.remove('completed');
+        btn.innerText = "Mark Gate Verified";
+        btn.parentElement.classList.remove('bg-[#EFF8F2]', 'border-[#1E7B4F]');
+      }
+
+      updateGateSummary();
+      try { localStorage.setItem('nf_gates_v1', JSON.stringify(gateStatus)); } catch (e) {}
+    }
+
+    function updateGateSummary() {
+      const verifiedCount = Object.values(gateStatus).filter(Boolean).length;
+      const headline = document.getElementById('gate-status-headline');
+      if (verifiedCount === 6) {
+        headline.innerText = "6 of 6 Verified — SENIOR CONSULTANT CERTIFIED";
+        headline.classList.add('text-[#1E7B4F]');
+      } else {
+        headline.innerText = `${verifiedCount} of 6 Gate Items Verified`;
+        headline.classList.remove('text-[#1E7B4F]');
+      }
+    }
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    // Render saved/initial gate state (Gate 6 preset from Session 8 capstone)
+    for (var g = 1; g <= 6; g++) toggleGate(g, gateStatus[g]);
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

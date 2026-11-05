@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 3 Session 6 · The Problem-Solving Loop</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 06 (150m)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">The Problem-Solving Loop · Live Client Crucible</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Benchmark Share</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Card Anatomy</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>Loop: Steps 1-4</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>Loop: Steps 5-8</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Defend Under Fire</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>Field Mandate</span>
+        </button>
+      </nav>
+
+      <!-- Back to Session 5 -->
+      <div class="flex items-center gap-2">
+        <a href="session5.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 5</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: HOMEWORK SHARE & TRIAD WINNER                   -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 15 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Strongest Foundation Shift
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Skill Anchor: Power Law & Learning Acuity
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Trainee Presentation Challenge -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="award" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Opening Exercise // One Sentence, One Meta Skill
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              In Session 5, you audited Snaxxville's three foundation upgrades. Each trainee presents their strongest proposed Foundation Upgrade for their live client in <strong>one sentence</strong>:
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <div class="font-bold font-mono text-[#1F2733] uppercase text-[10px]">The 3-Point Litmus Test:</div>
+              <ul class="space-y-1.5 text-[#5C6066]">
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i> Did it change an actual business decision?</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i> Did it alter an economic number in the workbook?</li>
+                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-[#1E7B4F]"></i> Did it eliminate an existential failure risk?</li>
+              </ul>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#1F2733] text-white text-xs space-y-1">
+              <span class="text-[#BD9F4F] font-bold font-mono text-[10px] uppercase">The Room Vote:</span>
+              <p class="text-slate-200">
+                The cohort votes on the strongest upgrade. The winner is asked immediately: <em>"How would you deliver this uncomfortable truth to the owner without triggering defensiveness?"</em> (Sets up Session 7).
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066]">
+            Upgrades that only polish marketing prose are disqualified.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Three Benchmark Shifts -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Benchmark Shifts in Real Blueprints
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">VERIFIED EXAMPLES</span>
+            </div>
+
+            <div class="space-y-3 text-xs">
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                  <span>Snaxxville: 2-Year to 5-Year Agreement</span>
+                  <span class="font-mono text-[#1E7B4F]">TERM UPGRADE</span>
+                </div>
+                <p class="text-[#5C6066]">Prevents the slow unit from hitting expensive renewal fees before fully recovering its payback base.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                  <span>K-Street: Foot Traffic to 12% Occupancy Cap</span>
+                  <span class="font-mono text-[#BD9F4F]">SITE UPGRADE</span>
+                </div>
+                <p class="text-[#5C6066]">Replaces dangerous generic footfall counts with four mathematical site gates that prevent rent insolvency.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                  <span>Teamworks: ₱100 / Session Royalty Gate</span>
+                  <span class="font-mono text-[#1E7B4F]">FEE UPGRADE</span>
+                </div>
+                <p class="text-[#5C6066]">Waives the first 100 client sessions per month so clinic therapists are paid before HQ captures royalties.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-medium flex justify-between items-center">
+            <span>Core Principle:</span>
+            <strong class="font-heading text-[#1F2733]">We advise on what keeps the unit alive.</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE PROBLEM CARD PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "How does a raw, messy client crisis turn into an airtight entry in Blueprint Part 5 Advisory?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct Template B1 (The Problem Card).</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Problem Card</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: TEMPLATE B1 ANATOMY                             -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">STAGE PACE: 15 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Template B1 // Problem Card Architecture
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Single Deliverable Standard
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: The Card Template Visual -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Template B1 Layout Structure
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">CLIENT · SHORT NAME</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs font-mono">
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">1. In Their Voice:</span>
+              <span class="font-sans text-[#1A1A1A] font-bold">"I am the franchisee / customer and the friction is..."</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">2. Assumptions:</span>
+              <span class="font-sans text-[#1A1A1A]">8 Assumptions tagged H, I, CS, or Confirmed (B2)</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">3. Causal Chain:</span>
+              <span class="font-sans text-[#1A1A1A]">A → B → C → D → loop back. Why it repeats.</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">4. The One Link:</span>
+              <span class="font-sans text-[#1E7B4F] font-bold">Attack Link [X]. Explicit "Not Yet" list.</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">5. Outcome:</span>
+              <span class="font-sans text-[#1A1A1A]">2X operational vs 10X emotional transformation</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">6. Ground Evidence:</span>
+              <span class="font-sans text-[#BD9F4F] font-bold">Who · Where · By When (First-Hand)</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex justify-between">
+              <span class="text-[#5C6066]">7. Next Proof:</span>
+              <span class="font-sans text-[#1A1A1A] font-bold">One Proof · One Named Owner · One Hard Date</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-[#FDF2F0] border border-[#B42318]/30 flex justify-between">
+              <span class="text-[#B42318]">8. What's Weak Here:</span>
+              <span class="font-sans text-[#B42318] font-bold">Unflinching self-audit of this card</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Destination in Blueprint -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE DESTINATION GATE</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Where Does the Card Land?</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Every accepted Problem Card is converted into a concrete section of the Blueprint. It never floats in vacuum:
+            </p>
+
+            <div class="space-y-2 text-xs">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong class="text-[#1F2733]">5.1 Foundation Upgrade:</strong> If it changes a term, site cap, or unit economics model.
+              </div>
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong class="text-[#1F2733]">5.2 Risk & Mitigation:</strong> If it identifies an operational breakdown that requires a buffer or audit standard.
+              </div>
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <strong class="text-[#1F2733]">Appendix B Open Item:</strong> If it requires Legal Counsel redrafting or owner confirmation before launch.
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            Gate Requirement: 3 Problem Cards accepted across 2+ brands.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="play-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">LIVE CRUCIBLE PROBE // STEPS 1 TO 4</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Set the timer for 35 minutes. Run Steps 1 through 4 on your live client problem right now."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Enforce first-person voice, assumption audits, and causal loops.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Run Steps 1 to 4</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: THE LIVE LOOP CRUCIBLE (STEPS 1 TO 4)           -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">TIMED SPRINT · 35 MINUTES (STEPS 1–4)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Live Loop // Steps 1 to 4 Execution
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Customer Obsession · First Principles · Systems · Power Law
+        </div>
+      </div>
+
+      <!-- Steps 1 to 4 Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        
+        <!-- Step 1 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 01 (5 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">VOICE</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Customer's Voice</h4>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] italic">
+              "I am the franchisee and..."
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              No solutions permitted in the sentence! Strictly state their daily friction and fear. Never say <em>"The client wants..."</em>
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Customer Obsession</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 02 (10 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">AUDIT</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Assumptions Table</h4>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-mono space-y-1">
+              <div>1. [CS] Client-Said</div>
+              <div>2. [I] Inferred</div>
+              <div>3. [H] Heard</div>
+              <div>4. [C] Confirmed</div>
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              List at least 8 assumptions. Trap: Treating Client-Said as Confirmed. Rebuild on Confirmed data only.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: First Principles</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 03 (15 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">LOOP</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">The Causal Chain</h4>
+            <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+              A → B → C → D → Loops back to A.
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Draw the loop until it repeats. Show why fixing symptoms leaves the underlying systemic driver intact.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Systems Thinking</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 04 (5 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">FOCUS</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">The ONE Link</h4>
+            <div class="p-3 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 text-xs text-[#1E7B4F] font-bold">
+              Attack: Link B only.<br>Not Yet: Everything else.
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Cut to one single priority that moves 80% of the outcome. Everything else is pushed to the owner-approved "not yet" list.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Power Law</div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">LIVE CRUCIBLE PROBE // STEPS 5 TO 8</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Now advance to the transformation and evidence layer: Steps 5 through 8."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Enforce 10X feeling, ground proof witnesses, dated actions, and candor audit.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Run Steps 5 to 8</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: THE LIVE LOOP CRUCIBLE (STEPS 5 TO 8)           -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">TIMED SPRINT · 25 MINUTES (STEPS 5–8)</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Live Loop // Steps 5 to 8 Execution
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Outcomes · Ground Commando · Relentless Exec · Candor
+        </div>
+      </div>
+
+      <!-- Steps 5 to 8 Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
+        
+        <!-- Step 5 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 05 (10 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">OUTCOME</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">10X Outcome</h4>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A]">
+              <strong>2X:</strong> Faster payback.<br>
+              <strong>10X:</strong> Family pride, peace of mind, kampante.
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Write the operational 2X version, then the emotional 10X transformation. Keep the second.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Radical Outcomes</div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 06 (5 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">GROUND</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Ground Evidence</h4>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-mono">
+              Named Crew · Branch Store · Exact Shift Time
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Never write "do more desk research". Name the exact humans you must interview on the floor to verify assumptions.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Ground Commando</div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 07 (5 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">PROOF</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">Next Proof</h4>
+            <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+              1 Proof · 1 Named Owner · 1 Hard Date
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Every card ends in a hard action commitment. "Next steps TBD" or "Team will coordinate" is an immediate disqualification.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Relentless Exec</div>
+        </div>
+
+        <!-- Step 8 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-5 shadow-sm space-y-3 flex flex-col justify-between">
+          <div class="space-y-2">
+            <div class="flex justify-between items-center border-b border-[#E8E4D8] pb-2">
+              <span class="font-mono font-bold text-[#BD9F4F] text-xs">STEP 08 (5 MINS)</span>
+              <span class="text-[10px] font-mono text-[#5C6066]">CANDOR</span>
+            </div>
+            <h4 class="font-heading font-bold text-[#1F2733] text-sm">What's Weak Here</h4>
+            <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] font-bold">
+              Unflinching self-audit of your own card.
+            </div>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              State plainly where your logic is vulnerable or where data is missing. Any defensive stance triggers an immediate rewrite.
+            </p>
+          </div>
+          <div class="text-[10px] font-mono text-[#1E7B4F] font-bold">Skill: Radical Candor</div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="shield-alert" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">DEFENSE UNDER FIRE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "5 minutes to present your card. 5 minutes of challenge with the Senior Review Questions."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Defend your link and decide where your card lands.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Defense Room</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: DEFEND THE CARD UNDER FIRE                      -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">DEFENSE CLINIC · 35 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Defending the Card // The Sr Review Questions
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Peer Challenge Protocol
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: The 4 Sr Challenge Questions -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The Senior Reviewer's Challenge Arsenal
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">5 MIN PER SPRINT</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              When a trainee presents their Problem Card, the reviewer challenges the logic using these exact questions:
+            </p>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">1. The Voice Challenge:</span>
+                <p class="text-[#5C6066]">"Whose words are these? Did you hear them directly from a franchisee, or are you echoing the owner's deck?"</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">2. The Causal Loop Challenge:</span>
+                <p class="text-[#5C6066]">"Why does this keep happening? If we fix this one link, why won't the problem just pop up somewhere else?"</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">3. The Power Law Challenge:</span>
+                <p class="text-[#5C6066]">"If you could fix only ONE thing this quarter, is this honestly the single link that moves 80% of the outcome?"</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">4. The Personal Savings Challenge:</span>
+                <p class="text-[#5C6066]">"Would you put your own family's life savings into this unit under these assumptions?"</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs font-mono">
+            Any "no" triggers an immediate revision before client presentation.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Triaging Destination Card -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Cohort Decision // Card Triaging Gate
+              </span>
+              <span class="text-[10px] font-mono text-[#1E7B4F] font-bold">ACCEPT OR REVISE</span>
+            </div>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              After the 5-minute challenge, the room votes on one of three triage destinations:
+            </p>
+
+            <div class="space-y-2.5 text-xs font-sans">
+              <div class="p-3 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 flex items-start gap-3">
+                <span class="w-5 h-5 rounded-md bg-[#1E7B4F] text-white flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">A</span>
+                <div>
+                  <strong class="text-[#1E7B4F]">Accepted into 5.1 Foundation Upgrades:</strong>
+                  <p class="text-[#5C6066] mt-0.5">Changes a contract clause, territory population threshold, or fee formula.</p>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#BD9F4F]/40 flex items-start gap-3">
+                <span class="w-5 h-5 rounded-md bg-[#BD9F4F] text-white flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">B</span>
+                <div>
+                  <strong class="text-[#1F2733]">Accepted into 5.2 Named Risks:</strong>
+                  <p class="text-[#5C6066] mt-0.5">A known operational vulnerability with an owned mitigation protocol.</p>
+                </div>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 flex items-start gap-3">
+                <span class="w-5 h-5 rounded-md bg-[#B42318] text-white flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">C</span>
+                <div>
+                  <strong class="text-[#B42318]">Revising: Needs Ground Evidence First:</strong>
+                  <p class="text-[#5C6066] mt-0.5">Card blocked until consultant visits store or conducts customer interview.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066] text-right">
+            Accepted cards become verified evidence for Gate Item 2.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">FIELD MANDATE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "How does Problem Card v1 become v2? By touching reality."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Lock in the first-hand evidence plan and homework assignment.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Lock In Field Mandate</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: FIELD GROUNDING & THE V2 MANDATE                -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">STAGE PACE: 15 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Field Grounding // Upgrading Card v1 to v2
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Step 6 Execution · Ground Commando
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Ground Commando Plan -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="footprints" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Executing Step 6 for Real (Template B9)
+            </span>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Your Problem Card v1 is currently full of assumptions. Before Session 7, you must gather first-hand ground evidence to transform it into <strong>Problem Card v2</strong>:
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <div class="font-bold font-mono text-[#1F2733] uppercase text-[10px]">Template B9 Field Notes Requirements:</div>
+              <ul class="space-y-1.5 text-[#5C6066]">
+                <li class="flex items-center gap-2"><i data-lucide="calendar" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Date, exact store location, and operational context.</li>
+                <li class="flex items-center gap-2"><i data-lucide="user" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Name and role of the crew member, franchisee, or diner.</li>
+                <li class="flex items-center gap-2"><i data-lucide="message-square" class="w-3.5 h-3.5 text-[#BD9F4F]"></i> Exact verbatim quotes with emotional nuance and Taglish.</li>
+                <li class="flex items-center gap-2"><i data-lucide="alert-circle" class="w-3.5 h-3.5 text-[#B42318]"></i> The specific assumption it confirmed or completely destroyed.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 text-xs text-[#1E7B4F] font-medium flex items-center justify-between">
+            <span>Next Milestone:</span>
+            <strong class="font-mono">Session 7 · The Hard Conversation (Role-Plays)</strong>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Homework & Session 7 Setup -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Homework Assignment for Session 7
+              </span>
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">MANDATORY</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-3 text-xs leading-relaxed">
+              <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE 3 DELIVERABLES:</span>
+              <div class="space-y-2 text-slate-200">
+                <div class="flex items-start gap-2">
+                  <span class="font-mono font-bold text-[#BD9F4F]">1.</span>
+                  <span><strong>Problem Card v2:</strong> Incorporate your first-hand ground evidence and document what changed since v1.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="font-mono font-bold text-[#BD9F4F]">2.</span>
+                  <span><strong>Second Problem Card:</strong> Write a fresh Problem Card for a secondary operational issue on the same live brand.</span>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="font-mono font-bold text-[#BD9F4F]">3.</span>
+                  <span><strong>Prepare for Pushback:</strong> Be ready to tell your live client owner an uncomfortable truth in Session 7's role-play crucible.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Session 6 Loop Canvas</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Canvas:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Benchmark Share</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Benchmark Share",
+      "2. Card Anatomy",
+      "3. Loop: Steps 1 to 4",
+      "4. Loop: Steps 5 to 8",
+      "5. Defend Under Fire",
+      "6. Field Mandate"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

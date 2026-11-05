@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 2B Session 4 · The Blueprint (Parts 1 to 3)</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 04 (4 Hrs)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">The Blueprint Cards · Parts 1 to 3 Teardown</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Architecture</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>One Sentence</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>Part 1: Customer</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>Part 2: Brand</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Part 3A: Franchisee</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>Part 3B: Economics</span>
+        </button>
+      </nav>
+
+      <!-- Module Navigation Links -->
+      <div class="flex items-center gap-2">
+        <a href="session3.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 3</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: BLUEPRINT ARCHITECTURE & THE TRACE TEST         -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 40 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            How the Blueprint Works // The Single Source of Truth
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Franchisees Never See the Blueprint
+        </div>
+      </div>
+
+      <!-- Main Architecture Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 5 Cols: Internal Architecture -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#BD9F4F]/10 text-[#BD9F4F] font-mono text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+              System Boundary
+            </div>
+            
+            <h3 class="text-xl font-extrabold text-[#1A1A1A] font-heading leading-snug">
+              The Blueprint is Strictly Internal
+            </h3>
+
+            <p class="text-sm text-[#1A1A1A] leading-relaxed">
+              The Franchise Blueprint is written solely for the franchisor leadership and the Next Franchise advisory team. 
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2">
+              <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">The Downstream Cascade</span>
+              <p class="text-xs text-slate-200 leading-relaxed font-medium">
+                The investor pitch deck, the Franchise Agreement clauses, and the sales qualification script are built <em>strictly from the Blueprint</em>. A weak card becomes a weak slide, a weak legal clause, and a false promise to a family's life savings.
+              </p>
+            </div>
+          </div>
+
+          <!-- The Trace Test Crucible -->
+          <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+            <span class="font-heading font-bold text-[#1F2733] uppercase text-[11px]">The Trace Test Crucible:</span>
+            <p class="text-[#5C6066] leading-relaxed">
+              Pick any single number or claim in a client's pitch deck. Trace it backward to its Blueprint card, and from the card to its verified source in Appendix A or the Financial Goals workbook. If the trail breaks anywhere, the Blueprint is disqualified.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: The Two Customers -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <h3 class="text-xs font-heading font-bold tracking-wider text-[#1F2733] uppercase">
+              The Two Customers Every Blueprint Answers
+            </h3>
+            <span class="text-[11px] text-[#5C6066] font-mono">Parallel Architecture</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse font-sans">
+              <thead>
+                <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px] tracking-wider">
+                  <th class="p-3">Critical Question</th>
+                  <th class="p-3 text-slate-300">Part 1: The End Customer</th>
+                  <th class="p-3 text-[#BD9F4F] bg-[#161D27] font-bold">Part 3: The Franchisee</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-bold text-[#1F2733]">Who are they?</td>
+                  <td class="p-3 text-[#5C6066]"><strong>1.1 Power Customer</strong> (Diner, Patient, Parent)</td>
+                  <td class="p-3 bg-[#F7F5EF]/30 font-semibold text-[#1A1A1A]"><strong>3.1 Power Franchisee</strong> (OFW, Family Investor)</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-bold text-[#1F2733]">What do they do instead?</td>
+                  <td class="p-3 text-[#5C6066]"><strong>1.2 Power Substitutes</strong> (Carinderia, Cook at home)</td>
+                  <td class="p-3 bg-[#F7F5EF]/30 font-semibold text-[#1A1A1A]"><strong>3.3 Alternatives</strong> (Bank deposit, Build house)</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-bold text-[#1F2733]">What do they want?</td>
+                  <td class="p-3 text-[#5C6066]">Afternoon reward, merienda with friends</td>
+                  <td class="p-3 bg-[#F7F5EF]/30 font-semibold text-[#1A1A1A]"><strong>3.2 Power Outcome</strong> (Stop working abroad)</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-bold text-[#1F2733]">Where do they fit?</td>
+                  <td class="p-3 text-[#5C6066]"><strong>1.3 Territory Rule</strong> (Town size & catchment)</td>
+                  <td class="p-3 bg-[#F7F5EF]/30 font-semibold text-[#1A1A1A]"><strong>3.7 Readiness Check</strong> (Action score &gt; 7)</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-bold text-[#1F2733]">What does it cost?</td>
+                  <td class="p-3 text-[#5C6066]">Average ticket: ₱225 per combo</td>
+                  <td class="p-3 bg-[#F7F5EF]/30 font-semibold text-[#1A1A1A]"><strong>3.9 & 3.10 Economics</strong> (₱1.58M Total Cash)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] flex items-center justify-between">
+            <span class="text-[#5C6066]">The Rule:</span>
+            <strong class="font-heading text-[#1F2733]">The diner decides if a unit sells. The franchisee decides if a unit is run well.</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="feather" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE STRATEGIC SPINE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "If you cannot state the market gap, proof, and franchisee gain in one sentence, your pitch deck has no spine."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct the One Sentence across 5 live Blueprints.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct The One Sentence</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: THE BLUEPRINT IN ONE SENTENCE                   -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">STAGE PACE: 10 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Blueprint in One Sentence
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Written Last · Placed First
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Formula & Snaxxville 6 Cols -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="code" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 3-Part Structural Formula
+            </span>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <div class="font-bold text-[#1F2733] font-mono text-[11px] uppercase">Formula Breakdown:</div>
+              <p><strong>1. The Market Gap:</strong> What does the territory lack that customers crave?</p>
+              <p><strong>2. The Unit Proof:</strong> Exactly how much gross sales/volume do existing units prove?</p>
+              <p><strong>3. The Franchisee Gain:</strong> What concrete life outcome does this deliver to a local owner?</p>
+            </div>
+
+            <!-- Snaxxville Live Example -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">Snaxxville Benchmark Sentence:</span>
+              <p class="text-slate-100 font-medium leading-relaxed">
+                "Most towns in Northern Samar have no branded snack or fast-food outlet, and Snaxxville—already selling ₱726k–₱862k a month in two of them—is the only local brand ready to franchise into the rest."
+              </p>
+              <p class="text-slate-300 italic pt-1 border-t border-slate-700">
+                "For a franchisee from the province, that means a chance to own a proven business in their own town, instead of risking life savings on an untested stall."
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 text-xs text-[#1E7B4F] font-medium">
+            Could a competitor's name be swapped in without changing a word? If yes, it fails.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: K-Street Honesty Case vs Weak Slogans -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE HONESTY CASE: K-STREET</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Naming the Failure it Solves</h3>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+              <span class="font-bold text-[#B42318] font-mono text-[10px] uppercase">K-Street Korean Food Counters:</span>
+              <p class="text-[#1A1A1A] leading-relaxed">
+                "Thirty of sixty previous franchises failed because they relied on mall foot-traffic rather than occupancy cost limits. The new K-Street Blueprint rebuilds expansion around strict rent-to-sales ratios and audited commissary delivery."
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1.5 text-xs">
+              <span class="font-bold text-[#B42318] font-mono text-[10px] uppercase">The Weak Consultant Version (Disqualified):</span>
+              <p class="text-[#5C6066] italic leading-relaxed">
+                "A fast-growing food brand with delicious products and a passionate team, ready to expand nationwide."
+              </p>
+              <div class="text-[10px] text-[#B42318] font-bold pt-1">Why it fails: Zero gap named. Zero proof numbers. Zero franchisee stakes.</div>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#5C6066] text-right">
+            Governs pitch deck Slide 1.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="users" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">TERRITORY & CUSTOMER PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "If your territory rule is based on total population alone, why did Palapag fail with 34,000 residents?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Explore Part 1: Cards 1.1 to 1.4 and the penetration math.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Part 1: Customer</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: PART 1 — THE CUSTOMER (CARDS 1.1 TO 1.4)        -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">STAGE PACE: 50 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 1: The Customer // Cards 1.1 to 1.4
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Customer Obsession · Ground Truth · First Principles
+        </div>
+      </div>
+
+      <!-- Part 1 Grid & Interactive Territory Tool -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: Cards 1.1 to 1.4 -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              The 4 Cards of Part 1
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">THE DINER / USER</span>
+          </div>
+
+          <div class="space-y-3 text-xs leading-relaxed text-[#1A1A1A]">
+            
+            <!-- 1.1 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>1.1 Power Customer (First Person)</span>
+                <span class="text-[10px] font-mono text-[#1E7B4F] bg-[#EFF8F2] px-2 py-0.5 rounded">BEHAVIORAL</span>
+              </div>
+              <p class="text-slate-800 italic">
+                "I'm a young worker earning around ₱440 a day in a town with no mall. You'll recognize me because I arrive after 3:00 PM with two coworkers to share merienda and unwind."
+              </p>
+              <div class="text-[11px] text-[#5C6066]">Separates payer from user (e.g. at Teamworks, mother pays, child receives therapy).</div>
+            </div>
+
+            <!-- 1.2 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>1.2 Power Substitutes (Sets Price Ceiling)</span>
+                <span class="text-[10px] font-mono text-[#BD9F4F] bg-white px-2 py-0.5 rounded">BEHAVIOR &gt; BRANDS</span>
+              </div>
+              <p class="text-slate-800">
+                Primary substitute is homemade merienda or street carts outside school (fishball/banana cue). Rain is a substitute in itself (keeps people home), which justifies Facebook-page delivery.
+              </p>
+            </div>
+
+            <!-- 1.3 & 1.4 -->
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>1.3 Territory Rule & 1.4 Market Evidence</span>
+                <span class="text-[10px] font-mono text-[#1F2733] bg-white px-2 py-0.5 rounded">PSA CENSUS BACKED</span>
+              </div>
+              <p class="text-slate-800">
+                Penetration = Weekly Transactions ÷ Catchment Population. Snaxxville Catubig achieves <strong>2.3% weekly penetration</strong>. Palapag has more people, but 1/5th the penetration because the site was on a deserted road.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Interactive Territory Calculator Widget -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">INTERACTIVE TERRITORY ENGINE</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Solve Minimum Town Population</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              To achieve Conservative volume (100 txns/day = 700 txns/week), how large must the town catchment segment be at a conservative 3% weekly penetration?
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-3 font-mono text-xs">
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">Weekly Target Txns:</span>
+                <span class="text-[#BD9F4F]">700 txns / week</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">Conservative Penetration:</span>
+                <span class="text-[#BD9F4F]">3.0%</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">700 ÷ 0.03 =</span>
+                <span class="text-white font-bold text-sm">23,333 People</span>
+              </div>
+              <div class="text-[11px] text-[#1E7B4F] font-bold">
+                Snaxxville Territory Rule: Towns of 23,000+ residents qualify for Phase 1.
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1">
+            <strong>The Demand Score Rule:</strong>
+            <p class="text-slate-800 text-[11px] leading-relaxed">
+              Territory demand score is rated out of 10 based on actual customer behavior (repeat purchase, unprompted orders). Below 7/10 means the territory rule is invalid.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">PROOF CLINIC PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The owner wants to hide the Palapag branch because it only sells 26 transactions a day. Why do we force it in?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Learn why proof requires showing where the model fails.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Part 2: Brand</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: PART 2 — THE BRAND (CARDS 2.1 TO 2.4)           -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">STAGE PACE: 30 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 2: The Brand // Proof & Turnaround Story
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Radical Candor · Include Weak Branches
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Cards 2.1 & 2.2 -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Cards 2.1 & 2.2 // The Cost & The Boundary
+            </span>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">2.1 Founder Story (The Turnaround Lesson):</span>
+              <p class="leading-relaxed">
+                Two years ago, Laoang branch sales fell to single digits. Instead of closing, the founders moved to a larger high-visibility site, added dine-in seating, and updated the combo menu. Today, it averages <strong>116 daily transactions</strong>.
+              </p>
+              <div class="p-2.5 rounded bg-white border border-[#E8E4D8] text-[#5C6066] italic text-[11px]">
+                "That turnaround is the lesson behind the franchise system: the right site format matters more than the gross population of the town."
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">2.2 The Business:</span>
+              <p class="leading-relaxed">
+                Defines the exact operational boundaries: counter service, dine-in, and delivery through Facebook page (10–15% of revenue). Lists all required FDA/LGU health permits and proprietary recipes.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#1F2733] text-white text-xs">
+            Franchisees buy the founder's battle-tested judgment, not generic corporate enthusiasm.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Proof Clinic (Card 2.3) -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Card 2.3 Proof Clinic // Include All Branches
+              </span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">NO HIDING DATA</span>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs border-collapse font-mono">
+                <thead>
+                  <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px]">
+                    <th class="p-2.5">Branch</th>
+                    <th class="p-2.5 text-right">Daily Txns</th>
+                    <th class="p-2.5 text-right">Monthly Sales</th>
+                    <th class="p-2.5 text-right">Role in System</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                  <tr class="bg-[#EFF8F2]/60 font-bold">
+                    <td class="p-2.5 font-sans">Catubig Flagship</td>
+                    <td class="p-2.5 text-right">109 / day</td>
+                    <td class="p-2.5 text-right">₱861,607</td>
+                    <td class="p-2.5 text-right font-sans text-[#1E7B4F]">Proves Target</td>
+                  </tr>
+                  <tr class="bg-[#EFF8F2]/60 font-bold">
+                    <td class="p-2.5 font-sans">Laoang Store</td>
+                    <td class="p-2.5 text-right">116 / day</td>
+                    <td class="p-2.5 text-right">₱726,268</td>
+                    <td class="p-2.5 text-right font-sans text-[#1E7B4F]">Proves Target</td>
+                  </tr>
+                  <tr class="bg-[#FDF2F0]/60">
+                    <td class="p-2.5 font-sans text-[#B42318]">Palapag Store</td>
+                    <td class="p-2.5 text-right font-bold text-[#B42318]">26 / day</td>
+                    <td class="p-2.5 text-right">₱175,500</td>
+                    <td class="p-2.5 text-right font-sans text-[#B42318]">Bad Location Warning</td>
+                  </tr>
+                  <tr class="bg-[#FDF2F0]/60">
+                    <td class="p-2.5 font-sans text-[#B42318]">Campus Kiosk</td>
+                    <td class="p-2.5 text-right font-bold text-[#B42318]">12 / day</td>
+                    <td class="p-2.5 text-right">₱81,000</td>
+                    <td class="p-2.5 text-right font-sans text-[#B42318]">Format Discontinued</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#5C6066] leading-relaxed">
+              <strong>The Architect Rule:</strong> We explicitly showcase Palapag because it teaches the franchisee where the model fails. If you hide the weak branch, you hide the risk.
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#1F2733] font-bold">
+            Feeds Pitch Deck Slide: Verified Unit Track Record.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="user-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE FRANCHISEE CUSTOMER PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Owners want 'investors with capital who want passive income'. Why does that buyer fail 80% of the time?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Explore Part 3: Cards 3.1 to 3.4 and the causal pain sequence.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Part 3A: Franchisee</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: PART 3A — THE FRANCHISEE (CARDS 3.1 TO 3.4)     -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">STAGE PACE: 45 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Part 3A: The Franchisee // Cards 3.1 to 3.4
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Customer Obsession · Whole Person · Systems Thinking
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Cards 3.1, 3.2, 3.3 -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="heart" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Cards 3.1, 3.2 & 3.3 // Persona, Outcome & Alternatives
+            </span>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">3.1 Power Franchisee (First Person):</span>
+              <p class="leading-relaxed italic">
+                "I'm from this province. I work abroad and plan to return, or I run a local shop, and I've saved ₱1.5M. You'll recognize me because I ask how many months until I recover my cash before I even ask about the menu."
+              </p>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono uppercase text-[10px]">3.2 The 4-Box Outcome // The Psycho-Spiritual Driver:</span>
+              <div class="grid grid-cols-2 gap-2 text-[11px]">
+                <div class="p-2 bg-white rounded border border-[#E8E4D8]"><strong>Direct:</strong> Steady cash flow</div>
+                <div class="p-2 bg-white rounded border border-[#E8E4D8]"><strong>Social:</strong> Respected business owner</div>
+                <div class="p-2 bg-white rounded border border-[#E8E4D8]"><strong>Financial:</strong> Recoup ₱1.58M in 13 mos</div>
+                <div class="p-2 bg-white rounded border border-[#BD9F4F] text-[#1F2733] font-bold"><strong>Psycho-Spiritual:</strong> Never go abroad again</div>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#5C6066]">
+              <strong>3.3 Power Alternatives:</strong> The real competitor is not another food franchise—it is keeping savings in the bank, buying a jeepney, or building a retirement home.
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#BD9F4F] font-bold">
+            "Wants to avoid losing savings that took 10 years abroad to build is the sales hook."
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Card 3.4 Pain DNA (Causal Chain) -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                Card 3.4 Power Pain DNA // Causal Chains
+              </span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">NO FRICTION LISTS</span>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-2 text-xs">
+              <span class="font-bold text-[#B42318] font-mono text-[10px] uppercase">The Weak Version (Banned):</span>
+              <p class="text-[#5C6066] italic">"Pains: Competition, rising ingredient costs, finding staff, bad location, marketing."</p>
+              <div class="text-[10px] text-[#B42318] font-bold">Why it fails: 5 disconnected symptoms. Zero systemic causality.</div>
+            </div>
+
+            <!-- The Real Causal Chain -->
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs font-mono">
+              <span class="text-[10px] text-[#BD9F4F] font-bold uppercase">The True Causal Chain (The White Bucket / K-Street):</span>
+              <div class="space-y-1.5 text-slate-200">
+                <div class="p-1.5 rounded bg-[#161D27] border border-slate-700">1. Working capital underestimated in Mode 1</div>
+                <div class="p-1.5 rounded bg-[#161D27] border border-slate-700">↓ 2. Staff hours cut to conserve payroll</div>
+                <div class="p-1.5 rounded bg-[#161D27] border border-slate-700">↓ 3. Service slips; regulars drift away</div>
+                <div class="p-1.5 rounded bg-[#161D27] border border-slate-700">↓ 4. Sales drop below Conservative; more hours cut</div>
+                <div class="p-1.5 rounded bg-[#B42318] text-white font-bold">↓ 5. Unit collapses in Month 14</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-medium">
+            Systems Thinking Rule: Find the link that keeps the loop repeating. Attack that link.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">READINESS & USAGE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "A prospect arrives with ₱2M cash in hand. Why must you turn them away if their score is 6/10?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct Cards 3.5 to 3.10 and contract enforcement gates.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Cards 3.5 to 3.10</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: PART 3B — SOLUTION TO ECONOMICS (3.5 TO 3.10)   -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">STAGE PACE: 40 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Cards 3.5 to 3.10 // Solution, Readiness & Economics
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Follow the Good · Relentless Execution · First Principles
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 6 Cols: Cards 3.5, 3.6, 3.7 -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="shield-alert" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Cards 3.5, 3.6 & 3.7 // Solution, Delta & Readiness
+            </span>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">3.5 Power Solution DNA:</span>
+              <p class="leading-relaxed">
+                Every pain in 3.4 must be answered by a named system deliverable. At Teamworks: "Parent waits months for diagnosis" is answered by an <em>HQ Program Manager evaluating every client monthly</em>.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1.5 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">3.6 Delta 10X (Measurable Transformation):</span>
+              <p class="leading-relaxed">
+                Not generic slogans. From <em>"Savings sitting idle in foreign bank"</em> to <em>"₱1,581,650 recovered in 13 months with family running daily counter."</em>
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1.5 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#B42318] font-mono text-[10px] uppercase">3.7 Readiness Check // The "Not Yet" List:</span>
+              <p class="leading-relaxed">
+                Scores actual applicant actions (funds verified, branch visited, site found). <strong>Score below 7 = DO NOT SIGN</strong>. Explicitly rejects absentee investors and buyers borrowing money to afford the fee.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-[11px] font-mono text-[#B42318] font-bold">
+            Readiness Check gives your brokerage team permission to say NO.
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Cards 3.8, 3.9 & 3.10 -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="file-check" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Cards 3.8, 3.9 & 3.10 // Usage & Economics
+            </span>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <span class="font-bold text-[#1F2733] font-mono text-[10px] uppercase">3.8 Power Usage // 5 Checkable Behaviors:</span>
+              <ol class="space-y-1 list-decimal list-inside text-[#5C6066]">
+                <li>Certify crew before store opening (contract gate).</li>
+                <li>Report sales at 3:00 PM and closing daily.</li>
+                <li>Maintain 14-day emergency buffer stock.</li>
+                <li>Purchase proprietary mixes strictly from commissary.</li>
+                <li>Owner attends weekly operations audit on-site.</li>
+              </ol>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="font-mono text-[#BD9F4F] font-bold text-[10px] uppercase">3.9 & 3.10 Projections & Investment:</span>
+              <p class="text-slate-200 leading-relaxed">
+                Every peso must match the approved Financial Goals workbook. Payback must be stated <strong>from signing</strong> against <strong>total cash before opening (Line 2.6)</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Blueprint Session 4 Canvas</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Module:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Architecture</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Blueprint Architecture",
+      "2. The One Sentence",
+      "3. Part 1: The Customer",
+      "4. Part 2: The Brand",
+      "5. Part 3A: The Franchisee",
+      "6. Part 3B: Economics & Usage"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    updateView();
+  </script>
+</body>
+</html>

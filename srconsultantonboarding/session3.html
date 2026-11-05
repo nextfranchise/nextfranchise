@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Week 2A Session 3 · The Financial Goals Engine</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .color-pill-blue { background-color: #EBF5FF; color: #1E429F; border: 1px solid #C3DDFD; }
+    .color-pill-green { background-color: #EFF8F2; color: #1E7B4F; border: 1px solid #BCF0DA; }
+    .color-pill-yellow { background-color: #FEF08A; color: #713F12; border: 1px solid #FDE047; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND                                        -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Wordmark Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Session 03 (4 Hrs)</span>
+          </div>
+          <p class="text-[11px] text-slate-300">The Financial Goals Engine · Single Source of Truth</p>
+        </div>
+      </div>
+
+      <!-- Stage Stepper Pills -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Diagnosis</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>Mode 1 CapEx</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>Mode 2 & Break-Even</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>Ramp-Up Payback</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>Offer Scenarios</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>Red-Flag Clinic</span>
+        </button>
+      </nav>
+
+      <!-- Module Navigation Links -->
+      <div class="flex items-center gap-2">
+        <a href="session2.html" class="px-2.5 py-1.5 rounded-lg bg-[#161D27] hover:bg-[#253040] text-slate-300 text-xs font-mono border border-[#2B3747] flex items-center gap-1 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Session 2</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MAIN WORKSPACE                                           -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- STAGE 1: STEP 1 DIAGNOSIS & THE 4 STEPS                  -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 40 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Financial Engine // Single Source of Truth
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          First Principles · Arithmetic is Cheap, Judgment is Rare
+        </div>
+      </div>
+
+      <!-- Main Stage Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 5 Cols: The Law of the Workbook -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#BD9F4F]/10 text-[#BD9F4F] font-mono text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="database" class="w-4 h-4"></i>
+              Core Architecture
+            </div>
+            
+            <h3 class="text-xl font-extrabold text-[#1A1A1A] font-heading leading-snug">
+              The Workbook Wins. Always.
+            </h3>
+
+            <p class="text-sm text-[#1A1A1A] leading-relaxed">
+              The Financial Goals workbook is created before the Blueprint. It is the mathematical spine behind the franchise agreement, pitch deck, and pro-forma.
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2">
+              <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">The Source of Truth Rule</span>
+              <p class="text-xs text-slate-200 leading-relaxed font-medium">
+                "When the Blueprint, sales deck, or contract disagree with the workbook, the workbook wins and everything else is corrected. No number enters without a named source."
+              </p>
+            </div>
+          </div>
+
+          <!-- Color Code Protocol -->
+          <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs">
+            <span class="font-heading font-bold text-[#1F2733] uppercase text-[11px]">Strict Workbook Color Codes:</span>
+            <div class="grid grid-cols-2 gap-2 text-[10px] font-mono">
+              <div class="p-2 rounded color-pill-blue font-bold">Blue = Client / Source Input</div>
+              <div class="p-2 rounded bg-white border border-slate-300 font-bold text-slate-900">Black = Dynamic Formula</div>
+              <div class="p-2 rounded color-pill-green font-bold">Green = Cross-Tab Link</div>
+              <div class="p-2 rounded color-pill-yellow font-bold">Yellow = Unconfirmed Estimate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: The 4 Steps Pipeline -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <h3 class="text-xs font-heading font-bold tracking-wider text-[#1F2733] uppercase">
+              The 4 Step Engineering Process
+            </h3>
+            <span class="text-[11px] text-[#5C6066] font-mono">Iterative Protocol</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-3 hover:border-[#BD9F4F] transition">
+              <span class="w-6 h-6 rounded-lg bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">1</span>
+              <div class="space-y-0.5">
+                <div class="font-heading font-bold text-[#1F2733]">Diagnose (Before Any Spreadsheet)</div>
+                <p class="text-[#5C6066]">Audit locked inputs, critical gaps, red flags rated Green/Amber/Red, and Smart Fill defaults.</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-3 hover:border-[#BD9F4F] transition">
+              <span class="w-6 h-6 rounded-lg bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">2</span>
+              <div class="space-y-0.5">
+                <div class="font-heading font-bold text-[#1F2733]">Iterate Tables by Script</div>
+                <p class="text-[#5C6066]">Agree on Mode 1 and Mode 2 structures. Recalculate every figure mathematically—never typed by hand or eye.</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-3 hover:border-[#BD9F4F] transition">
+              <span class="w-6 h-6 rounded-lg bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">3</span>
+              <div class="space-y-0.5">
+                <div class="font-heading font-bold text-[#1F2733]">Build & Link Formulas</div>
+                <p class="text-[#5C6066]">Build tab-by-tab. Every formula links back to the Assumptions tab. Recalculate to confirm zero #REF! or loop errors.</p>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-start gap-3 hover:border-[#BD9F4F] transition">
+              <span class="w-6 h-6 rounded-lg bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">4</span>
+              <div class="space-y-0.5">
+                <div class="font-heading font-bold text-[#1F2733]">Clarify & Version Control</div>
+                <p class="text-[#5C6066]">Send the owner a concise clarification list. Replace yellow cells with blue client inputs. Raise version.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-[11px] text-[#1A1A1A] flex justify-between items-center font-medium">
+            <span>Snaxxville Version Control Example:</span>
+            <span class="font-mono text-[#BD9F4F]">Snaxxville_Financial_Goals_2026_v0_4.xlsx</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CAPITAL ARCHITECTURE PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The Franchise Package is ₱823,000. Why will a franchisee go bankrupt if they prepare ₱823,000?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Deconstruct Mode 1: Package vs. Third-Party vs. Total Cash Before Opening.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct Mode 1 CapEx</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 2: MODE 1 CAPEX & SITE VARIANCE                    -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">STAGE PACE: 40 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Mode 1 CapEx // What It Costs to Open
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Snaxxville One-Store Real Model
+        </div>
+      </div>
+
+      <!-- Mode 1 Comparison Engine -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Table 8 Cols -->
+        <div class="lg:col-span-8 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Capital Stack: Lowest vs Typical vs Highest Site Condition
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">Catubig Baseline</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse font-mono">
+              <thead>
+                <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px] tracking-wider">
+                  <th class="p-3">Cost Layer</th>
+                  <th class="p-3 text-right">Lowest Site</th>
+                  <th class="p-3 text-right text-[#BD9F4F] bg-[#161D27]">Typical Site</th>
+                  <th class="p-3 text-right">Highest Site</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-sans font-medium">1.1 Franchise Fee + 1.2 Set-up Fee</td>
+                  <td class="p-3 text-right">₱823,000</td>
+                  <td class="p-3 text-right font-bold bg-[#F7F5EF]">₱823,000</td>
+                  <td class="p-3 text-right">₱823,000</td>
+                </tr>
+                <tr class="bg-[#F7F5EF]/40 font-bold text-[#1F2733]">
+                  <td class="p-3 font-sans">2.4 Franchise Package (Fixed)</td>
+                  <td class="p-3 text-right">₱823,000</td>
+                  <td class="p-3 text-right bg-[#F7F5EF] text-[#BD9F4F]">₱823,000</td>
+                  <td class="p-3 text-right">₱823,000</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60">
+                  <td class="p-3 font-sans font-medium text-[#5C6066]">Third-Party Build (Site Condition Moves This)</td>
+                  <td class="p-3 text-right">₱176,000</td>
+                  <td class="p-3 text-right bg-[#F7F5EF]">₱325,000</td>
+                  <td class="p-3 text-right text-[#B42318]">₱570,000</td>
+                </tr>
+                <tr class="font-bold border-t-2 border-[#1F2733]">
+                  <td class="p-3 font-sans text-[#1F2733]">2.5 Total Investment (Payback Base)</td>
+                  <td class="p-3 text-right">₱999,000</td>
+                  <td class="p-3 text-right bg-[#F7F5EF] text-[#1F2733]">₱1,148,000</td>
+                  <td class="p-3 text-right">₱1,393,000</td>
+                </tr>
+                <tr class="hover:bg-[#F7F5EF]/60 text-[#5C6066]">
+                  <td class="p-3 font-sans">Deposits, Opening Stock, 3-Mo Working Capital</td>
+                  <td class="p-3 text-right">₱385,650</td>
+                  <td class="p-3 text-right bg-[#F7F5EF]">₱433,650</td>
+                  <td class="p-3 text-right">₱463,650</td>
+                </tr>
+                <tr class="bg-[#1F2733] text-white font-bold text-xs">
+                  <td class="p-3 font-sans text-[#BD9F4F]">2.6 TOTAL CASH BEFORE OPENING</td>
+                  <td class="p-3 text-right">₱1,384,650</td>
+                  <td class="p-3 text-right text-[#BD9F4F] bg-[#161D27]">₱1,581,650</td>
+                  <td class="p-3 text-right">₱1,856,650</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right 4 Cols: The K-Street Extreme Cautionary Case -->
+        <div class="lg:col-span-4 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#B42318] uppercase tracking-wider">THE K-STREET EXTREME TRAP</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">When the Package is Only 25% of the Cash</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              At K-Street Evo City, the headline franchise package is <strong>₱799,000</strong>. But total cash required before opening at a typical mall site was <strong>₱3,156,317</strong>.
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1.5">
+              <strong class="font-heading font-bold">Why Past Franchisees Failed:</strong>
+              <p class="leading-relaxed">
+                "Franchisees budgeted against the ₱799k package, spent everything on fit-out, and ran out of revolving capital in month five. A Readiness Check built only on the package qualifies people who cannot survive."
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-[11px] font-mono">
+            Line 2.6 is what the buyer MUST have in the bank.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="calculator" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE BREAK-EVEN DRILL</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "If you cannot calculate break-even on paper with a pen, you cannot catch a broken formula in Excel."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Test Mode 2 P&L columns and solve break-even by hand.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Solve Break-Even By Hand</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 3: MODE 2 P&L & BREAK-EVEN BY HAND                 -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">STAGE PACE: 50 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Mode 2 P&L // The 5 Columns & Break-Even Formula
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Solved by Formula · Never Typed In
+        </div>
+      </div>
+
+      <!-- Mode 2 & Calculator Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: Mode 2 Table -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Snaxxville Monthly Unit P&L (₱225 Weighted Ticket)
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">Mode 2 Columns</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs border-collapse font-mono">
+              <thead>
+                <tr class="bg-[#1F2733] text-white font-heading uppercase text-[10px]">
+                  <th class="p-2.5">Metric</th>
+                  <th class="p-2.5 text-right text-slate-300">Break-Even</th>
+                  <th class="p-2.5 text-right text-[#BD9F4F]">Conservative</th>
+                  <th class="p-2.5 text-right font-bold text-white bg-[#161D27]">Target</th>
+                  <th class="p-2.5 text-right text-slate-300">Optimistic</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+                <tr>
+                  <td class="p-2.5 font-sans font-medium">Daily Transactions</td>
+                  <td class="p-2.5 text-right font-bold">46.5 / day</td>
+                  <td class="p-2.5 text-right">100 / day</td>
+                  <td class="p-2.5 text-right font-bold bg-[#F7F5EF]">120 / day</td>
+                  <td class="p-2.5 text-right">148 / day</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans font-medium">Monthly Gross Sales</td>
+                  <td class="p-2.5 text-right">₱314,099</td>
+                  <td class="p-2.5 text-right">₱675,000</td>
+                  <td class="p-2.5 text-right font-bold bg-[#F7F5EF]">₱810,000</td>
+                  <td class="p-2.5 text-right">₱999,000</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans text-[#5C6066]">Gross Margin %</td>
+                  <td class="p-2.5 text-right">52%</td>
+                  <td class="p-2.5 text-right">52%</td>
+                  <td class="p-2.5 text-right bg-[#F7F5EF]">52%</td>
+                  <td class="p-2.5 text-right">52%</td>
+                </tr>
+                <tr>
+                  <td class="p-2.5 font-sans font-medium">Monthly EBITDA</td>
+                  <td class="p-2.5 text-right">₱0</td>
+                  <td class="p-2.5 text-right">₱133,533</td>
+                  <td class="p-2.5 text-right font-bold bg-[#F7F5EF]">₱183,483</td>
+                  <td class="p-2.5 text-right">₱253,413</td>
+                </tr>
+                <tr class="font-bold text-[#1F2733] border-t border-[#1F2733]">
+                  <td class="p-2.5 font-sans">Net Income After Tax</td>
+                  <td class="p-2.5 text-right">₱0</td>
+                  <td class="p-2.5 text-right">₱106,827</td>
+                  <td class="p-2.5 text-right bg-[#F7F5EF] text-[#BD9F4F]">₱146,787</td>
+                  <td class="p-2.5 text-right">₱202,731</td>
+                </tr>
+                <tr class="bg-[#F7F5EF] text-[11px] font-bold text-[#1F2733]">
+                  <td class="p-2.5 font-sans">Payback from Signing</td>
+                  <td class="p-2.5 text-right">—</td>
+                  <td class="p-2.5 text-right">16 Months</td>
+                  <td class="p-2.5 text-right text-[#1E7B4F]">13 Months</td>
+                  <td class="p-2.5 text-right">11 Months</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-[11px] text-[#5C6066] leading-relaxed">
+            <strong>The ₱3M Tax Switch Rule:</strong> Below ₱3M annual sales, the unit pays 3% percentage tax. Above ₱3M, it registers for VAT. Mode 2 break-even column triggers this switch by formula.
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Interactive Break-Even by Hand Calculator -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">INTERACTIVE CRUCIBLE</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Compute Break-Even Live</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Fixed Costs = <strong>₱116,217</strong>/mo. Direct costs are 48% and variable expenses are 15%, leaving <strong>37% contribution margin</strong> (₱0.37 per peso of sales).
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-3 font-mono text-xs">
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">Fixed Costs:</span>
+                <span class="text-[#BD9F4F]">₱116,217</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">Contribution Margin:</span>
+                <span class="text-[#BD9F4F]">37.0%</span>
+              </div>
+              <div class="flex justify-between border-b border-slate-700 pb-1.5">
+                <span class="text-slate-400">₱116,217 ÷ 0.37 =</span>
+                <span class="text-white font-bold">₱314,099 / mo</span>
+              </div>
+              <div class="flex justify-between text-[#1E7B4F] font-bold">
+                <span>At ₱225 Ticket (30 Days):</span>
+                <span>46.5 txns / day</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 text-xs text-[#B42318] space-y-1">
+            <strong>The Fixed Fee Trap at Break-Even:</strong>
+            <p class="leading-relaxed text-[#1A1A1A]">
+              Snaxxville's fixed ₱30,000 monthly system fee is <strong>3.7% of sales at Target</strong>, but balloons to <strong>9.6% of sales at break-even</strong>!
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">HONEST PAYBACK PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Steady-state payback says 7.8 months. Why is quoting 7.8 months to a franchise buyer a lie?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Learn why Ramp-Up Payback from Signing is the only honest metric.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Inspect Ramp-Up & Payback</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 4: RAMP-UP & PAYBACK FROM SIGNING                  -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">STAGE PACE: 25 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Ramp-Up // Payback From Signing vs Steady-State
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#1E7B4F]"></span>
+          Skill Anchor: Radical Candor & Follow the Good
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Comparison Card 6 Cols -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="git-commit" class="w-4 h-4 text-[#BD9F4F]"></i>
+              Two Numbers, One Truth
+            </span>
+
+            <div class="grid grid-cols-2 gap-3 text-center">
+              <div class="p-4 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 space-y-1">
+                <span class="text-[10px] font-mono uppercase text-[#B42318] font-bold">Steady-State Payback</span>
+                <div class="text-2xl font-extrabold text-[#B42318] font-mono">7.8 Mos</div>
+                <p class="text-[11px] text-[#5C6066]">Calculated only after unit hits 120 txns/day.</p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30 space-y-1">
+                <span class="text-[10px] font-mono uppercase text-[#1E7B4F] font-bold">Payback From Signing</span>
+                <div class="text-2xl font-extrabold text-[#1E7B4F] font-mono">13 Mos</div>
+                <p class="text-[11px] text-[#5C6066]">Pre-opening fit-out + ramp climb included.</p>
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs leading-relaxed">
+              <span class="font-heading font-bold text-[#BD9F4F]">Why 13 Months is the Only Honest Metric:</span>
+              <p class="text-slate-200">
+                A franchisee's life savings leave their bank account on the day the Franchise Agreement is signed—not on the day the counter rings its 120th transaction. Selling 7.8 months creates disillusionment and panic during pre-opening.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-xs text-[#1A1A1A] font-medium flex justify-between items-center">
+            <span>Ramp Climb Defaults:</span>
+            <span class="font-mono text-[#1F2733]">F&B: ~6 Mos | Services (Therapy/SPED): ~18 Mos</span>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: The Deepest Cumulative Loss Crucible -->
+        <div class="lg:col-span-6 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+                The Valley of Death // Deepest Loss
+              </span>
+              <span class="text-[10px] font-mono text-[#B42318] font-bold">CRITICAL DEFENSE</span>
+            </div>
+
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">
+              Who Absorbs the Pre-Break-Even Bleed?
+            </h3>
+
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              A new unit loses cash in Month 1 and Month 2 during crew training and soft opening. The cumulative red ink before the first profitable month is the <strong>Deepest Cumulative Loss</strong>.
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2 text-xs text-[#1A1A1A]">
+              <div class="font-bold font-mono text-[#1F2733]">Mode 1 Line 2.6 Working Capital Requirement:</div>
+              <p class="text-[#5C6066] leading-relaxed">
+                If the Deepest Cumulative Loss is ₱150,000, and your Mode 1 revolving fund only budgeted ₱80,000, the franchisee runs out of payroll cash in week seven.
+              </p>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#1F2733] text-white text-xs space-y-1">
+            <span class="font-mono text-[#BD9F4F] font-bold uppercase text-[10px]">Architect Gate:</span>
+            <p class="text-slate-200">
+              The revolving fund in Mode 1 must 100% cover the deepest cumulative loss with a safety buffer.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="gift" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OFFER SCENARIOS PROBE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "The owner wants to offer discounts to close founding buyers. Why does NF forbid cutting package price?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Discover how to cost perks in Offer Scenarios without discounting.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Cost Founding Perks</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 5: OFFER SCENARIOS & PERK COSTING                  -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">STAGE PACE: 25 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Offer Scenarios // Costing Perks & Value Stacking
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Never Cut the Package Price
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: Perk Engineering Table -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Snaxxville Founding Perks Deconstruction
+            </span>
+            <span class="text-[10px] font-mono text-[#BD9F4F] font-bold">Offer Scenarios Tab</span>
+          </div>
+
+          <div class="space-y-3 text-xs">
+            
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>Perk A: 50% Reduced System Fee (First 6 Mos)</span>
+                <span class="text-[#1E7B4F] font-mono">Value: ₱90,000</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] text-[#5C6066]">
+                <div>Cost to Franchisor: <strong>₱90,000</strong></div>
+                <div>Effect on Payback: <strong>Preserves 13 Mos Target</strong></div>
+              </div>
+              <p class="text-[11px] text-[#1A1A1A] italic">Protects the franchisee's cash during the fragile 6-month ramp-up.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2">
+              <div class="flex justify-between items-center font-bold text-[#1F2733]">
+                <span>Perk B: Waived Renewal Fee (K-Street Option)</span>
+                <span class="text-[#BD9F4F] font-mono">Value: ₱118,750</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-[11px] text-[#5C6066]">
+                <div>Cost to Franchisor: <strong>₱0 Today</strong></div>
+                <div>Effect on Payback: <strong>0.0 Months</strong></div>
+              </div>
+              <p class="text-[11px] text-[#1A1A1A] italic">Arrives at Month 61. Real value to buyer, but does nothing for early survival.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: The Perk Rule -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">OFFER GOVERNANCE</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">The Two Questions for Every Perk</h3>
+            
+            <div class="space-y-2.5 text-xs text-[#1A1A1A]">
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <strong>1. Value vs. Payback Distinction:</strong>
+                <p class="text-[#5C6066] leading-relaxed">
+                  A perk can have massive perceived value without moving payback by a single day. The prospect must hear both answers honestly.
+                </p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1">
+                <strong>2. Answer a Named Pain:</strong>
+                <p class="text-[#5C6066] leading-relaxed">
+                  Every bonus must answer a specific sequence in Blueprint 3.4 Pain DNA. Bonuses that don't solve named pains erode franchisor margin without building loyalty.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white text-xs">
+            The package price is sacred. Perks vary; the package stays fixed.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE RED-FLAG DIAGNOSTIC ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "K-Street Evo City v2: Payback is 53 months at Conservative, and the mall lease expires in 36 months."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Conduct the live red-flag audit and write the owner clarification memo.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Enter Red-Flag Clinic</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- STAGE 6: THE RED-FLAG CLINIC & CLARIFICATION MEMO        -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">DIAGNOSTIC CLINIC · 35 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Red-Flag Clinic // K-Street Evo City Autopsy
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#B42318] bg-[#FDF2F0] border border-[#B42318]/30 px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          High-Stakes Radical Candor Round
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 7 Cols: The 5 Red Flags -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">
+              Diagnostic Audit: Rate Every Metric Green, Amber, Red
+            </span>
+            <span class="text-[10px] font-mono text-[#B42318] font-bold">LIVE AUTOPSY</span>
+          </div>
+
+          <div class="space-y-2.5 text-xs">
+            
+            <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 flex items-start justify-between gap-3">
+              <div>
+                <span class="font-bold text-[#B42318] font-mono uppercase text-[10px]">RED FLAG 01 // Payback Exceeds Mall Lease</span>
+                <p class="text-[#1A1A1A] mt-0.5 leading-relaxed">
+                  At Conservative level, payback base is <strong>53 months</strong>. But the Ayala Malls Evo City lease terminates in <strong>April 2029 (36 months)</strong>! The franchisee loses money before recouping.
+                </p>
+              </div>
+              <span class="px-2 py-0.5 bg-[#B42318] text-white font-mono font-bold text-[10px] rounded shrink-0">FATAL</span>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30 flex items-start justify-between gap-3">
+              <div>
+                <span class="font-bold text-[#B42318] font-mono uppercase text-[10px]">RED FLAG 02 // Mall Sales Quota Missed</span>
+                <p class="text-[#1A1A1A] mt-0.5 leading-relaxed">
+                  Conservative volume yields sales below the mall's <strong>₱510,400 monthly quota</strong>, triggering lease penalty clauses.
+                </p>
+              </div>
+              <span class="px-2 py-0.5 bg-[#B42318] text-white font-mono font-bold text-[10px] rounded shrink-0">FATAL</span>
+            </div>
+
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#BD9F4F]/40 flex items-start justify-between gap-3">
+              <div>
+                <span class="font-bold text-[#BD9F4F] font-mono uppercase text-[10px]">AMBER FLAG 03 // Gross Margin Drift</span>
+                <p class="text-[#1A1A1A] mt-0.5 leading-relaxed">
+                  Snaxxville sits at 52% gross margin against a 55% target; specialty shakes are not costed. Recipe cells had two manual overrides (burger was ₱22.67, not ₱19.62).
+                </p>
+              </div>
+              <span class="px-2 py-0.5 bg-[#BD9F4F] text-white font-mono font-bold text-[10px] rounded shrink-0">AMBER</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: Clarification Memo Action -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-4">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">THE OWNER CLARIFICATION MEMO</span>
+            <h3 class="text-base font-bold text-[#1A1A1A] font-heading">Say It Before the Contract Signs</h3>
+            
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Never solve a red payback by artificially raising the sales levels! If there is no ground evidence, the fix lies in site format, rent caps, or an honest NO.
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2 text-xs">
+              <span class="text-[10px] font-mono text-[#BD9F4F] font-bold uppercase">Trainee Output Mandate:</span>
+              <p class="text-slate-200 leading-relaxed font-medium">
+                Write a 3-line Viber message and a 1-question clarification bullet for each red flag. Have the lead consultant approve before sending to the client.
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button onclick="goToTopic(0)" class="w-full py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition flex items-center justify-center gap-2 shadow-sm">
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+              <span>Restart Financial Engine View</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Module:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Diagnosis</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Diagnosis & 4 Steps",
+      "2. Mode 1 CapEx",
+      "3. Mode 2 & Break-Even",
+      "4. Ramp-Up Payback",
+      "5. Offer Scenarios",
+      "6. Red-Flag Clinic"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>

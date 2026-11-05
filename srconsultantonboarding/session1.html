@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Franchise · Sr Consultant Training Platform</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Montserrat (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', 'sans-serif'],
+            heading: ['"Montserrat"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            nf: {
+              gold: '#BD9F4F',
+              goldLight: '#F3E8C9',
+              dark: '#1F2733',
+              darkSurface: '#161D27',
+              bg: '#F7F5EF',
+              surface: '#FFFFFF',
+              text: '#1A1A1A',
+              muted: '#5C6066',
+              border: '#E8E4D8',
+              warning: '#B42318',
+              warningBg: '#FDF2F0',
+              success: '#1E7B4F',
+              successBg: '#EFF8F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      background-color: #F7F5EF;
+      color: #1A1A1A;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .topic-view {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .topic-view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#BD9F4F] selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- BRAND HEADER BAND (#1F2733 Dark Background for Logo)    -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-40 bg-[#1F2733] border-b border-[#2C3747] shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      
+      <!-- Brand Wordmark Logo -->
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="flex items-center">
+          <img 
+            src="https://nextfranchise.github.io/nextfranchise/assets/NF%20WHITE%20NO%20BG.png" 
+            alt="Next Franchise — Your Partner in Franchise Growth" 
+            class="h-8 sm:h-9 object-contain w-auto"
+          />
+        </a>
+        <div class="hidden md:block border-l border-[#344255] pl-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold font-heading text-white tracking-wider uppercase">Sr Consultant Architecture</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-[#BD9F4F]/20 text-[#BD9F4F] font-mono font-semibold border border-[#BD9F4F]/40">Module 01</span>
+          </div>
+          <p class="text-[11px] text-slate-300">Building Problem Solvers Through Meta Skills</p>
+        </div>
+      </div>
+
+      <!-- Navigation Stepper -->
+      <nav class="hidden lg:flex items-center gap-1 bg-[#161D27] p-1 rounded-xl border border-[#2B3747] text-xs">
+        <button onclick="goToTopic(0)" id="step-btn-0" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">1</span>
+          <span>Foundation</span>
+        </button>
+        <button onclick="goToTopic(1)" id="step-btn-1" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">2</span>
+          <span>The Crucible</span>
+        </button>
+        <button onclick="goToTopic(2)" id="step-btn-2" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">3</span>
+          <span>The Mirror Test</span>
+        </button>
+        <button onclick="goToTopic(3)" id="step-btn-3" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">4</span>
+          <span>The 13 Habits</span>
+        </button>
+        <button onclick="goToTopic(4)" id="step-btn-4" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">5</span>
+          <span>The 8-Loop Engine</span>
+        </button>
+        <button onclick="goToTopic(5)" id="step-btn-5" class="step-btn px-3 py-1.5 rounded-lg font-heading font-medium transition text-slate-300 hover:text-white flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full bg-[#1F2733] text-[10px] flex items-center justify-center font-mono">6</span>
+          <span>The Gate</span>
+        </button>
+      </nav>
+
+      <!-- Responsive Mobile Indicator -->
+      <div class="lg:hidden text-xs font-mono font-bold text-white bg-[#161D27] px-3 py-1 rounded-lg border border-[#2B3747]">
+        Stage <span id="mobile-step-display" class="text-[#BD9F4F]">1</span> of 6
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- MASTER WORKSPACE                                         -->
+  <!-- ======================================================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 1: THE FOUNDATION & GROUND RULES          -->
+    <!-- ======================================================== -->
+    <div id="topic-view-0" class="topic-view active space-y-6">
+      
+      <!-- Stage Header -->
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 01</span>
+            <span class="text-[#5C6066]">STAGE PACE: 10 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Multiplier Stakes & Ground Rules
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Stakes: Franchisee Life Savings
+        </div>
+      </div>
+
+      <!-- Main Stage Split -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left 5 Cols: The Core Stake -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-5">
+          <div class="space-y-4">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-[#BD9F4F]/10 text-[#BD9F4F] font-mono text-xs font-bold uppercase tracking-wider">
+              <i data-lucide="alert-octagon" class="w-4 h-4"></i>
+              Systemic Risk
+            </div>
+            
+            <h3 class="text-xl font-extrabold text-[#1A1A1A] font-heading leading-snug">
+              Why an Error in Franchising is Catastrophic
+            </h3>
+
+            <p class="text-sm text-[#1A1A1A] leading-relaxed">
+              In normal consulting, an error harms a single corporate entity. 
+            </p>
+
+            <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-2">
+              <span class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">The Franchise Multiplier</span>
+              <p class="text-xs text-slate-200 leading-relaxed font-medium">
+                In franchising, an untested assumption or flawed unit model is cloned across 10, 20, or 50 branches. Real families—OFWs, retirees, and life savings—bear the ultimate cost.
+              </p>
+            </div>
+          </div>
+
+          <!-- PROBE 1: The Stuck Problem Live Board -->
+          <div class="p-4 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="help-circle" class="w-3.5 h-3.5 text-[#BD9F4F]"></i>
+                Live Probe // The 3-Sentence Crucible
+              </span>
+              <span class="text-[10px] font-mono text-[#5C6066]">WHITEBOARD READY</span>
+            </div>
+            <p class="text-xs text-[#1A1A1A] font-medium leading-relaxed">
+              "What is the single client problem you are stuck on right now? State it in 2 to 3 sentences in the customer's exact words—without proposing a solution yet."
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 7 Cols: The 6 Non-Negotiables -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-3">
+            <h3 class="text-xs font-heading font-bold tracking-wider text-[#1F2733] uppercase">
+              The 6 Non-Negotiable Standards of Thought
+            </h3>
+            <span class="text-[11px] text-[#5C6066] font-mono">Operating Foundation</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">01</span> Customer First
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">Start in the customer's and franchisee's life, never in the client's growth slide deck.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">02</span> Their Words, Not Ours
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">Preserve customer and owner verbatim quotes. Taglish, emotional tone, and raw friction intact.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">03</span> No Invented Facts
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">Any claim not directly seen, heard, or source-verified is marked <span class="font-semibold text-[#1A1A1A]">Inferred</span> until proven.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">04</span> Say What's Weak
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">Critique of the work is never critique of the person. Uncomfortable truths protect capital.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">05</span> Action-Proof Ending
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">No open-ended meetings. Every session closes with: <strong class="text-[#1A1A1A]">One proof, one named owner, one date</strong>.</p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] space-y-1 hover:border-[#BD9F4F] transition">
+              <div class="font-bold text-[#1F2733] font-heading flex items-center gap-1.5">
+                <span class="text-[#BD9F4F] font-mono font-bold">06</span> Strict Confidentiality
+              </div>
+              <p class="text-[#5C6066] leading-relaxed">Client unit economics and store data never leave this room under any condition.</p>
+            </div>
+          </div>
+
+          <div class="pt-2 text-[11px] text-[#5C6066] italic flex items-center gap-2">
+            <i data-lucide="check-check" class="w-4 h-4 text-[#1E7B4F]"></i>
+            Trainees adhere to these 6 principles across all Blueprint deliverables and client reviews.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 2) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="help-circle" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">STRATEGIC INQUIRY FOR THE ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "Why do famous franchise developers with 20+ years of experience still fail to prevent branch closures?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Let's deconstruct the origin case that gave birth to Next Franchise.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(1)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Deconstruct the Case</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 2: THE FOUNDER'S CRUCIBLE                 -->
+    <!-- ======================================================== -->
+    <div id="topic-view-1" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 02</span>
+            <span class="text-[#5C6066]">STAGE PACE: 20 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            Autopsy of a 6-Branch Collapse
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Appendix E3 Case Analysis
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Story Timeline Cards -->
+        <div class="lg:col-span-7 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm space-y-5 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="activity" class="w-4 h-4 text-[#BD9F4F]"></i>
+              The 5-Year Trajectory
+            </span>
+
+            <div class="space-y-3.5">
+              <div class="flex gap-4 items-start p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <div class="w-7 h-7 rounded-full bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">1</div>
+                <div>
+                  <h4 class="text-sm font-bold text-[#1A1A1A] font-heading">Rapid Pandemic Scaling (2020–2023)</h4>
+                  <p class="text-xs text-[#5C6066] leading-relaxed mt-0.5">
+                    An F&B brand scaled from local pandemic delivery to <strong>nine branches in three years</strong> powered by customer passion and operational momentum.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4 items-start p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/20">
+                <div class="w-7 h-7 rounded-full bg-[#B42318] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">2</div>
+                <div>
+                  <h4 class="text-sm font-bold text-[#B42318] font-heading">The Network Contraction (2023–2025)</h4>
+                  <p class="text-xs text-[#5C6066] leading-relaxed mt-0.5">
+                    Within 24 months, <strong>six of those nine branches shuttered</strong>. Franchisees lost life savings and retirement capital.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-4 items-start p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+                <div class="w-7 h-7 rounded-full bg-[#BD9F4F] text-white flex items-center justify-center font-mono font-bold text-xs shrink-0 mt-0.5">3</div>
+                <div>
+                  <h4 class="text-sm font-bold text-[#1F2733] font-heading">The Traditional Developer's Failure</h4>
+                  <p class="text-xs text-[#5C6066] leading-relaxed mt-0.5">
+                    A major franchise developer was hired to stop the bleeding. They produced binders, updated menus, and issued compliance audits. <em>The intervention never diagnosed the root cause.</em>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROBE 2: Post-Mortem Inquiry -->
+          <div class="p-4 rounded-xl bg-[#1F2733] text-white space-y-1.5">
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider flex items-center gap-1.5">
+              <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+              Post-Mortem Probe
+            </div>
+            <p class="text-xs text-slate-200 leading-relaxed font-medium">
+              "If the developer fixed manuals, recipes, and brand aesthetics... why did 6 branches still fail?"
+            </p>
+          </div>
+        </div>
+
+        <!-- Right 5 Cols: The Advisor Code -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-6 shadow-sm flex flex-col justify-between space-y-4">
+          <div class="space-y-3">
+            <span class="text-xs font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">ROOM AUDIT // THE ADVISOR CODE</span>
+            <h3 class="text-lg font-bold text-[#1A1A1A] font-heading">What Separates Advisors Who Save Businesses?</h3>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Think of the single best advisor or mentor you have ever observed. When crisis struck, what did they do that mediocre consultants never do?
+            </p>
+            
+            <div class="space-y-2 pt-2 text-xs text-[#1A1A1A]">
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#1E7B4F] shrink-0"></i>
+                <span>They visited the branch floor before touching slides</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#1E7B4F] shrink-0"></i>
+                <span>They spoke the uncomfortable economic truth out loud</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-2">
+                <i data-lucide="check-circle" class="w-4 h-4 text-[#1E7B4F] shrink-0"></i>
+                <span>They cut 20 distractions to attack the one fatal link</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-[#F7F5EF] border-l-4 border-[#BD9F4F] space-y-1">
+            <span class="text-xs font-heading font-bold text-[#1F2733]">The Core Realization</span>
+            <p class="text-xs text-[#5C6066] leading-relaxed">
+              Those behaviors are not mystical instincts. They are trainable habits of thought: <strong>The 13 Meta Skills</strong>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 3) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="git-pull-request" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CRITICAL INQUIRY FOR THE ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "If your last consulting deliverable was put on trial, which column did it actually sit in?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Let's run The Mirror Test across the 6 decisive engagement moments.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(2)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Run The Mirror Test</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 3: THE MIRROR TEST                        -->
+    <!-- ======================================================== -->
+    <div id="topic-view-2" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 03</span>
+            <span class="text-[#5C6066]">STAGE PACE: 25 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Mirror Test // Two Consulting Paradigms
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Live Self-Audit
+        </div>
+      </div>
+
+      <!-- The Comparison Table -->
+      <div class="overflow-hidden rounded-2xl border border-[#E8E4D8] bg-white shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-[#1F2733] border-b border-[#E8E4D8] text-white font-heading uppercase text-[11px] tracking-wider">
+                <th class="p-4 w-1/5">Decisive Moment</th>
+                <th class="p-4 w-2/5 text-slate-300">The Traditional Consultant</th>
+                <th class="p-4 w-2/5 text-[#BD9F4F] bg-[#161D27] font-bold">The NF Franchise Architect</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#E8E4D8] text-[#1A1A1A]">
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">01. Starting Point</td>
+                <td class="p-4 text-[#5C6066]">Takes the owner's pitch deck, menu, and growth ego targets ("open 50 branches in 3 years") as the assignment.</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Starts from the daily lives and fears of the end diner and future franchisee in their exact words.</td>
+              </tr>
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">02. The Numbers</td>
+                <td class="p-4 text-[#5C6066]">Transcribes sales targets, ROI claims, and payback numbers into glossy slides unchecked.</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Audits every figure: Heard, Inferred, Client-said, Confirmed. Builds strictly on Confirmed register data.</td>
+              </tr>
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">03. Branch Failures</td>
+                <td class="p-4 text-[#5C6066]">Treats branch complaints in isolation; prescribes local ad campaigns or ad-hoc menu changes.</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Draws the causal chain until it loops back, and destroys the root link keeping the failure cycle alive.</td>
+              </tr>
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">04. Strategic Advice</td>
+                <td class="p-4 text-[#5C6066]">Presents a laundry list of 20 unranked recommendations where everything is labeled critical.</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Power Law: Isolates one or two decisive priorities and forces an explicit "not yet" list signed by the owner.</td>
+              </tr>
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">05. Harsh Reality</td>
+                <td class="p-4 text-[#5C6066]">Softens data to keep the owner comfortable and safeguard monthly consulting retainers.</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Radical Candor: 3 moves (State the weak point, say why it hurts, offer a viable next step).</td>
+              </tr>
+              <tr class="hover:bg-[#F7F5EF]/60 transition">
+                <td class="p-4 font-heading font-bold text-[#1F2733]">06. Meeting Exit</td>
+                <td class="p-4 text-[#5C6066]">Hands over a 60-page PDF report. Writes: "Next steps: TBD."</td>
+                <td class="p-4 text-[#1A1A1A] bg-[#F7F5EF]/40 font-medium border-l-2 border-[#BD9F4F]">Relentless Execution: leaves One Next Proof, One Named Owner, One Hard Date.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 4) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">STRATEGIC INQUIRY FOR THE ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "If the left column produces comfortable reports, what cognitive engine produces branch survival?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Explore the 13 Meta Skills that govern the right column.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(3)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Inspect The 13 Skills</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 4: THE 13 META SKILLS ARCHITECTURE        -->
+    <!-- ======================================================== -->
+    <div id="topic-view-3" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 04</span>
+            <span class="text-[#5C6066]">STAGE PACE: 55 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The 13 Meta Skills Architecture
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm flex items-center gap-2 font-semibold">
+          <span class="w-2 h-2 rounded-full bg-[#BD9F4F]"></span>
+          Target: Level 4 on 5 of 7 Sr Focus Skills
+        </div>
+      </div>
+
+      <!-- 6 Strategic Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+
+        <!-- Pillar 1 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#E8E4D8] flex justify-between items-center">
+              <span>01. Direction</span>
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+            </div>
+            <div onclick="showSkillModal('Customer Obsession')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">Customer Obsession</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Their real life comes before owner's deck.</p>
+            </div>
+            <div onclick="showSkillModal('First Principles')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">First Principles</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Strip defaults. Rebuild from register data.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-[#5C6066]">Governs Parts 1 & 3</span>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#E8E4D8] flex justify-between items-center">
+              <span>02. Focus</span>
+              <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+            </div>
+            <div onclick="showSkillModal('Power Law')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Power Law</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Find the 20% driver; table the "not yet".</p>
+            </div>
+            <div onclick="showSkillModal('Systems Thinking')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Systems Thinking</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Map causal loops until they connect.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">Sr Focus Core</span>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="bg-white border border-[#E8E4D8] rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#E8E4D8] flex justify-between items-center">
+              <span>03. Evidence</span>
+              <i data-lucide="footprints" class="w-3.5 h-3.5"></i>
+            </div>
+            <div onclick="showSkillModal('Ground Commando')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">Ground Commando</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Store visits, crew talk, verbatim field notes.</p>
+            </div>
+            <div onclick="showSkillModal('Relentless Execution')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">Relentless Exec</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">1 proof, 1 owner, 1 date every time.</p>
+            </div>
+            <div onclick="showSkillModal('Learning Acuity')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Learning Acuity</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Pivots without ego. Learning dividends.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-[#5C6066]">Field Grounding</span>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#E8E4D8] flex justify-between items-center">
+              <span>04. Honesty</span>
+              <i data-lucide="scale" class="w-3.5 h-3.5"></i>
+            </div>
+            <div onclick="showSkillModal('Radical Candor')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Radical Candor</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Say the hard truth plainly because you care.</p>
+            </div>
+            <div onclick="showSkillModal('AI Integration')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">AI Integration</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Speed without surrendering judgment.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">Sr Focus Core</span>
+        </div>
+
+        <!-- Pillar 5 -->
+        <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-sm">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#E8E4D8] flex justify-between items-center">
+              <span>05. Human</span>
+              <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+            </div>
+            <div onclick="showSkillModal('Follow the Good')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Follow the Good</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">"Would I advise this if NF earned ₱0?"</p>
+            </div>
+            <div onclick="showSkillModal('Whole Person')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="font-heading font-bold text-[#1A1A1A] text-xs">Whole Person</div>
+              <p class="text-[11px] text-[#5C6066] mt-1">OFW life savings, fear, pride, family.</p>
+            </div>
+            <div onclick="showSkillModal('Deeply Personal Leadership')" class="p-2.5 rounded-xl bg-[#F7F5EF] hover:bg-white border border-[#E8E4D8] hover:border-[#BD9F4F] cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-[#1A1A1A] text-xs">Deeply Personal</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white px-1.5 py-0.2 rounded font-mono font-bold">L4</span>
+              </div>
+              <p class="text-[11px] text-[#5C6066] mt-1">Authentic conviction; your 100-word why.</p>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">Sr Focus Core</span>
+        </div>
+
+        <!-- Pillar 6 -->
+        <div class="bg-[#1F2733] border-2 border-[#BD9F4F] rounded-2xl p-4 flex flex-col justify-between space-y-3 shadow-md text-white">
+          <div class="space-y-2">
+            <div class="text-[10px] font-mono uppercase text-[#BD9F4F] font-bold pb-1 border-b border-[#2C3747] flex justify-between items-center">
+              <span>NORTH STAR</span>
+              <i data-lucide="zap" class="w-3.5 h-3.5 text-[#BD9F4F]"></i>
+            </div>
+            <div onclick="showSkillModal('Radical Outcomes')" class="p-2.5 rounded-xl bg-[#161D27] border border-[#BD9F4F]/40 cursor-pointer transition">
+              <div class="flex justify-between items-center">
+                <span class="font-heading font-bold text-white text-xs">Radical Outcomes</span>
+                <span class="text-[9px] bg-[#BD9F4F] text-white font-bold px-1.5 py-0.2 rounded font-mono">L4</span>
+              </div>
+              <p class="text-[11px] text-[#BD9F4F] font-semibold mt-1">5X to 10X Change</p>
+              <p class="text-[10px] text-slate-300 mt-1 leading-relaxed">Systemic proof plus deep emotional peace of mind.</p>
+            </div>
+          </div>
+          <span class="text-[9px] text-center font-mono font-bold text-[#BD9F4F] bg-[#161D27] py-1 rounded border border-[#2C3747]">
+            GOVERNS ALL SKILLS
+          </span>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 5) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="refresh-cw" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CANVAS PROBE FOR THE ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "How do 13 cognitive habits become an unyielding operating process?"
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Every client problem is passed through the 8-Step Problem-Solving Loop.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(4)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Operate The 8-Loop</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 5: THE 8-STEP LOOP ENGINE                 -->
+    <!-- ======================================================== -->
+    <div id="topic-view-4" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 05</span>
+            <span class="text-[#5C6066]">STAGE PACE: 20 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The 8-Step Problem-Solving Loop (Template B1)
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          Feeds Blueprint Part 5 Advisory
+        </div>
+      </div>
+
+      <!-- 8-Step Process Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 text-xs">
+        
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 1</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">Customer Voice</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">"I am the franchisee..." Never "the client wants."</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Customer Obsession</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 2</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">Assumptions</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">List at least 8. Tag Heard, Inferred, CS, or Confirmed.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">First Principles</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 3</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">Causal Chain</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">A → B → C. Trace until it loops back on itself.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Systems Thinking</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 4</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">The One Link</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">Attack 1 root link. Move everything else to "not yet".</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Power Law</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 5</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">10X Outcome</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">Write the 2X version, then 10X + named emotional feeling.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Radical Outcomes</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 6</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">Ground Proof</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">Named crew/customers to talk to, which exact branch to visit.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Ground Commando</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 7</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">Next Proof</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">One proof, one named owner, one hard date. Zero TBDs.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Relentless Exec</span>
+        </div>
+
+        <div class="bg-white border border-[#E8E4D8] rounded-xl p-3.5 flex flex-col justify-between space-y-2 shadow-sm hover:border-[#BD9F4F] transition">
+          <div>
+            <span class="text-[10px] font-mono font-bold text-[#BD9F4F]">STEP 8</span>
+            <h4 class="font-heading font-bold text-[#1A1A1A] text-xs mt-1">What's Weak</h4>
+            <p class="text-[10px] text-[#5C6066] mt-1 leading-relaxed">Unflinching self-audit. Any "no" triggers an immediate revision.</p>
+          </div>
+          <span class="text-[9px] font-mono text-[#1F2733] bg-[#F7F5EF] p-1 rounded font-semibold">Radical Candor</span>
+        </div>
+
+      </div>
+
+      <!-- VISUAL DISCUSSION PROBE (Advances to Stage 6) -->
+      <div class="bg-white border-2 border-[#BD9F4F]/40 rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm hover:border-[#BD9F4F] transition">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="shield-check" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">CERTIFICATION PROBE FOR THE ROOM</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              "How is a Sr Consultant certified? Not by tenure. By audited evidence."
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Examine the 4-week roadmap and the 6 mandatory gates.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(5)" class="px-5 py-3 bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <span>Inspect The 6 Gates</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- VIEW CONTAINER 6: THE GATE & ROADMAP                     -->
+    <!-- ======================================================== -->
+    <div id="topic-view-5" class="topic-view space-y-6">
+      
+      <div class="border-b border-[#E8E4D8] pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-mono text-[#BD9F4F] font-bold mb-1">
+            <span class="px-2 py-0.5 rounded bg-[#BD9F4F]/10 border border-[#BD9F4F]/30 uppercase">DISCOVERY 06</span>
+            <span class="text-[#5C6066]">STAGE PACE: 10 MINUTES</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-heading tracking-tight">
+            The Roadmap & Sr Certification Gate
+          </h2>
+        </div>
+        <div class="text-xs font-mono text-[#1F2733] bg-white border border-[#E8E4D8] px-3.5 py-1.5 rounded-xl shadow-sm font-semibold">
+          100% Evidence-Based Evaluation
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- 4-Week Milestone Arc -->
+        <div class="lg:col-span-5 bg-white border border-[#E8E4D8] rounded-2xl p-5 space-y-3 text-xs shadow-sm flex flex-col justify-between">
+          <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">The 1-Month Training Arc</span>
+          
+          <div class="space-y-2">
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+              <span class="font-heading font-bold text-[#1F2733]">Week 1: Meta Skills Foundation</span>
+              <p class="text-[#5C6066] mt-0.5">All 13 habits drilled; Dino Crew case; AI Persona audit; personal why.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+              <span class="font-heading font-bold text-[#1F2733]">Week 2: Financial Goals & Blueprint</span>
+              <p class="text-[#5C6066] mt-0.5">CapEx Mode 1 & Mode 2 P&L; break-even by hand; full Blueprint teardown.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+              <span class="font-heading font-bold text-[#1F2733]">Week 3: Live Integration & Hard Talks</span>
+              <p class="text-[#5C6066] mt-0.5">Running the Loop on live clients; role-playing pushback under pressure.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+              <span class="font-heading font-bold text-[#1F2733]">Week 4: Capstone Defense</span>
+              <p class="text-[#5C6066] mt-0.5">Present Part 5 Advisory to lead acting as owner; rubric scoring; 90-day plan.</p>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#1F2733] text-white">
+            <span class="text-[11px] font-mono text-[#BD9F4F] font-bold uppercase tracking-wider">Months 2 to 4</span>
+            <p class="text-xs text-slate-300 mt-0.5">Real client Blueprint ownership, co-leads, and monthly rubric evaluations.</p>
+          </div>
+        </div>
+
+        <!-- The 6 Strict Certification Gates -->
+        <div class="lg:col-span-7 bg-white border-2 border-[#BD9F4F]/50 rounded-2xl p-5 space-y-3 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between border-b border-[#E8E4D8] pb-2">
+            <span class="text-xs font-heading font-bold text-[#1F2733] uppercase tracking-wider">The 6 Certification Gate Items</span>
+            <span class="text-[11px] text-[#1E7B4F] font-mono font-bold bg-[#EFF8F2] px-2 py-0.5 rounded border border-[#1E7B4F]/30">ALL 6 MANDATORY</span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">1</span>
+              <span class="text-[#1A1A1A]">Level 4 on at least 5 of the 7 Sr focus Meta Skills; Level 3+ on all others.</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">2</span>
+              <span class="text-[#1A1A1A]">At least 3 Problem Cards accepted into Blueprint Part 5 Advisory across 2+ brands.</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">3</span>
+              <span class="text-[#1A1A1A]">Owned Part 5 and Part 6 on one full live client Blueprint through to owner signature.</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">4</span>
+              <span class="text-[#1A1A1A]">Led 1 client Blueprint discussion delivering at least 1 hard truth, observed by lead Sr.</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">5</span>
+              <span class="text-[#1A1A1A]">Coached another consultant through one Blueprint section to a passing check.</span>
+            </div>
+            <div class="p-2.5 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] flex items-center gap-3">
+              <span class="w-5 h-5 rounded-md bg-[#1F2733] text-white flex items-center justify-center font-mono font-bold text-[10px]">6</span>
+              <span class="text-[#1A1A1A]">Session 8 Capstone defense passed with zero open "Revise" rows.</span>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8] text-[11px] text-[#5C6066]">
+            Gate status is audited continuously through Months 2 to 4. Promotion is certified only when all 6 have verified artifacts.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Prompt: First Field Probe -->
+      <div class="bg-white border-2 border-[#1F2733] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="w-10 h-10 rounded-xl bg-[#1F2733] text-[#BD9F4F] flex items-center justify-center shrink-0 mt-0.5">
+            <i data-lucide="edit-3" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-[11px] font-mono font-bold text-[#BD9F4F] uppercase tracking-wider">FIELD CHALLENGE // SESSION 1 CRUCIBLE</div>
+            <div class="text-sm font-heading font-extrabold text-[#1A1A1A]">
+              Rewrite your stuck problem in the first person ("I am the customer/franchisee...")
+            </div>
+            <div class="text-xs text-[#5C6066] mt-0.5">Build the 8-row Assumptions Table (B2) and sketch the Causal Chain (B3) for Session 2.</div>
+          </div>
+        </div>
+        <button onclick="goToTopic(0)" class="px-5 py-3 bg-[#1F2733] hover:bg-[#161D27] text-white font-heading font-bold text-xs rounded-xl transition shrink-0 flex items-center gap-2 shadow-sm">
+          <i data-lucide="rotate-ccw" class="w-4 h-4 text-[#BD9F4F]"></i>
+          <span>Restart Discovery Flow</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- BOTTOM NAVIGATION CONTROLS                               -->
+  <!-- ======================================================== -->
+  <footer class="sticky bottom-0 z-30 bg-white border-t border-[#E8E4D8] py-3.5 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between text-xs">
+      
+      <!-- Prev Button -->
+      <button id="prev-btn" onclick="prevTopic()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F7F5EF] hover:bg-[#E8E4D8] text-[#1F2733] font-heading font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Previous Section</span>
+      </button>
+
+      <!-- Active Stage Indicator -->
+      <div class="flex items-center gap-2">
+        <span class="text-[#5C6066] hidden sm:inline">Active Canvas:</span>
+        <span id="topic-title-display" class="font-bold text-[#1F2733] font-heading">1. Foundation</span>
+        <span class="text-[#E8E4D8]">|</span>
+        <span class="text-[#5C6066] font-mono text-[11px]">Keyboard: [←] [→]</span>
+      </div>
+
+      <!-- Next Button -->
+      <button id="next-btn" onclick="nextTopic()" class="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#BD9F4F] hover:bg-[#a68a40] text-white font-heading font-bold transition disabled:opacity-40 disabled:cursor-not-allowed shadow-sm">
+        <span>Next Section</span>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+      </button>
+
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: SKILL DECONSTRUCTION (BRANDED)                    -->
+  <!-- ======================================================== -->
+  <div id="skill-modal" class="fixed inset-0 z-50 bg-[#1F2733]/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white border border-[#E8E4D8] rounded-2xl max-w-xl w-full p-6 sm:p-7 space-y-4 relative shadow-2xl">
+      <button onclick="closeSkillModal()" class="absolute top-5 right-5 p-1 rounded-lg hover:bg-[#F7F5EF] text-[#5C6066] hover:text-[#1A1A1A]">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="space-y-1">
+        <span id="modal-skill-category" class="text-[10px] font-mono uppercase tracking-wider text-[#BD9F4F] bg-[#BD9F4F]/10 px-2.5 py-0.5 rounded border border-[#BD9F4F]/30 font-bold">Skill Card</span>
+        <h3 id="modal-skill-title" class="text-xl font-bold text-[#1F2733] font-heading">Skill Name</h3>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#E8E4D8]">
+          <div class="text-[10px] font-mono text-[#5C6066] uppercase tracking-wider mb-0.5 font-bold">The Key Question</div>
+          <div id="modal-skill-question" class="font-semibold text-[#1F2733] italic">"The question text..."</div>
+        </div>
+
+        <div class="space-y-1">
+          <div class="text-[10px] font-mono text-[#5C6066] uppercase tracking-wider font-bold">Philippine Franchising Scenario</div>
+          <p id="modal-skill-scenario" class="text-[#1A1A1A] leading-relaxed text-xs">Scenario details...</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-1">
+          <div class="p-3 rounded-xl bg-[#EFF8F2] border border-[#1E7B4F]/30">
+            <span class="text-[10px] font-mono font-bold text-[#1E7B4F] uppercase">When Present</span>
+            <p id="modal-skill-present" class="text-[11px] text-[#1A1A1A] mt-1 leading-snug">...</p>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FDF2F0] border border-[#B42318]/30">
+            <span class="text-[10px] font-mono font-bold text-[#B42318] uppercase">When Missing</span>
+            <p id="modal-skill-missing" class="text-[11px] text-[#1A1A1A] mt-1 leading-snug">...</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-[#F7F5EF] border border-[#BD9F4F]/40">
+          <span class="text-[10px] font-mono font-bold text-[#BD9F4F] uppercase">Action Drill</span>
+          <p id="modal-skill-drill" class="text-xs text-[#1F2733] mt-1 font-mono font-semibold">...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    lucide.createIcons();
+
+    let currentTopicIndex = 0;
+    const totalTopics = 6;
+
+    const topicTitles = [
+      "1. Foundation & Rules",
+      "2. The Crucible",
+      "3. The Mirror Test",
+      "4. The 13 Meta Skills",
+      "5. The 8-Loop Engine",
+      "6. The Gate & Roadmap"
+    ];
+
+    function updateView() {
+      for (let i = 0; i < totalTopics; i++) {
+        const view = document.getElementById(`topic-view-${i}`);
+        const stepBtn = document.getElementById(`step-btn-${i}`);
+        
+        if (i === currentTopicIndex) {
+          view.classList.add('active');
+          if (stepBtn) {
+            stepBtn.classList.add('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.remove('text-slate-300');
+          }
+        } else {
+          view.classList.remove('active');
+          if (stepBtn) {
+            stepBtn.classList.remove('bg-[#BD9F4F]', 'text-white');
+            stepBtn.classList.add('text-slate-300');
+          }
+        }
+      }
+
+      document.getElementById('topic-title-display').innerText = topicTitles[currentTopicIndex];
+      document.getElementById('mobile-step-display').innerText = currentTopicIndex + 1;
+      document.getElementById('prev-btn').disabled = (currentTopicIndex === 0);
+      document.getElementById('next-btn').disabled = (currentTopicIndex === totalTopics - 1);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToTopic(index) {
+      currentTopicIndex = index;
+      updateView();
+    }
+
+    function nextTopic() {
+      if (currentTopicIndex < totalTopics - 1) {
+        currentTopicIndex++;
+        updateView();
+      }
+    }
+
+    function prevTopic() {
+      if (currentTopicIndex > 0) {
+        currentTopicIndex--;
+        updateView();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextTopic();
+      if (e.key === 'ArrowLeft') prevTopic();
+    });
+
+    const skillData = {
+      'Customer Obsession': {
+        category: 'Set Direction · Target 3+',
+        question: 'Whose life changes, and how would they describe it in their own words?',
+        scenario: 'A milk tea brand wants 50 branches. Draft starts: "Gen Z, 18-24". Ground research rewrites it: "I\'m a call center agent going home at 7 a.m. I want something cold and sweet that feels like a reward, and I don\'t want to queue."',
+        present: 'Blueprint opens in customer voice. Exact quotes with Taglish kept. Persona defined by behaviors, not demographics.',
+        missing: '"Target market is middle income aged 18-35". Personas copied from client sales deck.',
+        drill: 'Rewrite the opening of any section as "I am [the customer]...", in first-person.'
+      },
+      'First Principles': {
+        category: 'Set Direction · Target 3+',
+        question: 'Why do we believe this? What have we actually seen? What are we assuming because it\'s convenient?',
+        scenario: 'Bakery owner says every branch must be in a mall. Assumptions audit reveals "mall traffic drives sales" was Client-said, while branch data showed top stores were beside commuter terminals.',
+        present: 'Assumptions table with clear status tags (Heard, Inferred, Client-said, Confirmed). Defaults challenged by name.',
+        missing: '"That\'s how it\'s done in franchising". Copy-pasting previous client\'s structure without audit.',
+        drill: 'List every single assumption, label each with H/I/CS/C, rebuild strictly using Confirmed ones.'
+      },
+      'Radical Outcomes': {
+        category: 'The North Star · Sr Focus Target Level 4',
+        question: 'What would make this 10X better for them, not just faster or cheaper? What would they feel?',
+        scenario: 'Laundry franchise: 2X outcome is "payback in 18 vs 24 months". 10X outcome: returning OFW runs a business her family helps with, eats dinner at home every night, never plans to go back abroad.',
+        present: 'Before and after they notice in their own life. Named emotional state: peace of mind, pride, kampante.',
+        missing: '"Improve, optimize, streamline". Outcomes limited solely to financial margins.',
+        drill: 'Write the outcome twice: 2X operational version first, then 10X emotional life transformation. Keep the second.'
+      },
+      'Systems Thinking': {
+        category: 'Sharpen Focus · Sr Focus Target Level 4',
+        question: 'Why does this keep happening? What does a change here ripple into?',
+        scenario: 'Franchisees report slow sales; owner pushes marketing. Causal loop reveals working capital was under-budgeted → staff hours cut → service slowed → regulars left → sales fell. A marketing promo won\'t fix that; higher working capital requirement in package does.',
+        present: 'Causal chains drawn until they loop back. Check ripple of fee changes on the weakest break-even unit.',
+        missing: 'Lists of disconnected symptoms. Fixing branch complaints one fire at a time.',
+        drill: 'Draw the chain A → B → C → D until it loops back. Attack the one link that breaks the cycle.'
+      },
+      'Power Law': {
+        category: 'Sharpen Focus · Sr Focus Target Level 4',
+        question: 'If we could do only one thing, which would move the most? What can we stop doing?',
+        scenario: 'Food cart client presents 14 operational issues. Ranking reveals late commissary deliveries caused 80% of stock-outs, which caused 80% of complaints. Sr puts 13 items on "not yet" and fixes delivery.',
+        present: 'One or two ruthless priorities. An explicit "not yet" list approved in writing by the owner.',
+        missing: 'Ten equal priorities on a slide. Trying to build a franchise package that appeals to every buyer.',
+        drill: 'Rank the whole list by impact, then cut everything below the top two into a visible "not yet" list.'
+      },
+      'Radical Candor': {
+        category: 'Keep It Honest · Sr Focus Target Level 4',
+        question: 'What am I not saying because it is uncomfortable?',
+        scenario: 'Owner deck claims 12-month payback at Target. Trainee states: "At Conservative, payback is 30 months. If we sell 12 and they live 30, the brand pays for it. We must show both in 3.10."',
+        present: '"What\'s weak here" section in every review. Disagreements delivered with evidence and a workable next step.',
+        missing: 'Softening numbers to keep client happy in the room, then complaining about the brand afterward.',
+        drill: 'Add a mandatory "What\'s weak here" paragraph to every review deliverable, written unflinchingly.'
+      },
+      'AI Integration': {
+        category: 'Integrity & Tech · Target 3+',
+        question: 'What did AI draft, and what did a human actually verify or hear on the ground?',
+        scenario: 'AI drafts market section stating province "has booming demand for coffee". Sr marks it Inferred, pulls PSA census data, and replaces vague statements with interviews from two local cafe owners.',
+        present: 'AI used for rapid synthesis and drafting; all unverified lines tagged Inferred until ground-confirmed.',
+        missing: 'AI-generated personas presented as market research. Hallucinated numbers in Blueprint body.',
+        drill: 'Mark every AI sentence Inferred until an actual human verifies it at the source.'
+      },
+      'Ground Commando': {
+        category: 'Turn Into Evidence · Target 3+',
+        question: 'Have I seen or heard this myself? When did I last talk to the actual customer or crew?',
+        scenario: 'Owner states store setup takes 2 weeks. Trainee spends morning with operations team, discovers permits delay setup to 6–8 weeks. Package timeline is corrected before any buyer signs.',
+        present: 'Branch audits, crew shadowing, verbatim quotes tagged with name, location, and date (Template B9).',
+        missing: 'Working solely from the owner\'s pitch deck or secondhand management summaries.',
+        drill: 'Talk to two people who live the problem on the ground before finalizing any recommendation.'
+      },
+      'Whole Person': {
+        category: 'Keep It Human · Target 3+',
+        question: 'What else is going on in this person\'s life that shapes this decision?',
+        scenario: 'Franchise prospect stalls contract. Consultant learns his wife wants the money reserved for their daughter\'s tuition. Team recommends a smaller kiosk format instead of pushing him into debt.',
+        present: 'Family savings, fear, fatigue, and pride accounted for in personas. Respectful pacing.',
+        missing: 'Prospects treated as "pipeline leads"; crew members treated as "headcount".',
+        drill: 'Complete Template B7 "In My Life" line: what keeps them busy, biggest worry, and what they need most.'
+      },
+      'Follow the Good': {
+        category: 'Keep It Human · Sr Focus Target Level 4',
+        question: 'Is this good for the customer, franchisee, and community, or only good for our consulting fee?',
+        scenario: 'Owner demands a "Founders\' Batch: Only 5 slots left" countdown when slots are unlimited. Consultant builds an honest scarcity: only the first 5 receive the founder on-site during opening week.',
+        present: 'Readiness check that deliberately rejects unfit capital. Scarcity that is factually true.',
+        missing: 'Selling packages the client is unready to support. False countdown timers and fake urgency.',
+        drill: 'Ask before every advisory: "Would I recommend this if Next Franchise earned ₱0 from it?"'
+      },
+      'Deeply Personal Leadership': {
+        category: 'Keep It Human · Sr Focus Target Level 4',
+        question: 'Why do I care about this problem? What in my own life makes it mine?',
+        scenario: 'In capstone, trainee shares how her parents\' sari-sari store was crushed by a convenience chain, inspiring her commitment to help small brands build bulletproof systems.',
+        present: 'Consultant leads from real values, without jargon. Founder story in 2.1 has genuine cost and turnaround.',
+        missing: 'Generic corporate mission statements. Using the word "passionate" without backing it up.',
+        drill: 'Write why helping franchisees matters to you personally in exactly 100 words, without the word "passionate".'
+      },
+      'Learning Acuity': {
+        category: 'Turn Into Evidence · Sr Focus Target Level 4',
+        question: 'What did reality teach us, and what will we now do differently?',
+        scenario: 'Two successive Blueprints overestimated demand using owner projections. Consultant logs a Learning Dividend; team institutes mandatory PSA census cross-checks for all territory rules.',
+        present: 'Version history logs detailing exact changes and reasons. Learning Dividends filed after milestones.',
+        missing: 'Defending an outdated position after ground data proved it false. Repeating mistakes across clients.',
+        drill: 'Complete Template B6 after every milestone: What we learned, what it cost, what we will do differently.'
+      },
+      'Relentless Execution': {
+        category: 'Turn Into Evidence · Target 3+',
+        question: 'What is the next proof, by when, and who owns it?',
+        scenario: 'After restructuring fees, trainee closes the client meeting: "Next proof: 3 prospect calls with new fee structure. Owner: Sales Lead Mark. Date: This Friday at 5 PM." Follows up on Friday.',
+        present: 'Dated next actions in every note. Follow-through on unglamorous tasks. Zero unassigned items in Appendix B.',
+        missing: 'Meeting summaries ending in "Next steps: TBD" or "Team will coordinate".',
+        drill: 'End every single working session with: One Next Proof, One Named Owner, One Hard Date.'
+      }
+    };
+
+    function showSkillModal(name) {
+      const data = skillData[name];
+      if (!data) return;
+      document.getElementById('modal-skill-title').innerText = name;
+      document.getElementById('modal-skill-category').innerText = data.category;
+      document.getElementById('modal-skill-question').innerText = `"${data.question}"`;
+      document.getElementById('modal-skill-scenario').innerText = data.scenario;
+      document.getElementById('modal-skill-present').innerText = data.present;
+      document.getElementById('modal-skill-missing').innerText = data.missing;
+      document.getElementById('modal-skill-drill').innerText = data.drill;
+      document.getElementById('skill-modal').classList.remove('hidden');
+    }
+
+    function closeSkillModal() {
+      document.getElementById('skill-modal').classList.add('hidden');
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSkillModal();
+    });
+
+    updateView();
+  </script>
+  <script src="nav.js"></script>
+</body>
+</html>
