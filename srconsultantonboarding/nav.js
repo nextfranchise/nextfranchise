@@ -63,6 +63,12 @@
     '.nf-reset{background:none;border:0;color:#64748B;font:inherit;font-size:13px;line-height:1;cursor:pointer;padding:0}' +
     '.nf-reset:hover{color:#fff}' +
     '@media(max-width:640px){.nf-bar{display:none}}' +
+    '.nf-bridge{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;background:#1F2733;color:#fff;border-radius:16px;padding:16px 20px;border:1px solid #BD9F4F;margin-top:24px}' +
+    '.nf-bridge small{display:block;font:700 10px "JetBrains Mono",monospace;color:#BD9F4F;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}' +
+    '.nf-bridge strong{display:block;font:800 15px "Montserrat",sans-serif}' +
+    '.nf-bridge p{margin:4px 0 0;font-size:12px;color:#CBD5E1;line-height:1.5;max-width:46rem}' +
+    '.nf-bridge>a{background:#BD9F4F;color:#fff;font:700 12px "Montserrat",sans-serif;padding:10px 18px;border-radius:12px;text-decoration:none;white-space:nowrap}' +
+    '.nf-bridge>a:hover{background:#a68a40}' +
     '.nf-xref{color:#8A6F22;font-weight:600;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:2px}' +
     '.nf-xref:hover{color:#BD9F4F;text-decoration-style:solid}' +
     '.nf-badge{display:flex;align-items:center;gap:6px;font:700 10px "JetBrains Mono",monospace;margin-bottom:-4px}' +
@@ -151,7 +157,7 @@
         var el = node.parentElement;
         while (el && el !== root) {
           var tag = el.tagName;
-          if (tag === 'A' || tag === 'BUTTON' || tag === 'SCRIPT' || tag === 'STYLE' || el.hasAttribute('onclick')) return NodeFilter.FILTER_REJECT;
+          if (tag === 'A' || tag === 'BUTTON' || tag === 'SCRIPT' || tag === 'STYLE' || el.hasAttribute('onclick') || (el.classList && (el.classList.contains('nf-bridge') || el.classList.contains('nf-resume')))) return NodeFilter.FILTER_REJECT;
           el = el.parentElement;
         }
         return NodeFilter.FILTER_ACCEPT;
@@ -286,6 +292,26 @@
     }
   }
 
+  /* ---------- "Up next" hand-off card on the final stage ---------- */
+  var BRIDGES = {
+    3: 'Your approved Financial Goals workbook becomes the foundation of the Blueprint. In Session 4, every peso you write into the cards must match it.',
+    4: 'Parts 1 to 3 are drafted. Session 5 completes the Blueprint with Part 4 (Shared Value), Part 5 (Advisory) and Appendices A and B, then puts the Part 6 Offer through an integrity audit.'
+  };
+  function addBridge() {
+    if (!current || current >= 9 || typeof totalTopics === 'undefined') return;
+    var view = document.getElementById('topic-view-' + (totalTopics - 1));
+    if (!view || view.querySelector('.nf-bridge')) return;
+    var nextN = current + 1;
+    if (view.textContent.indexOf('Session ' + nextN) !== -1) return; // page already has its own hand-off
+    var nx = SESSIONS[nextN - 1];
+    var box = document.createElement('div');
+    box.className = 'nf-bridge';
+    box.innerHTML = '<div><small>Up next · ' + nx.week + '</small><strong>Session ' + nextN + ' · ' + nx.title + '</strong>' +
+      (BRIDGES[current] ? '<p>' + BRIDGES[current] + '</p>' : '') + '</div>' +
+      '<a href="' + pageFor(nextN) + '">Continue to Session ' + nextN + ' →</a>';
+    view.appendChild(box);
+  }
+
   /* ---------- boot ---------- */
   function boot() {
     mountRail();
@@ -308,6 +334,7 @@
       });
     }
 
+    addBridge();
     linkify();
     decorateIndex();
   }
